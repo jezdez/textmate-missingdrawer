@@ -14,7 +14,7 @@ Known bugs:
 
 Release notes:
 2008-06-10
-he drawer is now saved with a minimal width if it's collapsed
+the drawer is now saved with a minimal width if it's collapsed
 the Reveal in Project menu item is now disabled since I don't know how to fix it
 the weird looking background in Tiger is fixed
 
