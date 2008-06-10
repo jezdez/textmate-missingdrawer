@@ -44,9 +44,20 @@
     NSWindow* window=[self window];
     NSDrawer* drawer=[[window drawers]objectAtIndex:0];
     NSView* sideView=[_sideView retain];
-    [self storeLayoutWithName:@"Panels"];
+    
+    NSView* contentView=[[window contentView]retain];
+    NSView* leftView=[[contentView subviews]objectAtIndex:0];
+    NSRect leftFrame=[leftView frame];
 
-    if(sideView){       
+    if (leftFrame.size.width==0) {
+        NSLog(@"save only when frame not collapsed");
+        leftFrame.size.width = 122;
+        [leftView setFrame:leftFrame];
+        [contentView adjustSubviews];
+    }
+    [contentView storeLayoutWithName:@"Panels"];
+    
+    if(sideView){
         _sideView=nil;
         [sideView removeFromSuperview];
         [drawer setContentView:sideView];

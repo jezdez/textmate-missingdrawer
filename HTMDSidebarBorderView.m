@@ -136,7 +136,7 @@ int HTMDSidebarBorderViewSortViewX(id viewA, id viewB, void *context)
         NSOutlineView* realOutlineView = [outlineView documentView];
         NSFont *font = [NSFont fontWithName:@"Lucida Grande" size:12];
         [realOutlineView setRowHeight:[font defaultLineHeightForFont]];
-        [realOutlineView setBackgroundColor:[NSColor colorWithCalibratedRed:0.81f green:0.84f blue:0.88 alpha:0.80]];
+        [realOutlineView setBackgroundColor:[NSColor colorWithCalibratedRed:0.81f green:0.84f blue:0.88f alpha:1]];
         [realOutlineView reloadData];
     }
     [btns release];

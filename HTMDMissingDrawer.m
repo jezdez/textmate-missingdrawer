@@ -74,6 +74,12 @@ void rep_OakProjectController_openProjectDrawer(id self, SEL _cmd, id sender)
     }
 }
 
+IMP org_OakProjectController_revealInProject=NULL;
+void rep_OakProjectController_revealInProject(id self, SEL _cmd, id sender)
+{
+    //NSLog(@"reveal in project, yeah!");
+}
+
 #pragma mark -
 #pragma mark Plugin methods
 
@@ -104,6 +110,12 @@ void rep_OakProjectController_openProjectDrawer(id self, SEL _cmd, id sender)
         [HTMDMissingDrawer replaceClassName:@"OakProjectController"
             selectorName:@"openProjectDrawer:"
             withFunc:rep_OakProjectController_openProjectDrawer isClassMethod:NO];
+
+    org_OakProjectController_revealInProject =
+    [HTMDMissingDrawer replaceClassName:@"OakProjectController"
+            selectorName:@"revealInProject:"
+            withFunc:rep_OakProjectController_revealInProject isClassMethod:NO];
+    
 }
 
 #pragma mark -
