@@ -78,6 +78,23 @@ IMP org_OakProjectController_revealInProject=NULL;
 void rep_OakProjectController_revealInProject(id self, SEL _cmd, id sender)
 {
     //NSLog(@"reveal in project, yeah!");
+	org_OakProjectController_revealInProject(self, _cmd, sender);
+	org_OakProjectController_revealInProject(self, _cmd, sender);
+
+  NSWindow* window=[self window];
+  NSView* contentView=[[window contentView]retain];
+  //NSLog(@"project drawer opened");
+  
+  if ([[contentView className] isEqualToString:@"HTMDSplitView"]) {
+      //NSLog(@"panel exists and menu item was clicked");
+      NSView* leftView=[[contentView subviews]objectAtIndex:0];
+      NSRect leftFrame=[leftView frame];
+
+      if (leftFrame.size.width==0) {
+          //NSLog(@"show hidden panel");
+        rep_OakProjectController_openProjectDrawer(self, _cmd, sender);
+      }
+  }
 }
 
 #pragma mark -

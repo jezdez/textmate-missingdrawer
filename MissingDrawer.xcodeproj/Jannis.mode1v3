@@ -327,7 +327,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>1F0A23370DFE7C9C00AE21CB</string>
+										<string>1FA8FA520F2B87C600A86CA0</string>
 										<key>history</key>
 										<array>
 											<string>1F5738790D63B3A8003B95FF</string>
@@ -340,7 +340,7 @@
 											<string>1F0A23000DFE645600AE21CB</string>
 											<string>1F0A23100DFE697F00AE21CB</string>
 											<string>1F0A23110DFE697F00AE21CB</string>
-											<string>1F0A23120DFE697F00AE21CB</string>
+											<string>1F0A23370DFE7C9C00AE21CB</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -355,17 +355,6 @@
 											<string>1F5738810D63B3A8003B95FF</string>
 											<string>1F5738820D63B3A8003B95FF</string>
 											<string>1F5738830D63B3A8003B95FF</string>
-											<string>1F0A22E30DFE5E2F00AE21CB</string>
-											<string>1F0A22F70DFE632B00AE21CB</string>
-											<string>1F0A22F80DFE632B00AE21CB</string>
-											<string>1F0A22F90DFE632B00AE21CB</string>
-											<string>1F0A22FA0DFE632B00AE21CB</string>
-											<string>1F0A23020DFE645600AE21CB</string>
-											<string>1F0A23130DFE697F00AE21CB</string>
-											<string>1F0A23140DFE697F00AE21CB</string>
-											<string>1F0A23150DFE697F00AE21CB</string>
-											<string>1F0A23160DFE697F00AE21CB</string>
-											<string>1F0A23170DFE697F00AE21CB</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -423,9 +412,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>1F0A22E50DFE5E2F00AE21CB</string>
+				<string>1FA8FA530F2B87C600A86CA0</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>1F0A22E60DFE5E2F00AE21CB</string>
+				<string>1FA8FA540F2B87C600A86CA0</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -555,7 +544,7 @@
 	<key>TimeStamp</key>
 	<real>0.0</real>
 	<key>ToolbarDisplayMode</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>ToolbarIsVisible</key>
 	<true/>
 	<key>ToolbarSizeMode</key>
@@ -569,8 +558,7 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>1F2B40B10D5DBC11000354B0</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>/Users/Jannis/Code/git/textmate-missingdrawer/MissingDrawer.xcodeproj</string>
+		<string>/Users/Jannis/Code/svn/textmate-missingdrawer/MissingDrawer.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>95 180 1072 798 0 0 1280 1002 </string>
@@ -650,7 +638,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1F2B40B10D5DBC11000354B0</string>
-				<string>1F0A22E70DFE5E2F00AE21CB</string>
+				<string>1FA8FA550F2B87C600A86CA0</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

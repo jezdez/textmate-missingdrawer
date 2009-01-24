@@ -24,7 +24,7 @@
 		1F5732B90D6221BE003B95FF /* HTMDResizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDResizer.m; sourceTree = "<group>"; };
 		32DBCF630370AF2F00C91783 /* MissingDrawer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissingDrawer_Prefix.pch; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA478CB60AFD9CC90063F4D8 /* HTMDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDMissingDrawer.h; sourceTree = "<group>"; };
 		AA478CB70AFD9CC90063F4D8 /* HTMDMissingDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDMissingDrawer.m; sourceTree = "<group>"; };
 		AA478D220AFE1C280063F4D8 /* HTMDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDSplitView.h; sourceTree = "<group>"; };
