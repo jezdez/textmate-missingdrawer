@@ -297,7 +297,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>95 180 1072 798 0 0 1280 1002 </string>
+						<string>79 120 1072 798 0 0 1280 1002 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -315,7 +315,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>HTMDMissingDrawer.m</string>
+								<string>HTMDSidebarBorderView.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -323,11 +323,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>HTMDMissingDrawer.m</string>
+										<string>HTMDSidebarBorderView.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>1FA8FA520F2B87C600A86CA0</string>
+										<string>1FE7371E0F2F1DD700CE03A4</string>
 										<key>history</key>
 										<array>
 											<string>1F5738790D63B3A8003B95FF</string>
@@ -337,10 +337,10 @@
 											<string>1FB0B0310D66075500245BA5</string>
 											<string>1FB0B0320D66075500245BA5</string>
 											<string>1FB0B0330D66075500245BA5</string>
-											<string>1F0A23000DFE645600AE21CB</string>
 											<string>1F0A23100DFE697F00AE21CB</string>
 											<string>1F0A23110DFE697F00AE21CB</string>
-											<string>1F0A23370DFE7C9C00AE21CB</string>
+											<string>1FAEBD3C0F2CB11D00083951</string>
+											<string>1FEE8E010F2F1D4700D2F8E5</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -368,7 +368,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {864, 582}}</string>
 								<key>RubberWindowFrame</key>
-								<string>95 180 1072 798 0 0 1280 1002 </string>
+								<string>79 120 1072 798 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -388,7 +388,7 @@
 								<key>Frame</key>
 								<string>{{0, 587}, {864, 170}}</string>
 								<key>RubberWindowFrame</key>
-								<string>95 180 1072 798 0 0 1280 1002 </string>
+								<string>79 120 1072 798 0 0 1280 1002 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -412,9 +412,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>1FA8FA530F2B87C600A86CA0</string>
+				<string>1FE737190F2F1D9400CE03A4</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>1FA8FA540F2B87C600A86CA0</string>
+				<string>1FE7371A0F2F1D9400CE03A4</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -558,10 +558,10 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>1F2B40B10D5DBC11000354B0</string>
-		<string>/Users/Jannis/Code/svn/textmate-missingdrawer/MissingDrawer.xcodeproj</string>
+		<string>/Users/Jannis/Code/git/textmate-missingdrawer/MissingDrawer.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>95 180 1072 798 0 0 1280 1002 </string>
+	<string>79 120 1072 798 0 0 1280 1002 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -638,7 +638,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1F2B40B10D5DBC11000354B0</string>
-				<string>1FA8FA550F2B87C600A86CA0</string>
+				<string>1FE7371B0F2F1D9400CE03A4</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -791,12 +791,14 @@
 							<key>Dock</key>
 							<array>
 								<dict>
+									<key>BecomeActive</key>
+									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>HTMDMissingDrawer.m</string>
+										<string>HTMDSidebarBorderView.m</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -817,8 +819,6 @@
 							<string>379pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -854,8 +854,8 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>1F0A22E80DFE5E2F00AE21CB</string>
-				<string>1F0A22E90DFE5E2F00AE21CB</string>
+				<string>1FAEBD410F2CB11D00083951</string>
+				<string>1FAEBD420F2CB11D00083951</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
@@ -864,7 +864,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
