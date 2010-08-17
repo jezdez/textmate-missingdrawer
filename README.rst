@@ -49,3 +49,4 @@ Authors
 
 * hetima computer, hetima@hetima.com, http://hetima.com/
 * Jannis Leidel, jannis@leidel.info, http://jannisleidel.com
+* Christoph Meißner, post@christophmeissner.de
