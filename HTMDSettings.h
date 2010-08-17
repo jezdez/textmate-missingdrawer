@@ -1,5 +1,5 @@
 //
-//  HTMDResizer.m
+//  HTMDSettings.h
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
@@ -28,18 +28,26 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "HTMDResizer.h"
 
-@implementation HTMDResizer
+#import <Foundation/Foundation.h>
 
-- (void) mouseDown:(NSEvent *)theEvent {
-    debug("mouseDown in sliderImage");
-    [[[self superview] superview] mouseDown:theEvent];
+@interface HTMDSettings : NSObject {
+	
+	@private
+	BOOL	_showSideViewOnLeft;
+	NSRect	_sideViewLayout;
+	NSRect	_mainViewLayout;
+	NSMenuItem* _toggleSplitViewLayoutMenuItem;
+	
 }
 
-- (void) mouseDragged:(NSEvent *)theEvent {
-    debug("mouseDragged in sliderImage");
-    [[[self superview] superview] mouseDragged:theEvent];
-}
+@property (nonatomic, readonly) NSMenuItem* toggleSplitViewLayoutMenuItem;
+@property BOOL showSideViewOnLeft;
+@property NSRect sideViewLayout;
+@property NSRect mainViewLayout;
+
++ (HTMDSettings*) defaultSettings;
+- (void) save;
+- (IBAction) toggleSideViewLayout:(id)sender;
 
 @end

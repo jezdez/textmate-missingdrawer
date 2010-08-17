@@ -1,5 +1,5 @@
 //
-//  HTMDResizer.m
+//  HTMDDebugUtils.h
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
@@ -28,18 +28,16 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "HTMDResizer.h"
+#define _debug(fmt, args...)	{\
+								NSString* __DEBUG_STRING_TO_LOG__ = [[NSString alloc] initWithFormat:@fmt, ##args];\
+								NSLog(__DEBUG_STRING_TO_LOG__);\
+								[__DEBUG_STRING_TO_LOG__ release];\
+							}
 
-@implementation HTMDResizer
+#if ENABLE_DEBUG_MODE
+	#define debug(fmt, args...) _debug("%s(%i): " fmt, __FUNCTION__, __LINE__, ##args)
+#else
+	#define debug(fmt, args...) 
+#endif
 
-- (void) mouseDown:(NSEvent *)theEvent {
-    debug("mouseDown in sliderImage");
-    [[[self superview] superview] mouseDown:theEvent];
-}
-
-- (void) mouseDragged:(NSEvent *)theEvent {
-    debug("mouseDragged in sliderImage");
-    [[[self superview] superview] mouseDragged:theEvent];
-}
-
-@end
+#define log_error(fmt, args...) _debug("%s(%i): " fmt, __FUNCTION__, __LINE__, ##args)

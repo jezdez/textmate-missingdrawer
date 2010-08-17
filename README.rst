@@ -1,20 +1,23 @@
 MissingDrawer.tmplugin
 ======================
 
-This plugin provides Xcode-like project window interface without drawer.
+This plugin provides Xcode-like project window interface without drawer and 
+adds "Open Terminal Here" button to the file list's button panel.
 
 .. image:: http://u1.ipernity.com/12/06/21/5520621.8b44798f.jpg?download=MissingDrawer%20January%20tweaks_o.jpg
 
-Known bugs
-----------
-
-* TextMate seems not to load the plugin if you drag a folder to its icon and
-  it's not already running. You'll then get the "old" drawer layout.
-* The same applies to opening existing TextMate project (``*.tmproj``)
-  while TextMate is not running.
-
 Release notes
 -------------
+
+2010-07-08
+##########
+
+* added a "Open Terminal Here" button to the drawer's button panel
+* fixed the issue of an actual missing drawer when opening a TextMate project
+(``*.tmproj``) by double clicking it or a directory by dragging it to the dock
+icon when TextMate is not running already
+* added lefty support for toggeling the file list to be displayed left or right
+to edit window
 
 2009-01-27
 ##########

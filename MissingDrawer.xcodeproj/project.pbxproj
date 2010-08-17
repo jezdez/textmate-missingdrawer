@@ -7,30 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F57343A0D625BC0003B95FF /* HTMDResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5732B90D6221BE003B95FF /* HTMDResizer.m */; };
-		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		17BD1715121ACAF900EE401A /* DrawerBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BD170B121ACAF900EE401A /* DrawerBorder.png */; };
+		17BD1716121ACAF900EE401A /* DrawerResizeHandle.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BD170D121ACAF900EE401A /* DrawerResizeHandle.png */; };
+		17BD1717121ACAF900EE401A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17BD170F121ACAF900EE401A /* InfoPlist.strings */; };
+		17BD1718121ACAF900EE401A /* OpenTerminalHere.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BD1711121ACAF900EE401A /* OpenTerminalHere.png */; };
+		17BD1719121ACAF900EE401A /* OpenTerminalHerePressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BD1713121ACAF900EE401A /* OpenTerminalHerePressed.png */; };
+		17BD172B121ACB2E00EE401A /* HTMDMissingDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BD1724121ACB2E00EE401A /* HTMDMissingDrawer.m */; };
+		17BD172C121ACB2E00EE401A /* HTMDResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BD1725121ACB2E00EE401A /* HTMDResizer.m */; };
+		17BD172D121ACB2E00EE401A /* HTMDSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BD1726121ACB2E00EE401A /* HTMDSettings.m */; };
+		17BD172E121ACB2E00EE401A /* HTMDSidebarBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BD1727121ACB2E00EE401A /* HTMDSidebarBorderView.m */; };
+		17BD172F121ACB2E00EE401A /* HTMDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BD1728121ACB2E00EE401A /* HTMDSplitView.m */; };
+		17BD1730121ACB2E00EE401A /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 17BD1729121ACB2E00EE401A /* LICENSE.txt */; };
+		17BD1733121ACB4B00EE401A /* README.rst in Resources */ = {isa = PBXBuildFile; fileRef = 17BD1732121ACB4B00EE401A /* README.rst */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		AA478CB80AFD9CCA0063F4D8 /* HTMDMissingDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA478CB70AFD9CC90063F4D8 /* HTMDMissingDrawer.m */; };
-		AA478D240AFE1C280063F4D8 /* HTMDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA478D230AFE1C280063F4D8 /* HTMDSplitView.m */; };
-		AA478D940AFEB7AD0063F4D8 /* HTMDSidebarBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA478D930AFEB7AD0063F4D8 /* HTMDSidebarBorderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		1F5732B80D6221BE003B95FF /* HTMDResizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDResizer.h; sourceTree = "<group>"; };
-		1F5732B90D6221BE003B95FF /* HTMDResizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDResizer.m; sourceTree = "<group>"; };
+		17468E1D11E6579800792BD4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17BD170C121ACAF900EE401A /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = DrawerBorder.png; sourceTree = "<group>"; };
+		17BD170E121ACAF900EE401A /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = DrawerResizeHandle.png; sourceTree = "<group>"; };
+		17BD1710121ACAF900EE401A /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
+		17BD1712121ACAF900EE401A /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = OpenTerminalHere.png; sourceTree = "<group>"; };
+		17BD1714121ACAF900EE401A /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = OpenTerminalHerePressed.png; sourceTree = "<group>"; };
+		17BD171E121ACB2E00EE401A /* HTMDDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDDebugUtils.h; sourceTree = "<group>"; };
+		17BD171F121ACB2E00EE401A /* HTMDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDMissingDrawer.h; sourceTree = "<group>"; };
+		17BD1720121ACB2E00EE401A /* HTMDResizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDResizer.h; sourceTree = "<group>"; };
+		17BD1721121ACB2E00EE401A /* HTMDSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDSettings.h; sourceTree = "<group>"; };
+		17BD1722121ACB2E00EE401A /* HTMDSidebarBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDSidebarBorderView.h; sourceTree = "<group>"; };
+		17BD1723121ACB2E00EE401A /* HTMDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDSplitView.h; sourceTree = "<group>"; };
+		17BD1724121ACB2E00EE401A /* HTMDMissingDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDMissingDrawer.m; sourceTree = "<group>"; };
+		17BD1725121ACB2E00EE401A /* HTMDResizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDResizer.m; sourceTree = "<group>"; };
+		17BD1726121ACB2E00EE401A /* HTMDSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDSettings.m; sourceTree = "<group>"; };
+		17BD1727121ACB2E00EE401A /* HTMDSidebarBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDSidebarBorderView.m; sourceTree = "<group>"; };
+		17BD1728121ACB2E00EE401A /* HTMDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDSplitView.m; sourceTree = "<group>"; };
+		17BD1729121ACB2E00EE401A /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		17BD1732121ACB4B00EE401A /* README.rst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
 		32DBCF630370AF2F00C91783 /* MissingDrawer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissingDrawer_Prefix.pch; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AA478CB60AFD9CC90063F4D8 /* HTMDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDMissingDrawer.h; sourceTree = "<group>"; };
-		AA478CB70AFD9CC90063F4D8 /* HTMDMissingDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDMissingDrawer.m; sourceTree = "<group>"; };
-		AA478D220AFE1C280063F4D8 /* HTMDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDSplitView.h; sourceTree = "<group>"; };
-		AA478D230AFE1C280063F4D8 /* HTMDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDSplitView.m; sourceTree = "<group>"; };
-		AA478D920AFEB7AD0063F4D8 /* HTMDSidebarBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMDSidebarBorderView.h; sourceTree = "<group>"; };
-		AA478D930AFEB7AD0063F4D8 /* HTMDSidebarBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMDSidebarBorderView.m; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -49,11 +65,23 @@
 		089C166AFE841209C02AAC07 /* MissingDrawer */ = {
 			isa = PBXGroup;
 			children = (
-				08FB77AFFE84173DC02AAC07 /* Classes */,
+				17BD171E121ACB2E00EE401A /* HTMDDebugUtils.h */,
+				17BD171F121ACB2E00EE401A /* HTMDMissingDrawer.h */,
+				17BD1724121ACB2E00EE401A /* HTMDMissingDrawer.m */,
+				17BD1720121ACB2E00EE401A /* HTMDResizer.h */,
+				17BD1725121ACB2E00EE401A /* HTMDResizer.m */,
+				17BD1721121ACB2E00EE401A /* HTMDSettings.h */,
+				17BD1726121ACB2E00EE401A /* HTMDSettings.m */,
+				17BD1722121ACB2E00EE401A /* HTMDSidebarBorderView.h */,
+				17BD1727121ACB2E00EE401A /* HTMDSidebarBorderView.m */,
+				17BD1723121ACB2E00EE401A /* HTMDSplitView.h */,
+				17BD1728121ACB2E00EE401A /* HTMDSplitView.m */,
 				32C88E010371C26100C91783 /* Other Sources */,
-				089C167CFE841241C02AAC07 /* Resources */,
+				17BD170A121ACAF900EE401A /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
+				17BD1732121ACB4B00EE401A /* README.rst */,
+				17BD1729121ACB2E00EE401A /* LICENSE.txt */,
 			);
 			name = MissingDrawer;
 			sourceTree = "<group>";
@@ -65,30 +93,6 @@
 				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
 			);
 			name = "Frameworks and Libraries";
-			sourceTree = "<group>";
-		};
-		089C167CFE841241C02AAC07 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				8D5B49B7048680CD000E48DA /* Info.plist */,
-				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		08FB77AFFE84173DC02AAC07 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				AA478CB60AFD9CC90063F4D8 /* HTMDMissingDrawer.h */,
-				AA478CB70AFD9CC90063F4D8 /* HTMDMissingDrawer.m */,
-				AA478D220AFE1C280063F4D8 /* HTMDSplitView.h */,
-				AA478D230AFE1C280063F4D8 /* HTMDSplitView.m */,
-				1F5732B80D6221BE003B95FF /* HTMDResizer.h */,
-				1F5732B90D6221BE003B95FF /* HTMDResizer.m */,
-				AA478D920AFEB7AD0063F4D8 /* HTMDSidebarBorderView.h */,
-				AA478D930AFEB7AD0063F4D8 /* HTMDSidebarBorderView.m */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
@@ -109,6 +113,19 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
+		17BD170A121ACAF900EE401A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17BD170B121ACAF900EE401A /* DrawerBorder.png */,
+				17BD170D121ACAF900EE401A /* DrawerResizeHandle.png */,
+				17BD170F121ACAF900EE401A /* InfoPlist.strings */,
+				17BD1711121ACAF900EE401A /* OpenTerminalHere.png */,
+				17BD1713121ACAF900EE401A /* OpenTerminalHerePressed.png */,
+			);
+			name = Resources;
+			path = English.lproj;
+			sourceTree = "<group>";
+		};
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +137,7 @@
 		32C88E010371C26100C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				17468E1D11E6579800792BD4 /* Info.plist */,
 				32DBCF630370AF2F00C91783 /* MissingDrawer_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -168,7 +186,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
+				17BD1715121ACAF900EE401A /* DrawerBorder.png in Resources */,
+				17BD1716121ACAF900EE401A /* DrawerResizeHandle.png in Resources */,
+				17BD1717121ACAF900EE401A /* InfoPlist.strings in Resources */,
+				17BD1718121ACAF900EE401A /* OpenTerminalHere.png in Resources */,
+				17BD1719121ACAF900EE401A /* OpenTerminalHerePressed.png in Resources */,
+				17BD1730121ACB2E00EE401A /* LICENSE.txt in Resources */,
+				17BD1733121ACB4B00EE401A /* README.rst in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,22 +203,55 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA478CB80AFD9CCA0063F4D8 /* HTMDMissingDrawer.m in Sources */,
-				AA478D240AFE1C280063F4D8 /* HTMDSplitView.m in Sources */,
-				AA478D940AFEB7AD0063F4D8 /* HTMDSidebarBorderView.m in Sources */,
-				1F57343A0D625BC0003B95FF /* HTMDResizer.m in Sources */,
+				17BD172B121ACB2E00EE401A /* HTMDMissingDrawer.m in Sources */,
+				17BD172C121ACB2E00EE401A /* HTMDResizer.m in Sources */,
+				17BD172D121ACB2E00EE401A /* HTMDSettings.m in Sources */,
+				17BD172E121ACB2E00EE401A /* HTMDSidebarBorderView.m in Sources */,
+				17BD172F121ACB2E00EE401A /* HTMDSplitView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
+		17BD170B121ACAF900EE401A /* DrawerBorder.png */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C167EFE841241C02AAC07 /* English */,
+				17BD170C121ACAF900EE401A /* English */,
+			);
+			name = DrawerBorder.png;
+			sourceTree = "<group>";
+		};
+		17BD170D121ACAF900EE401A /* DrawerResizeHandle.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17BD170E121ACAF900EE401A /* English */,
+			);
+			name = DrawerResizeHandle.png;
+			sourceTree = "<group>";
+		};
+		17BD170F121ACAF900EE401A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17BD1710121ACAF900EE401A /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		17BD1711121ACAF900EE401A /* OpenTerminalHere.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17BD1712121ACAF900EE401A /* English */,
+			);
+			name = OpenTerminalHere.png;
+			sourceTree = "<group>";
+		};
+		17BD1713121ACAF900EE401A /* OpenTerminalHerePressed.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17BD1714121ACAF900EE401A /* English */,
+			);
+			name = OpenTerminalHerePressed.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -203,6 +260,8 @@
 		1DEB913B08733D840010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -210,9 +269,12 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MissingDrawer_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "ENABLE_DEBUG_MODE=1";
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = MissingDrawer;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = tmplugin;
 				ZERO_LINK = YES;
 			};
@@ -221,17 +283,19 @@
 		1DEB913C08733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MissingDrawer_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "ENABLE_LOGS=0";
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MissingDrawer;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = tmplugin;
 			};
 			name = Release;
@@ -239,10 +303,12 @@
 		1DEB913F08733D840010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Debug;
 		};

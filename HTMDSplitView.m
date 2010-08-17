@@ -1,80 +1,119 @@
 //
 //  HTMDSplitView.m
 //  MissingDrawer
-
+//
+//	Copyright (c) 2006 hetima computer, 
+//                2008, 2009 Jannis Leidel, 
+//                2010 Christoph Meißner
+//
+//	Permission is hereby granted, free of charge, to any person
+//	obtaining a copy of this software and associated documentation
+//	files (the "Software"), to deal in the Software without
+//	restriction, including without limitation the rights to use,
+//	copy, modify, merge, publish, distribute, sublicense, and/or sell
+//	copies of the Software, and to permit persons to whom the
+//	Software is furnished to do so, subject to the following
+//	conditions:
+//
+//	The above copyright notice and this permission notice shall be
+//	included in all copies or substantial portions of the Software.
+//
+//	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+//	EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+//	OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//	NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+//	HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+//	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+//	OTHER DEALINGS IN THE SOFTWARE.
+//
 
 #import "HTMDSplitView.h"
+#import "HTMDResizer.h"
+#import "HTMDSettings.h"
+
+#define MIN_SIDEVIEW_WIDTH 135.0f
+#define MAX_SIDEVIEW_WIDTH 350.0f
 
 @implementation HTMDSplitView
+
+@synthesize sideView = _sideView;
+@synthesize mainView = _mainView;
 
 #pragma mark -
 #pragma mark Original Methods
 
-- (id)initWithFrame:(NSRect)frame {
+- (id) initWithFrame:(NSRect)frame andMainView:(NSView*)mainView andSideView:(NSView*)sideView {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
+		[self setDelegate:self];
+		
+		_sideView = [sideView retain];
+		_mainView = [mainView retain];
+		[self.sideView setAutoresizingMask:NSViewHeightSizable];
         [self setVertical:YES];
-        [self setDelegate:self];
+		
+		HTMDSettings* settings = [HTMDSettings defaultSettings];
+		if(settings.showSideViewOnLeft) {
+			[self addSubview:self.sideView];
+			[self addSubview:self.mainView];
+		} else {
+			[self addSubview:self.mainView];
+			[self addSubview:self.sideView];
+		}
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleLayout) name:@"MDSideviewLayoutHasBeenChangedNotification" object:nil];
     }
     return self;
 }
 
-- (IBAction)adjustSubviews:(id)sender
-{
+- (void) toggleLayout {
+	debug("toggling views");
+	NSView* leftView = [[[self subviews] objectAtIndex:0] retain];
+	[leftView removeFromSuperview];
+	[self addSubview:leftView];
+	[self adjustSubviews];
+}
+
+- (IBAction) adjustSubviews:(id)sender {
     [self adjustSubviews];
 }
 
-//setup
-- (void)addSubview:(NSView *)aView
-{
-    [super addSubview:aView];
-    if([[self subviews]count]==1){
-        [aView setAutoresizingMask:NSViewHeightSizable];
-        _sideView=aView;
-    }else{
-        _mainView=aView;
-    }
+- (void) dealloc {
+	[_sideView release], _sideView = nil;
+	[_mainView release], _mainView = nil;
+	[super dealloc];
 }
 
 //cleanup
-- (void)windowWillCloseWillCall
-{
-    //NSLog(@"windowWillCloseWillCall");
-    NSWindow* window=[self window];
-    NSDrawer* drawer=[[window drawers]objectAtIndex:0];
-    NSView* sideView=[_sideView retain];
-    
-    NSView* contentView=[[window contentView]retain];
-    NSView* leftView=[[contentView subviews]objectAtIndex:0];
-    NSRect leftFrame=[leftView frame];
-
-    if (leftFrame.size.width==0) {
-        NSLog(@"save only when frame not collapsed");
-        leftFrame.size.width = 122;
-        [leftView setFrame:leftFrame];
-        [contentView adjustSubviews];
+- (void) windowWillCloseWillCall {
+    debug("windowWillCloseWillCall");
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    if ([self.sideView frame].size.width<=0) {
+		debug("save only when frame not collapsed");
+		NSRect sideViewFrame = [self.sideView frame];
+        sideViewFrame.size.width = MIN_SIDEVIEW_WIDTH;
+        [self.sideView setFrame:sideViewFrame];
+        [self adjustSubviews];
     }
-    [contentView storeLayoutWithName:@"Panels"];
-    
-    if(sideView){
-        _sideView=nil;
-        [sideView removeFromSuperview];
-        [drawer setContentView:sideView];
-        [sideView release];
+    [self saveLayout];
+	
+    if(self.sideView){
+		NSDrawer* drawer = [[[self window] drawers]objectAtIndex:0];
+        [self.sideView removeFromSuperview];
+        [drawer setContentView:self.sideView];
+        [_sideView release], _sideView = nil;
     }
 }
 
 #pragma mark -
 #pragma mark Overridden from NSSplitView
 
-- (float)dividerThickness
-{
+- (CGFloat) dividerThickness {
     return 1;
 }
 
-- (void)drawDividerInRect:(NSRect)aRect
-{
+- (void) drawDividerInRect:(NSRect)aRect {
     [[NSColor colorWithDeviceWhite:.625 alpha:1] setFill];
     [NSBezierPath fillRect:aRect];
 }
@@ -82,169 +121,158 @@
 #pragma mark -
 #pragma mark NSSplitView delegate methods
 
-- (BOOL)splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview
-{
+- (BOOL) splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview {
     return NO;
 }
 
-- (float)splitView:(NSSplitView *)sender constrainMinCoordinate:(float)proposedMin ofSubviewAt:(int)offset
-{
-    return 110.0; //Min width
+- (CGFloat) splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset {
+	if ([[self subviews] objectAtIndex:offset] == self.sideView) {
+		return MIN_SIDEVIEW_WIDTH;
+	} else {
+		return [self frame].size.width - MAX_SIDEVIEW_WIDTH;
+	}
+	
 }
 
-- (float)splitView:(NSSplitView *)sender constrainMaxCoordinate:(float)proposedMax ofSubviewAt:(int)offset
-{
-    return 350.0; //Max width
+- (CGFloat) splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset {
+	if ([[self subviews] objectAtIndex:offset] == self.sideView) {
+		return MAX_SIDEVIEW_WIDTH;
+	} else {
+		return [self frame].size.width - MIN_SIDEVIEW_WIDTH;
+	}
 }
 
-- (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
-{
-    NSRect newFrame = [sender frame];
-    NSView *left = [[sender subviews] objectAtIndex:0];
-    NSRect leftFrame = [left frame];
-    NSView *right = [[sender subviews] objectAtIndex:1];
-    NSRect rightFrame = [right frame];
-    float dividerThickness = [sender dividerThickness];
-
-    leftFrame.size.height = newFrame.size.height;
-    leftFrame.origin.x = 0;
-    leftFrame.origin.y = 0;
-
-    rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
-    rightFrame.size.height = newFrame.size.height;
-    rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+- (void) splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize {
+	debug();
+	
+	float dividerThickness = [self dividerThickness];
     
-    [left setFrame:leftFrame];
-    [right setFrame:rightFrame];
+	NSRect windowFrame = [[NSApp mainWindow] frame];
+	windowFrame.size.width = MAX(3*MIN_SIDEVIEW_WIDTH + dividerThickness, windowFrame.size.width);
+	[[NSApp mainWindow] setFrame:windowFrame display:YES];
+
+	NSRect splitViewFrame = [self frame];
+	splitViewFrame.size.width = MAX(3*MIN_SIDEVIEW_WIDTH + dividerThickness, splitViewFrame.size.width);
+	[splitView setFrame:splitViewFrame];
+	
+    NSRect sideViewFrame = [self.sideView frame];
+    NSRect mainViewFrame = [self.mainView frame];
+    
+	sideViewFrame.size.height = splitViewFrame.size.height;
+	mainViewFrame.size.height = splitViewFrame.size.height;
+
+	mainViewFrame.size.width = splitViewFrame.size.width - sideViewFrame.size.width - dividerThickness;
+	
+	HTMDSettings* settings = [HTMDSettings defaultSettings];
+	
+	if (settings.showSideViewOnLeft) {
+		mainViewFrame.origin.x = sideViewFrame.size.width + dividerThickness;
+		sideViewFrame.origin.x = 0;
+	} else {
+		mainViewFrame.origin.x = 0;
+		sideViewFrame.origin.x = mainViewFrame.size.width + dividerThickness;
+	}
+	
+    [self.sideView setFrame:sideViewFrame];
+    [self.mainView setFrame:mainViewFrame];
 }
 
 #pragma mark -
 #pragma mark Sidebar resize area
 
-- (void)resetCursorRects
-{
+- (void) resetCursorRects {
+	debug();
     [super resetCursorRects];
-        
+	
     NSRect location = [resizeSlider frame];
     location.origin.y = [self frame].size.height - location.size.height;
-
+	
     [self addCursorRect:location cursor:[NSCursor resizeLeftRightCursor]];
 }
 
-- (void)mouseDown:(NSEvent *)theEvent 
-{
-    //NSLog(@"mouseDown in splitView");
+- (void) mouseDown:(NSEvent *)theEvent {
+	debug();
     NSPoint clickLocation = [theEvent locationInWindow];
-
     NSView *clickReceiver = [self hitTest:clickLocation];
-    if ([[clickReceiver className] isEqualToString:@"HTMDResizer"]) {
-        //NSLog(@"Entering drag");
+    if ([clickReceiver isKindOfClass:[HTMDResizer class]]) {
         inResizeMode = YES;
     } else {
-        //NSLog([clickReceiver className]);
         inResizeMode = NO;
         [super mouseDown:theEvent];
     }
-    //NSLog(@"mouseDown in splitView done");
 }
 
-- (void)mouseUp:(NSEvent *)theEvent
-{
-    //NSLog(@"Exiting drag");
+- (void) mouseUp:(NSEvent *)theEvent {
+	debug();
     inResizeMode = NO;
 }
 
-- (void)mouseDragged:(NSEvent *)theEvent 
-{
-    //NSLog(@"mouseDragged in splitView");
+- (void) mouseDragged:(NSEvent *)theEvent {
+	debug();
+	
     if (inResizeMode == NO) {
         [super mouseDragged:theEvent];
         return;
     }
-        
+	
     [[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewWillResizeSubviewsNotification object:self];
-
+	
+	
     NSPoint clickLocation = [theEvent locationInWindow];
-    NSRect newFrame = [_sideView frame];
+	NSView* leftView = [[self subviews] objectAtIndex:0];
+    NSRect newFrame = [leftView frame];
     newFrame.size.width = clickLocation.x;
-    //NSLog(@"new width: %f", newFrame.size.width);
-    
-    id delegate = [self delegate];
-    if(delegate && [delegate respondsToSelector:@selector(splitView:constrainSplitPosition:ofSubviewAt:)]) {
-        float new = [delegate splitView:self constrainSplitPosition:newFrame.size.width ofSubviewAt:0];
+	
+    if(self.delegate && [self.delegate respondsToSelector:@selector(splitView:constrainSplitPosition:ofSubviewAt:)]) {
+        float new = [self.delegate splitView:self constrainSplitPosition:newFrame.size.width ofSubviewAt:0];
         newFrame.size.width = new;
-        //NSLog(@"Constrained width to: %f", new);
     }
-    
-    if(delegate && [delegate respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)]) {
-        float min = [delegate splitView:self constrainMinCoordinate:0. ofSubviewAt:0];
+	
+    if(self.delegate && [self.delegate respondsToSelector:@selector(splitView:constrainMinCoordinate:ofSubviewAt:)]) {
+        float min = [self.delegate splitView:self constrainMinCoordinate:0. ofSubviewAt:0];
         newFrame.size.width = MAX(min, newFrame.size.width);
-        //NSLog(@"Constrained min width to: %f", newFrame.size.width);
     }
-    
-    if(delegate && [delegate respondsToSelector:@selector(splitView:constrainMaxCoordinate:ofSubviewAt:)]) {
-        float max = [delegate splitView:self constrainMaxCoordinate:0. ofSubviewAt:0];
+	
+    if(self.delegate && [self.delegate respondsToSelector:@selector(splitView:constrainMaxCoordinate:ofSubviewAt:)]) {
+        float max = [self.delegate splitView:self constrainMaxCoordinate:0. ofSubviewAt:0];
         newFrame.size.width = MIN(max, newFrame.size.width);
-        //NSLog(@"Constrained max width to: %f", newFrame.size.width);
     }
-    [_sideView setFrame:newFrame];
+	
+    [leftView setFrame:newFrame];
+	
     [self setNeedsDisplay:YES];
     [self adjustSubviews];
-    
+	
     [[NSNotificationCenter defaultCenter] postNotificationName:NSSplitViewDidResizeSubviewsNotification object:self];
 }
 
 #pragma mark -
 #pragma mark Position save support
 
-- (NSString*)htmd__keyForLayoutName: (NSString*)name
-{
-    return [NSString stringWithFormat: @"HTMDSplitViewLayout%@", name];
+- (void) applyLayout:(NSRect)layout toView:(NSView*)view {
+	NSRect newFrame = layout;
+	if(NSIsEmptyRect(newFrame)) {
+		newFrame = [view frame];
+		if([self isVertical]) {
+			newFrame.size.width = 0;
+		} else {
+			newFrame.size.height = 0;
+		}
+	}
+	[view setFrame:newFrame];
 }
 
-- (void)storeLayoutWithName: (NSString*)name
-{
-    NSString* key = [self htmd__keyForLayoutName: name];
-    NSMutableArray* viewRects = [NSMutableArray array];
-    NSEnumerator* viewEnum = [[self subviews] objectEnumerator];
-    NSView* view;
-    NSRect frame;
-    
-    while((view=[viewEnum nextObject])!= nil)
-    {
-        if([self isSubviewCollapsed: view])
-            frame = NSZeroRect;
-        else
-            frame = [view frame];
-        [viewRects addObject: NSStringFromRect(frame)];
-    }
-    [[NSUserDefaults standardUserDefaults] setObject: viewRects forKey: key];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void) saveLayout {
+	HTMDSettings* settings = [HTMDSettings defaultSettings];
+	settings.sideViewLayout = [self.sideView frame];
+	settings.mainViewLayout = [self.mainView frame];
+	[settings save];
 }
 
-- (void)loadLayoutWithName: (NSString*)name
-{
-    NSString* key = [self htmd__keyForLayoutName: name];
-    NSMutableArray* viewRects = [[NSUserDefaults standardUserDefaults] objectForKey: key];
-    NSArray* views = [self subviews];
-
-    int i, count;
-    NSRect frame;
-    count = MIN([viewRects count], [views count]);
-    
-    for(i=0; i<count; i++)
-    {
-        frame = NSRectFromString([viewRects objectAtIndex: i]);
-        if(NSIsEmptyRect(frame))
-        {
-            frame = [[views objectAtIndex: i] frame];
-            if([self isVertical])
-                frame.size.width = 0;
-            else
-                frame.size.height = 0;
-        }
-        [[views objectAtIndex: i] setFrame: frame];
-    }
+- (void) restoreLayout {
+	HTMDSettings* settings = [HTMDSettings defaultSettings];
+	[self applyLayout:settings.sideViewLayout toView:self.sideView];
+	[self applyLayout:settings.mainViewLayout toView:self.mainView];
 }
 
 @end
