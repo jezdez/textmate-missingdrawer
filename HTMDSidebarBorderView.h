@@ -32,7 +32,6 @@
 
 @interface HTMDSidebarBorderView : NSView {
     id<NSObject> projectFileOutlineView;
-
 }
 - (void)addToSuperview:(NSView*)superview;
 + (NSImage*) bundledImageWithName:(NSString*)imageName;

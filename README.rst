@@ -13,11 +13,8 @@ Release notes
 ##########
 
 * added a "Open Terminal Here" button to the drawer's button panel
-* fixed the issue of an actual missing drawer when opening a TextMate project
-(``*.tmproj``) by double clicking it or a directory by dragging it to the dock
-icon when TextMate is not running already
-* added lefty support for toggeling the file list to be displayed left or right
-to edit window
+* fixed the issue of an actual missing drawer when opening a TextMate project (``*.tmproj``) by double clicking it or a directory by dragging it to the dock icon when TextMate is not running already 
+* added lefty support for toggeling the file list to be displayed left or right to edit window
 
 2009-01-27
 ##########

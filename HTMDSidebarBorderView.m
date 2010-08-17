@@ -41,7 +41,6 @@
 - (id) initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
     }
     return self;
 }
@@ -181,26 +180,9 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
     [btns addObject:terminalButton];
 	[terminalButton release];
 	
-    [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
+    //[btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
 	
-    //place buttons into sideboardview (self)	
-	float leftLoc = handleRect.size.width;
-	
-	for (NSView* button in btns) {
-		
-		NSRect buttonFrame = [button frame];
-		buttonFrame.origin.y = -4;
-		buttonFrame.origin.x = leftLoc;
-		leftLoc = leftLoc + (buttonFrame.size.width-1);
-		
-		[button setAutoresizingMask:NSViewMaxXMargin];
-		[button removeFromSuperview];
-		[button setFrame:buttonFrame];
-		[self addSubview:button];
-		
-	}	
-	
-    //adjust outlineView frame
+	//adjust outlineView frame
     if(outlineView){
         NSRect aRect=[superview frame];
         aRect.origin.x=-1.0;
@@ -218,6 +200,65 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
         [realOutlineView reloadData];
 		
     }
+	
+	//place buttons into sideboardview (self)
+
+//  alternative A: "Add file" button gets partially covered by window resizer handle when displaying buttons 
+//	on the right outside when in lefty mode
+	
+//	if(showSidebarOnLeft) {
+//		float leftLoc = 0;
+//		
+//		for (NSView* button in btns) {
+//			
+//			NSRect buttonFrame = [button frame];
+//			buttonFrame.origin.y = -4;
+//			buttonFrame.origin.x = leftLoc;
+//			leftLoc = leftLoc + (buttonFrame.size.width-1);
+//			
+//			[button setAutoresizingMask:NSViewMaxXMargin];
+//			[button removeFromSuperview];
+//			[button setFrame:buttonFrame];
+//			[self addSubview:button];
+//			
+//		}	
+//	} else {
+//		float pos = 0;
+//		
+//		for (NSView* button in btns) {
+//			NSRect buttonFrame = [button frame];
+//			buttonFrame.origin.y = -4;
+//			pos = pos + (buttonFrame.size.width-1);
+//			buttonFrame.origin.x = [self frame].size.width-pos;
+//			
+//			[button removeFromSuperview];
+//			[button setFrame:buttonFrame];
+//			[button setAutoresizingMask:NSViewMinXMargin];
+//			[self addSubview:button];
+//		}
+//	}
+	
+	float leftLoc = 0;
+	if(!showSidebarOnLeft) {
+		leftLoc = leftLoc + handleRect.size.width; // = 18 
+							 
+	}
+	for (NSView* button in btns) {
+		
+		NSRect buttonFrame = [button frame];
+		buttonFrame.origin.y = -4;
+		buttonFrame.origin.x = leftLoc;
+		leftLoc = leftLoc + (buttonFrame.size.width-1);
+		
+		[button setAutoresizingMask:NSViewMaxXMargin];
+		[button removeFromSuperview];
+		[button setFrame:buttonFrame];
+		[self addSubview:button];
+		
+	}
+	
+	
+	
     [btns release];
     [imageView release];
 }
