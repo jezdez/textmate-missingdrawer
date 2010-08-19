@@ -30,6 +30,7 @@
 //
 
 @interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
+	
     NSView *_sideView;
     NSView *_mainView;
  
@@ -40,9 +41,15 @@
 @property (readonly) NSView *sideView;
 @property (readonly) NSView *mainView;
 
+// Initializer
 - (id)initWithFrame:(NSRect)frame mainView:(NSView *)aMainView sideView:(NSView *)aSideView;
-- (void)windowWillCloseWillCall;
+
+// Drawing
+- (void)toggleLayout;
 - (IBAction)adjustSubviews:(id)sender;
+
+// Layout
+- (void)windowWillCloseWillCall;
 - (void)saveLayout;
 - (void)restoreLayout;
 

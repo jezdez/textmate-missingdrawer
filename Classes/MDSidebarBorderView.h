@@ -30,11 +30,17 @@
 //
 
 @interface MDSidebarBorderView : NSView {
+	
     id<NSObject> projectFileOutlineView;
 }
 
+// Class Methods
 + (NSImage *)bundledImageWithName:(NSString *)imageName;
 
+// Drawing
 - (void)addToSuperview:(NSView *)superview;
+
+// Actions
+- (void)terminalButtonPressed:(id)sender;
 
 @end

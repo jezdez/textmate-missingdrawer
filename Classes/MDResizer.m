@@ -38,6 +38,7 @@
     [[[self superview] superview] mouseDown:theEvent];
 }
 
+
 - (void) mouseDragged:(NSEvent *)theEvent {
     MDLog("mouseDragged in sliderImage");
     [[[self superview] superview] mouseDragged:theEvent];
