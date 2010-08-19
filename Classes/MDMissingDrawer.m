@@ -1,10 +1,11 @@
 //
-//  HTMDMissingDrawer.m
+//  MDMissingDrawer.m
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -29,21 +30,19 @@
 //
 
 #import <objc/objc-runtime.h>
-#import "HTMDMissingDrawer.h"
-#import "HTMDSplitView.h"
-#import "HTMDSidebarBorderView.h"
-#import "HTMDSettings.h"
+#import "MDMissingDrawer.h"
+#import "MDSplitView.h"
+#import "MDSidebarBorderView.h"
+#import "MDSettings.h"
 
-#pragma mark -
-#pragma mark Class method replacement support
+#pragma mark Instance method replacement support
 
-void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
+void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
     Method originalMethod = class_getInstanceMethod(cls, originalSel);
     Method newMethod = class_getInstanceMethod(cls, newSel);
     method_exchangeImplementations(originalMethod, newMethod);
 }
 
-#pragma mark -
 #pragma mark OakProjectController replacement methods category
 
 @interface NSObject (MD_OakProjectController_MethodReplacements)
@@ -66,17 +65,17 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 	if (window) {
 		NSView* contentView = [window contentView];
 		
-		if (contentView && ![contentView isKindOfClass:[HTMDSplitView class]]) {
+		if (contentView && ![contentView isKindOfClass:[MDSplitView class]]) {
 			NSDrawer* drawer = [[window drawers] objectAtIndex:0];
 			NSView* leftView = [[drawer contentView] retain];
 			[drawer setContentView:nil];
 			[window setContentView:nil];
 			
-			HTMDSidebarBorderView* borderView = [[HTMDSidebarBorderView alloc] initWithFrame:[leftView frame]];
+			MDSidebarBorderView* borderView = [[MDSidebarBorderView alloc] initWithFrame:[leftView frame]];
 			[borderView addToSuperview:leftView];
 			
-			HTMDSplitView* splitView = [HTMDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
-			debug("replacing current window with split view");
+			MDSplitView* splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
+			MDLog("replacing current window with split view");
 			[window setContentView:splitView];
 			
 			[borderView release];
@@ -87,7 +86,7 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 }
 
 - (void) MD_repl_windowDidLoad {
-    debug();
+    MDLog();
     
 	// call original
     [self MD_repl_windowDidLoad];
@@ -101,7 +100,7 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 }
 
 - (void) MD_repl_windowWillClose:(NSNotification*)notification {
-    debug();
+    MDLog();
 	
     NSWindow *window = [notification object];
 	
@@ -111,7 +110,7 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 	}
 	
     id splitView = [window contentView];
-    if ([splitView isKindOfClass:[HTMDSplitView class]]) {
+    if ([splitView isKindOfClass:[MDSplitView class]]) {
         [splitView windowWillCloseWillCall];
     }
 
@@ -120,25 +119,25 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 }
 
 - (void) MD_repl_openProjectDrawer:(id)sender {
-	debug();
+	MDLog();
 	
     NSWindow* window = [(NSWindowController*)self window];
     
-	if ([[window contentView] isKindOfClass:[HTMDSplitView class]]) {
+	if ([[window contentView] isKindOfClass:[MDSplitView class]]) {
         
-		debug("panel exists and menu item was clicked");
+		MDLog("panel exists and menu item was clicked");
 		
-		HTMDSplitView* contentView = (HTMDSplitView*)[window contentView];
+		MDSplitView* contentView = (MDSplitView*)[window contentView];
 		
 		NSView* sideView = contentView.sideView; //[[contentView subviews]objectAtIndex:0];
         NSRect sideViewFrame = [sideView frame];
 
         if (sideViewFrame.size.width == 0) {
-            debug("show hidden panel");
+            MDLog("show hidden panel");
 			[contentView restoreLayout];
             [contentView adjustSubviews];
         } else {
-            debug("hide visible panel");
+            MDLog("hide visible panel");
 			[contentView saveLayout];
             sideViewFrame.size.width = 0;
             [sideView setFrame:sideViewFrame];
@@ -148,14 +147,14 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 }
 
 - (void) MD_repl_revealInProject:(id)sender {
-	debug();
+	MDLog();
     [self MD_repl_revealInProject:sender];
     [self MD_repl_revealInProject:sender]; //TODO: twice?
 
     NSWindow* window= [(NSWindowController*)self window];
     NSView* contentView = [window contentView];
 
-    if ([[contentView className] isEqualToString:@"HTMDSplitView"]) {
+    if ([[contentView className] isEqualToString:@"MDSplitView"]) {
         NSView* leftView = [[contentView subviews] objectAtIndex:0];
         NSRect leftFrame = [leftView frame];
         if (leftFrame.size.width == 0) {
@@ -165,7 +164,7 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 }
 
 - (NSOutlineView *)MD_outlineView {
-	HTMDSplitView* contentView = (HTMDSplitView *)[[(NSWindowController *)self window] contentView];
+	MDSplitView* contentView = (MDSplitView *)[[(NSWindowController *)self window] contentView];
 	NSScrollView *scrollView = [[contentView.sideView subviews] objectAtIndex:0];
 	NSClipView *clipView = [[scrollView subviews] objectAtIndex:0];
 	return [[clipView subviews] lastObject];
@@ -181,18 +180,18 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 
 @end
 
-@interface HTMDMissingDrawer (private)
+@interface MDMissingDrawer (private)
 
 - (void) injectPluginMethods;
 - (void) installMenuItems;
 
 @end
 
-@implementation HTMDMissingDrawer
+@implementation MDMissingDrawer
 
 - (id) initWithPlugInController:(id<TMPlugInController>)aController {
 	if (self = [super init]) {
-		debug("initializing 'MissingDrawer' plugin");
+		MDLog("initializing 'MissingDrawer' plugin");
         [self injectPluginMethods];
 		[[[NSApp mainWindow] windowController] MD_splitWindowIfNeeded];
 		[self installMenuItems];
@@ -201,7 +200,7 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 }
 
 - (void) toggleSplitViewLayout:(id)sender {
-	debug("Toggle Left/Right");
+	MDLog("Toggle Left/Right");
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MDToggleSplitViewLayout" object:nil];
 }
 
@@ -211,7 +210,7 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 	NSMenuItem* showHideDrawerMenuItem = nil;
 	NSInteger drawerMenuItemIndex = 0;
 	
-	HTMDSettings* settings = [HTMDSettings defaultSettings];
+	MDSettings* settings = [MDSettings defaultSettings];
 	
 	for (NSMenuItem* menuItem in [viewMenu itemArray]) {
 		if ([[menuItem title] isEqualToString:@"Show/Hide Project Drawer"]) {
@@ -235,20 +234,18 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 }
 
 - (void) injectPluginMethods {
-	debug("swapping OakProjectController methods");
+	MDLog("swapping OakProjectController methods");
 	
     Class oakProjectController = NSClassFromString(@"OakProjectController");
-	// is subclass of NSWindowController
-	
-    swapClassMethods(oakProjectController, @selector(windowDidLoad),		@selector(MD_repl_windowDidLoad));
-    swapClassMethods(oakProjectController, @selector(windowWillClose:),		@selector(MD_repl_windowWillClose:));
-    swapClassMethods(oakProjectController, @selector(openProjectDrawer:),	@selector(MD_repl_openProjectDrawer:));
-    swapClassMethods(oakProjectController, @selector(revealInProject:),		@selector(MD_repl_revealInProject:));
+    swapInstanceMethods(oakProjectController, @selector(windowDidLoad),      @selector(MD_repl_windowDidLoad));
+    swapInstanceMethods(oakProjectController, @selector(windowWillClose:),   @selector(MD_repl_windowWillClose:));
+    swapInstanceMethods(oakProjectController, @selector(openProjectDrawer:), @selector(MD_repl_openProjectDrawer:));
+    swapInstanceMethods(oakProjectController, @selector(revealInProject:),   @selector(MD_repl_revealInProject:));
 }
 
-+ (HTMDSplitView*) makeSplitViewWithMainView:(NSView*)contentView sideView:(NSView*)sideView {
-	debug();
-    HTMDSplitView* splitView= [[HTMDSplitView alloc] initWithFrame:[contentView frame] andMainView:contentView andSideView:sideView];
++ (MDSplitView*) makeSplitViewWithMainView:(NSView*)contentView sideView:(NSView*)sideView {
+	MDLog();
+    MDSplitView* splitView= [[MDSplitView alloc] initWithFrame:[contentView frame] mainView:contentView sideView:sideView];
     [splitView setVertical:YES];
     return [splitView autorelease];
 }

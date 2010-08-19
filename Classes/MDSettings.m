@@ -1,10 +1,11 @@
 //
-//  HTMDSettings.m
+//  MDSettings.m
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -29,16 +30,16 @@
 //
 
 
-#import "HTMDSettings.h"
+#import "MDSettings.h"
 
-@implementation HTMDSettings
+@implementation MDSettings
 
 @synthesize showSideViewOnLeft	= _showSideViewOnLeft;
 @synthesize sideViewLayout		= _sideViewLayout;
 @synthesize mainViewLayout		= _mainViewLayout;
 @synthesize toggleSplitViewLayoutMenuItem = _toggleSplitViewLayoutMenuItem;
 
-NSString* const kMD_Settings_key		= @"HTMDSplitViewLayoutPanels";
+NSString* const kMD_Settings_key	= @"HTMDSplitViewLayoutPanels";
 NSString* const kMD_SideView_Frame	= @"SideViewFrame";
 NSString* const kMD_MainView_Frame	= @"MainViewFrame";
 NSString* const kMD_SideView_IsLeft	= @"SideViewIsLeft";
@@ -69,7 +70,7 @@ NSString* const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 }
 
 - (IBAction) toggleSideViewLayout:(id)sender {
-	debug();
+	MDLog();
 	self.showSideViewOnLeft = !self.showSideViewOnLeft;
 	[self save];
 	if([sender isKindOfClass:[NSMenuItem class]]) {
@@ -93,9 +94,9 @@ NSString* const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 #pragma mark -
 #pragma mark Singleton
 
-static HTMDSettings* _defaultSettings = nil;
+static MDSettings* _defaultSettings = nil;
 
-+ (HTMDSettings *)defaultSettings {
++ (MDSettings *)defaultSettings {
 	@synchronized(self) {
 		if (_defaultSettings == nil) {
 			[[[self alloc] init] release]; // release to trick Xcode's "Build and Analyze". release actually does nothing.

@@ -1,10 +1,11 @@
 //
-//  HTMDSettings.h
+//  MDResizer.m
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -28,32 +29,18 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import "MDResizer.h"
 
-#import <Foundation/Foundation.h>
+@implementation MDResizer
 
-extern NSString* const kMD_Settings_key;
-extern NSString* const kMD_SideView_Frame;
-extern NSString* const kMD_MainView_Frame;
-extern NSString* const kMD_SideView_IsLeft;
-extern NSString* const kMD_SideView_IsBlue;
-
-@interface HTMDSettings : NSObject {
-	
-	@private
-	BOOL	_showSideViewOnLeft;
-	NSRect	_sideViewLayout;
-	NSRect	_mainViewLayout;
-	NSMenuItem* _toggleSplitViewLayoutMenuItem;
-	
+- (void) mouseDown:(NSEvent *)theEvent {
+    MDLog("mouseDown in sliderImage");
+    [[[self superview] superview] mouseDown:theEvent];
 }
 
-@property (nonatomic, readonly) NSMenuItem* toggleSplitViewLayoutMenuItem;
-@property BOOL showSideViewOnLeft;
-@property NSRect sideViewLayout;
-@property NSRect mainViewLayout;
-
-+ (HTMDSettings*) defaultSettings;
-- (void) save;
-- (IBAction) toggleSideViewLayout:(id)sender;
+- (void) mouseDragged:(NSEvent *)theEvent {
+    MDLog("mouseDragged in sliderImage");
+    [[[self superview] superview] mouseDragged:theEvent];
+}
 
 @end

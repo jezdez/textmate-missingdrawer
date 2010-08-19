@@ -1,5 +1,6 @@
 //
-//  Prefix header for all source files of the 'MissingDrawer' target in the 'MissingDrawer' project.
+//  MDSidebarBorderView.h
+//  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
@@ -28,7 +29,12 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#ifdef __OBJC__
-	#import <Cocoa/Cocoa.h>
-	#import "MDDebugUtils.h"
-#endif
+@interface MDSidebarBorderView : NSView {
+    id<NSObject> projectFileOutlineView;
+}
+
++ (NSImage *)bundledImageWithName:(NSString *)imageName;
+
+- (void)addToSuperview:(NSView *)superview;
+
+@end

@@ -1,10 +1,11 @@
 //
-//  HTMDSplitView.m
+//  MDSplitView.m
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -28,14 +29,14 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "HTMDSplitView.h"
-#import "HTMDResizer.h"
-#import "HTMDSettings.h"
+#import "MDSplitView.h"
+#import "MDResizer.h"
+#import "MDSettings.h"
 
 #define MIN_SIDEVIEW_WIDTH 135.0f
 #define MAX_SIDEVIEW_WIDTH 350.0f
 
-@implementation HTMDSplitView
+@implementation MDSplitView
 
 @synthesize sideView = _sideView;
 @synthesize mainView = _mainView;
@@ -43,18 +44,16 @@
 #pragma mark -
 #pragma mark Original Methods
 
-- (id) initWithFrame:(NSRect)frame andMainView:(NSView*)mainView andSideView:(NSView*)sideView {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
+- (id)initWithFrame:(NSRect)frame mainView:(NSView *)aMainView sideView:(NSView *)aSideView {
+    if ((self = [super initWithFrame:frame])) {
 		[self setDelegate:self];
 		
-		_sideView = [sideView retain];
-		_mainView = [mainView retain];
+		_sideView = [aMainView retain];
+		_mainView = [aSideView retain];
 		[self.sideView setAutoresizingMask:NSViewHeightSizable];
         [self setVertical:YES];
 		
-		HTMDSettings* settings = [HTMDSettings defaultSettings];
+		MDSettings* settings = [MDSettings defaultSettings];
 		if(settings.showSideViewOnLeft) {
 			[self addSubview:self.sideView];
 			[self addSubview:self.mainView];
@@ -68,7 +67,7 @@
 }
 
 - (void) toggleLayout {
-	debug("toggling views");
+	MDLog("toggling views");
 	NSView* leftView = [[[self subviews] objectAtIndex:0] retain];
 	[leftView removeFromSuperview];
 	[self addSubview:leftView];
@@ -87,10 +86,10 @@
 
 //cleanup
 - (void) windowWillCloseWillCall {
-    debug("windowWillCloseWillCall");
+    MDLog("windowWillCloseWillCall");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     if ([self.sideView frame].size.width<=0) {
-		debug("save only when frame not collapsed");
+		MDLog("save only when frame not collapsed");
 		NSRect sideViewFrame = [self.sideView frame];
         sideViewFrame.size.width = MIN_SIDEVIEW_WIDTH;
         [self.sideView setFrame:sideViewFrame];
@@ -143,7 +142,7 @@
 }
 
 - (void) splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize {
-	debug();
+	MDLog();
 	
 	float dividerThickness = [self dividerThickness];
     
@@ -163,7 +162,7 @@
 
 	mainViewFrame.size.width = splitViewFrame.size.width - sideViewFrame.size.width - dividerThickness;
 	
-	HTMDSettings* settings = [HTMDSettings defaultSettings];
+	MDSettings* settings = [MDSettings defaultSettings];
 	
 	if (settings.showSideViewOnLeft) {
 		mainViewFrame.origin.x = sideViewFrame.size.width + dividerThickness;
@@ -181,7 +180,7 @@
 #pragma mark Sidebar resize area
 
 - (void) resetCursorRects {
-	debug();
+	MDLog();
     [super resetCursorRects];
 	
     NSRect location = [resizeSlider frame];
@@ -191,10 +190,10 @@
 }
 
 - (void) mouseDown:(NSEvent *)theEvent {
-	debug();
+	MDLog();
     NSPoint clickLocation = [theEvent locationInWindow];
     NSView *clickReceiver = [self hitTest:clickLocation];
-    if ([clickReceiver isKindOfClass:[HTMDResizer class]]) {
+    if ([clickReceiver isKindOfClass:[MDResizer class]]) {
         inResizeMode = YES;
     } else {
         inResizeMode = NO;
@@ -203,12 +202,12 @@
 }
 
 - (void) mouseUp:(NSEvent *)theEvent {
-	debug();
+	MDLog();
     inResizeMode = NO;
 }
 
 - (void) mouseDragged:(NSEvent *)theEvent {
-	debug();
+	MDLog();
 	
     if (inResizeMode == NO) {
         [super mouseDragged:theEvent];
@@ -263,14 +262,14 @@
 }
 
 - (void) saveLayout {
-	HTMDSettings* settings = [HTMDSettings defaultSettings];
+	MDSettings* settings = [MDSettings defaultSettings];
 	settings.sideViewLayout = [self.sideView frame];
 	settings.mainViewLayout = [self.mainView frame];
 	[settings save];
 }
 
 - (void) restoreLayout {
-	HTMDSettings* settings = [HTMDSettings defaultSettings];
+	MDSettings* settings = [MDSettings defaultSettings];
 	[self applyLayout:settings.sideViewLayout toView:self.sideView];
 	[self applyLayout:settings.mainViewLayout toView:self.mainView];
 }

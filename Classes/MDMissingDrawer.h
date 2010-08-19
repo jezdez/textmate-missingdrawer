@@ -1,10 +1,11 @@
 //
-//  HTMDSplitView.h
+//  MDMissingDrawer.h
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -28,23 +29,18 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
+#import "TMPlugInController.h"
 
-@interface HTMDSplitView : NSSplitView <NSSplitViewDelegate> {
-    NSView* _sideView;
-    NSView* _mainView;
- 
-    IBOutlet id resizeSlider;
-    BOOL inResizeMode;
+@class MDSplitView;
+
+@interface MDMissingDrawer : NSObject {
+	
 }
 
-@property (readonly) NSView* sideView;
-@property (readonly) NSView* mainView;
+// Class Methods
++ (MDSplitView *)makeSplitViewWithMainView:(NSView *)contentView sideView:(NSView *)sideView;
 
-- (id) initWithFrame:(NSRect)frame andMainView:(NSView*)mainView andSideView:(NSView*)sideView;
-- (void) windowWillCloseWillCall;
-- (IBAction) adjustSubviews:(id)sender;
-- (void) saveLayout;
-- (void) restoreLayout;
+// Plugin hook
+- (id)initWithPlugInController:(id<TMPlugInController>)aController;
 
 @end

@@ -1,10 +1,11 @@
 //
-//  HTMDSidebarBorderView.m
+//  MDSidebarBorderView.m
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -28,15 +29,15 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "HTMDSidebarBorderView.h"
-#import "HTMDResizer.h"
+#import "MDSidebarBorderView.h"
+#import "MDResizer.h"
 #import "Foundation/NSGeometry.h"
-#import "HTMDSettings.h"
+#import "MDSettings.h"
 
 #pragma mark -
 #pragma mark Original methods
 
-@implementation HTMDSidebarBorderView
+@implementation MDSidebarBorderView
 
 - (id) initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -56,7 +57,7 @@
 - (void) drawRect:(NSRect)rect {
     // Drawing code here.
     NSRect fromRect;
-    NSImage* image = [HTMDSidebarBorderView bundledImageWithName:@"DrawerBorder"];
+    NSImage* image = [MDSidebarBorderView bundledImageWithName:@"DrawerBorder"];
     fromRect.size=[image size];
     fromRect.origin.x=0;
     fromRect.origin.y=0;
@@ -90,7 +91,7 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
     }
 	
     for (NSDictionary* item in selectedItems) {
-        debug("[projectFileOutlineView selectedItems]: %@", item);
+        MDLog("[projectFileOutlineView selectedItems]: %@", item);
         NSString* path = [item objectForKey:@"sourceDirectory"];
         if (!path) {
             path = [[item objectForKey:@"filename"] stringByDeletingLastPathComponent];
@@ -98,7 +99,7 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
         if (path) {
             path = [path stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\\\\\""];
             NSString *s = [NSString stringWithFormat:@"tell application \"Terminal\"\n\tdo script \"cd \\\"%@\\\"\"\n\tactivate\nend tell", path];
-            debug("script:\n%@", s);
+            MDLog("script:\n%@", s);
             NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
             [as executeAndReturnError:nil];
 			[as release];
@@ -110,10 +111,10 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
 - (void) addToSuperview:(NSView*)superview {
     NSScrollView* outlineView = nil;
     int i, cnt;
-	BOOL showSidebarOnLeft = [[HTMDSettings defaultSettings] showSideViewOnLeft];
+	BOOL showSidebarOnLeft = [[MDSettings defaultSettings] showSideViewOnLeft];
 	
     //adjust frame
-    NSImage* image = [HTMDSidebarBorderView bundledImageWithName:@"DrawerBorder"];
+    NSImage* image = [MDSidebarBorderView bundledImageWithName:@"DrawerBorder"];
     NSRect borderRect;
 	borderRect.origin.x = showSidebarOnLeft?-1.0:1.0;
     borderRect.origin.y = 0.0;
@@ -122,7 +123,7 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
 	
     //add resizer image
     NSRect handleRect = NSZeroRect;
-    NSImage* sidebarResizerImage = [HTMDSidebarBorderView bundledImageWithName:@"DrawerResizeHandle"];
+    NSImage* sidebarResizerImage = [MDSidebarBorderView bundledImageWithName:@"DrawerResizeHandle"];
     handleRect.size = [sidebarResizerImage size];
     handleRect.origin.y = 0;
 	if (showSidebarOnLeft) {
@@ -130,7 +131,7 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
 	} else {
 		handleRect.origin.x = 0;
 	}
-    NSImageView *imageView = [[HTMDResizer alloc] initWithFrame:handleRect];
+    NSImageView *imageView = [[MDResizer alloc] initWithFrame:handleRect];
     [imageView setImage: sidebarResizerImage];
     [imageView setAutoresizingMask:showSidebarOnLeft?NSViewMinXMargin:NSViewMaxXMargin];
     [self addSubview:imageView];
@@ -167,8 +168,8 @@ int compareFrameOriginX(id viewA, id viewB, void *context) {
 	
     NSButton* terminalButton = [[NSButton alloc] initWithFrame:terminalButtonFrame];
 	
-    NSImage* buttonImage = [HTMDSidebarBorderView bundledImageWithName:@"OpenTerminalHere"];
-    NSImage* buttonImagePressed = [HTMDSidebarBorderView bundledImageWithName:@"OpenTerminalHerePressed"]; 
+    NSImage* buttonImage = [MDSidebarBorderView bundledImageWithName:@"OpenTerminalHere"];
+    NSImage* buttonImagePressed = [MDSidebarBorderView bundledImageWithName:@"OpenTerminalHerePressed"]; 
 	
 	[terminalButton setToolTip:@"Open Terminal window and 'cd' to selected file/folder"];
     [terminalButton setImage:buttonImage];
