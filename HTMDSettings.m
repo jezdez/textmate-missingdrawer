@@ -38,10 +38,11 @@
 @synthesize mainViewLayout		= _mainViewLayout;
 @synthesize toggleSplitViewLayoutMenuItem = _toggleSplitViewLayoutMenuItem;
 
-static NSString* const kMD_Settings_key		= @"HTMDSplitViewLayoutPanels";
-static NSString* const kMD_SideView_Frame	= @"SideViewFrame";
-static NSString* const kMD_MainView_Frame	= @"MainViewFrame";
-static NSString* const kMD_SideView_IsLeft	= @"SideViewIsLeft";
+NSString* const kMD_Settings_key		= @"HTMDSplitViewLayoutPanels";
+NSString* const kMD_SideView_Frame	= @"SideViewFrame";
+NSString* const kMD_MainView_Frame	= @"MainViewFrame";
+NSString* const kMD_SideView_IsLeft	= @"SideViewIsLeft";
+NSString* const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 
 - (id) init {
 	if(self = [super init]) {

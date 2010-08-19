@@ -31,6 +31,12 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* const kMD_Settings_key;
+extern NSString* const kMD_SideView_Frame;
+extern NSString* const kMD_MainView_Frame;
+extern NSString* const kMD_SideView_IsLeft;
+extern NSString* const kMD_SideView_IsBlue;
+
 @interface HTMDSettings : NSObject {
 	
 	@private

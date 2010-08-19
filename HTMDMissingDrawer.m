@@ -53,6 +53,10 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 - (void) MD_repl_revealInProject:(id)sender;
 - (void) MD_repl_openProjectDrawer:(id)sender;
 
+- (NSOutlineView *) MD_outlineView;
+- (void) MD_windowDidBecomeMain:(NSNotification *)notification;
+- (void) MD_windowDidResignMain:(NSNotification *)notification;
+
 @end
 
 @implementation NSObject (MD_OakProjectController_MethodReplacements)
@@ -88,14 +92,26 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
 	// call original
     [self MD_repl_windowDidLoad];
 	[self MD_splitWindowIfNeeded];
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMD_SideView_IsBlue]) {
+		NSWindow *window = [(NSWindowController *)self window];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MD_windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:window];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MD_windowDidResignMain:) name:NSWindowDidResignMainNotification object:window];
+	}
 }
 
 - (void) MD_repl_windowWillClose:(NSNotification*)notification {
     debug();
 	
-    id window=[notification object];
-    id splitView=[window contentView];
-    if([splitView isKindOfClass:[HTMDSplitView class]]) {
+    NSWindow *window = [notification object];
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMD_SideView_IsBlue]) {
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidBecomeMainNotification object:window];
+		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidResignMainNotification object:window];
+	}
+	
+    id splitView = [window contentView];
+    if ([splitView isKindOfClass:[HTMDSplitView class]]) {
         [splitView windowWillCloseWillCall];
     }
 
@@ -146,6 +162,21 @@ void swapClassMethods(Class cls, SEL originalSel, SEL newSel) {
             [self MD_repl_openProjectDrawer:sender];
         }
     }
+}
+
+- (NSOutlineView *)MD_outlineView {
+	HTMDSplitView* contentView = (HTMDSplitView *)[[(NSWindowController *)self window] contentView];
+	NSScrollView *scrollView = [[contentView.sideView subviews] objectAtIndex:0];
+	NSClipView *clipView = [[scrollView subviews] objectAtIndex:0];
+	return [[clipView subviews] lastObject];
+}
+
+- (void) MD_windowDidBecomeMain:(NSNotification *)notification {
+	[[self MD_outlineView] setBackgroundColor:[NSColor colorWithCalibratedRed:0.871 green:0.894 blue:0.918 alpha:1.0]];	
+}
+
+- (void) MD_windowDidResignMain:(NSNotification *)notification {
+	[[self MD_outlineView] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.929 alpha:1.0]];		
 }
 
 @end
