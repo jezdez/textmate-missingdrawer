@@ -1,4 +1,5 @@
 build/
 .DS_Store
-MissingDrawer.xcodeproj/meissner.pbxuser
-MissingDrawer.xcodeproj/meissner.perspectivev3
+*.pbxuser
+*.perspectivev3
+*.mode1v3
