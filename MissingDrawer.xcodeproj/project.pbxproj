@@ -18,8 +18,8 @@
 		B2B89119121CD28E00AC78F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B8910B121CD28D00AC78F1 /* InfoPlist.strings */; };
 		B2B8911A121CD28E00AC78F1 /* OpenTerminalHere.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8910D121CD28D00AC78F1 /* OpenTerminalHere.png */; };
 		B2B8911B121CD28E00AC78F1 /* OpenTerminalHerePressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8910F121CD28D00AC78F1 /* OpenTerminalHerePressed.png */; };
-		B2B89194121CDA1A00AC78F1 /* NSObject+MDOakProjectControllerMethodReplacements.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89193121CDA1A00AC78F1 /* NSObject+MDOakProjectControllerMethodReplacements.m */; };
-		B2B89197121CDA5800AC78F1 /* NSObject+MDOakProjectControllerMethodAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89196121CDA5800AC78F1 /* NSObject+MDOakProjectControllerMethodAdditions.m */; };
+		B2B89194121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89193121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m */; };
+		B2B89197121CDA5800AC78F1 /* NSWindowController+MDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89196121CDA5800AC78F1 /* NSWindowController+MDAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,6 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2B890FA121CD28D00AC78F1 /* MDDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDebugUtils.h; sourceTree = "<group>"; };
 		B2B890FB121CD28D00AC78F1 /* MDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMissingDrawer.h; sourceTree = "<group>"; };
 		B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMissingDrawer.m; sourceTree = "<group>"; };
 		B2B890FD121CD28D00AC78F1 /* MDResizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDResizer.h; sourceTree = "<group>"; };
@@ -46,10 +45,11 @@
 		B2B89111121CD28E00AC78F1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2B89128121CD2B800AC78F1 /* MissingDrawer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissingDrawer_Prefix.pch; sourceTree = "<group>"; };
 		B2B89134121CD38D00AC78F1 /* TMPlugInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMPlugInController.h; sourceTree = "<group>"; };
-		B2B89192121CDA1A00AC78F1 /* NSObject+MDOakProjectControllerMethodReplacements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MDOakProjectControllerMethodReplacements.h"; sourceTree = "<group>"; };
-		B2B89193121CDA1A00AC78F1 /* NSObject+MDOakProjectControllerMethodReplacements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MDOakProjectControllerMethodReplacements.m"; sourceTree = "<group>"; };
-		B2B89195121CDA5800AC78F1 /* NSObject+MDOakProjectControllerMethodAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MDOakProjectControllerMethodAdditions.h"; sourceTree = "<group>"; };
-		B2B89196121CDA5800AC78F1 /* NSObject+MDOakProjectControllerMethodAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MDOakProjectControllerMethodAdditions.m"; sourceTree = "<group>"; };
+		B2B89192121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+MDMethodReplacements.h"; sourceTree = "<group>"; };
+		B2B89193121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+MDMethodReplacements.m"; sourceTree = "<group>"; };
+		B2B89195121CDA5800AC78F1 /* NSWindowController+MDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+MDAdditions.h"; sourceTree = "<group>"; };
+		B2B89196121CDA5800AC78F1 /* NSWindowController+MDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+MDAdditions.m"; sourceTree = "<group>"; };
+		B2B891DD121CDCAA00AC78F1 /* MDDebugUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDebugUtils.h; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -115,22 +115,9 @@
 		B2B890F9121CD28D00AC78F1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B2B89134121CD38D00AC78F1 /* TMPlugInController.h */,
-				B2B890FA121CD28D00AC78F1 /* MDDebugUtils.h */,
-				B2B890FB121CD28D00AC78F1 /* MDMissingDrawer.h */,
-				B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */,
-				B2B890FD121CD28D00AC78F1 /* MDResizer.h */,
-				B2B890FE121CD28D00AC78F1 /* MDResizer.m */,
-				B2B890FF121CD28D00AC78F1 /* MDSettings.h */,
-				B2B89100121CD28D00AC78F1 /* MDSettings.m */,
-				B2B89101121CD28D00AC78F1 /* MDSidebarBorderView.h */,
-				B2B89102121CD28D00AC78F1 /* MDSidebarBorderView.m */,
-				B2B89103121CD28D00AC78F1 /* MDSplitView.h */,
-				B2B89104121CD28D00AC78F1 /* MDSplitView.m */,
-				B2B89192121CDA1A00AC78F1 /* NSObject+MDOakProjectControllerMethodReplacements.h */,
-				B2B89193121CDA1A00AC78F1 /* NSObject+MDOakProjectControllerMethodReplacements.m */,
-				B2B89195121CDA5800AC78F1 /* NSObject+MDOakProjectControllerMethodAdditions.h */,
-				B2B89196121CDA5800AC78F1 /* NSObject+MDOakProjectControllerMethodAdditions.m */,
+				B2B891E0121CDCB100AC78F1 /* Plugin */,
+				B2B891D4121CDC7F00AC78F1 /* Views */,
+				B2B891D2121CDC7000AC78F1 /* Categories */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -151,9 +138,46 @@
 		B2B89127121CD2B800AC78F1 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B2B891DD121CDCAA00AC78F1 /* MDDebugUtils.h */,
 				B2B89128121CD2B800AC78F1 /* MissingDrawer_Prefix.pch */,
 			);
 			path = "Other Sources";
+			sourceTree = "<group>";
+		};
+		B2B891D2121CDC7000AC78F1 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B2B89192121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.h */,
+				B2B89193121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m */,
+				B2B89195121CDA5800AC78F1 /* NSWindowController+MDAdditions.h */,
+				B2B89196121CDA5800AC78F1 /* NSWindowController+MDAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		B2B891D4121CDC7F00AC78F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B2B890FD121CD28D00AC78F1 /* MDResizer.h */,
+				B2B890FE121CD28D00AC78F1 /* MDResizer.m */,
+				B2B89101121CD28D00AC78F1 /* MDSidebarBorderView.h */,
+				B2B89102121CD28D00AC78F1 /* MDSidebarBorderView.m */,
+				B2B89103121CD28D00AC78F1 /* MDSplitView.h */,
+				B2B89104121CD28D00AC78F1 /* MDSplitView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		B2B891E0121CDCB100AC78F1 /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				B2B89134121CD38D00AC78F1 /* TMPlugInController.h */,
+				B2B890FB121CD28D00AC78F1 /* MDMissingDrawer.h */,
+				B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */,
+				B2B890FF121CD28D00AC78F1 /* MDSettings.h */,
+				B2B89100121CD28D00AC78F1 /* MDSettings.m */,
+			);
+			name = Plugin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,8 +243,8 @@
 				B2B89114121CD28E00AC78F1 /* MDSettings.m in Sources */,
 				B2B89115121CD28E00AC78F1 /* MDSidebarBorderView.m in Sources */,
 				B2B89116121CD28E00AC78F1 /* MDSplitView.m in Sources */,
-				B2B89194121CDA1A00AC78F1 /* NSObject+MDOakProjectControllerMethodReplacements.m in Sources */,
-				B2B89197121CDA5800AC78F1 /* NSObject+MDOakProjectControllerMethodAdditions.m in Sources */,
+				B2B89194121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m in Sources */,
+				B2B89197121CDA5800AC78F1 /* NSWindowController+MDAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

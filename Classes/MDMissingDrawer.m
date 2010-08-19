@@ -33,8 +33,8 @@
 #import "MDSplitView.h"
 #import "MDSidebarBorderView.h"
 #import "MDSettings.h"
-#import "NSObject+MDOakProjectControllerMethodReplacements.h"
-#import "NSObject+MDOakProjectControllerMethodAdditions.h"
+#import "NSWindowController+MDMethodReplacements.h"
+#import "NSWindowController+MDAdditions.h"
 #import <objc/objc-runtime.h>
 
 void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
