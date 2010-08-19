@@ -43,4 +43,7 @@
 // Plugin hook
 - (id)initWithPlugInController:(id<TMPlugInController>)aController;
 
+// Actions
+- (void)toggleSplitViewLayout:(id)sender;
+
 @end
