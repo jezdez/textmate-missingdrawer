@@ -1,10 +1,11 @@
 //
-//  HTMDResizer.m
+//  TMPlugInController.h
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -28,18 +29,8 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "HTMDResizer.h"
+@protocol TMPlugInController
 
-@implementation HTMDResizer
-
-- (void) mouseDown:(NSEvent *)theEvent {
-    debug("mouseDown in sliderImage");
-    [[[self superview] superview] mouseDown:theEvent];
-}
-
-- (void) mouseDragged:(NSEvent *)theEvent {
-    debug("mouseDragged in sliderImage");
-    [[[self superview] superview] mouseDragged:theEvent];
-}
+- (float)version;
 
 @end

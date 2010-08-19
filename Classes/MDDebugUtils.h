@@ -1,10 +1,11 @@
 //
-//  HTMDDebugUtils.h
+//  MDDebugUtils.h
 //  MissingDrawer
 //
 //	Copyright (c) 2006 hetima computer, 
 //                2008, 2009 Jannis Leidel, 
 //                2010 Christoph Meißner
+//                2010 Sam Soffes
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
@@ -28,16 +29,16 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#define _debug(fmt, args...)	{\
+#define _MDLog(fmt, args...)	{\
 								NSString* __DEBUG_STRING_TO_LOG__ = [[NSString alloc] initWithFormat:@fmt, ##args];\
 								NSLog(__DEBUG_STRING_TO_LOG__);\
 								[__DEBUG_STRING_TO_LOG__ release];\
 							}
 
 #if ENABLE_DEBUG_MODE
-	#define debug(fmt, args...) _debug("%s(%i): " fmt, __FUNCTION__, __LINE__, ##args)
+	#define MDLog(fmt, args...) _MDLog("%s(%i): " fmt, __FUNCTION__, __LINE__, ##args)
 #else
-	#define debug(fmt, args...) 
+	#define MDLog(fmt, args...) 
 #endif
 
-#define log_error(fmt, args...) _debug("%s(%i): " fmt, __FUNCTION__, __LINE__, ##args)
+#define MDLogError(fmt, args...) _MDLog("%s(%i): " fmt, __FUNCTION__, __LINE__, ##args)
