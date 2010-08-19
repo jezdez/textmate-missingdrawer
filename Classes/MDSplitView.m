@@ -48,8 +48,9 @@
     if ((self = [super initWithFrame:frame])) {
 		[self setDelegate:self];
 		
-		_sideView = [aMainView retain];
-		_mainView = [aSideView retain];
+		_mainView = [aMainView retain];
+		_sideView = [aSideView retain];
+		
 		[self.sideView setAutoresizingMask:NSViewHeightSizable];
         [self setVertical:YES];
 		
