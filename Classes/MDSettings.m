@@ -29,24 +29,25 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 #import "MDSettings.h"
+
+static MDSettings *_defaultSettings = nil;
+
+NSString *const kMD_Settings_key	= @"HTMDSplitViewLayoutPanels";
+NSString *const kMD_SideView_Frame	= @"SideViewFrame";
+NSString *const kMD_MainView_Frame	= @"MainViewFrame";
+NSString *const kMD_SideView_IsLeft	= @"SideViewIsLeft";
+NSString *const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 
 @implementation MDSettings
 
-@synthesize showSideViewOnLeft	= _showSideViewOnLeft;
-@synthesize sideViewLayout		= _sideViewLayout;
-@synthesize mainViewLayout		= _mainViewLayout;
+@synthesize showSideViewOnLeft = _showSideViewOnLeft;
+@synthesize sideViewLayout = _sideViewLayout;
+@synthesize mainViewLayout = _mainViewLayout;
 @synthesize toggleSplitViewLayoutMenuItem = _toggleSplitViewLayoutMenuItem;
 
-NSString* const kMD_Settings_key	= @"HTMDSplitViewLayoutPanels";
-NSString* const kMD_SideView_Frame	= @"SideViewFrame";
-NSString* const kMD_MainView_Frame	= @"MainViewFrame";
-NSString* const kMD_SideView_IsLeft	= @"SideViewIsLeft";
-NSString* const kMD_SideView_IsBlue	= @"MDBlueSidebar";
-
 - (id) init {
-	if(self = [super init]) {
+	if ((self = [super init])) {
 		NSDictionary* layout = [[NSUserDefaults standardUserDefaults] objectForKey:kMD_Settings_key];
 		if (layout && [layout isKindOfClass:[NSDictionary class]]) {
 			self.sideViewLayout = NSRectFromString([layout objectForKey:kMD_SideView_Frame]);
@@ -58,28 +59,29 @@ NSString* const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 			self.showSideViewOnLeft = YES;
 			[self save];
 		}
-		NSMenuItem* t_toggleSplitViewLayoutMenuItem = [[NSMenuItem alloc] initWithTitle:self.showSideViewOnLeft?@"Toggle Sideview Right":@"Toggle Sideview Left" 
-																	   action:@selector(toggleSideViewLayout:) 
-																keyEquivalent:@""];
-		[t_toggleSplitViewLayoutMenuItem setTarget:self];
-		[t_toggleSplitViewLayoutMenuItem setEnabled:YES];
-		_toggleSplitViewLayoutMenuItem = [t_toggleSplitViewLayoutMenuItem retain];
-		[t_toggleSplitViewLayoutMenuItem release];
+		
+		NSString *menuTitle = self.showSideViewOnLeft ? @"Toggle Sideview Right" : @"Toggle Sideview Left";
+		_toggleSplitViewLayoutMenuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(toggleSideViewLayout:) keyEquivalent:@""];
+		[_toggleSplitViewLayoutMenuItem setTarget:self];
+		[_toggleSplitViewLayoutMenuItem setEnabled:YES];
 	}
 	return self;
 }
 
-- (IBAction) toggleSideViewLayout:(id)sender {
+
+- (IBAction)toggleSideViewLayout:(id)sender {
 	MDLog();
 	self.showSideViewOnLeft = !self.showSideViewOnLeft;
 	[self save];
-	if([sender isKindOfClass:[NSMenuItem class]]) {
+	
+	if ([sender isKindOfClass:[NSMenuItem class]]) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MDSideviewLayoutHasBeenChangedNotification" object:nil];
-		[(NSMenuItem*)sender setTitle:self.showSideViewOnLeft?@"Toggle Sideview Right":@"Toggle Sideview Left"];
+		[(NSMenuItem*)sender setTitle:self.showSideViewOnLeft ? @"Toggle Sideview Right" : @"Toggle Sideview Left"];
 	}
 }
 
-- (void) save {
+
+- (void)save {
 	NSMutableDictionary* layout = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
 								   NSStringFromRect(self.sideViewLayout), kMD_SideView_Frame,
 								   NSStringFromRect(self.mainViewLayout), kMD_MainView_Frame,
@@ -87,54 +89,49 @@ NSString* const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 								   nil];
 	
 	[[NSUserDefaults standardUserDefaults] setObject:layout forKey:kMD_Settings_key];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 	[layout release];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-#pragma mark -
+
+
 #pragma mark Singleton
 
-static MDSettings* _defaultSettings = nil;
-
 + (MDSettings *)defaultSettings {
-	@synchronized(self) {
-		if (_defaultSettings == nil) {
-			[[[self alloc] init] release]; // release to trick Xcode's "Build and Analyze". release actually does nothing.
-		}
-	}
-	return _defaultSettings;
+    if (_defaultSettings == nil) {
+        _defaultSettings = [[super allocWithZone:NULL] init];
+    }
+    return _defaultSettings;
 }
+
 
 + (id)allocWithZone:(NSZone *)zone {
-	@synchronized(self) {
-		if (_defaultSettings == nil) {
-			_defaultSettings = [super allocWithZone:zone];
-			return _defaultSettings;
-		}
-	}
-	// on subsequent allocation attempts return nil
-	return nil;
+    return [[self defaultSettings] retain];
 }
 
-- (id)copyWithZone:(NSZone *)zone
-{
-	return self;
+
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
 }
+
 
 - (id)retain {
-	return self;
+    return self;
 }
+
 
 - (NSUInteger)retainCount {
-	return UINT_MAX;  // denotes an object that cannot be released
+    return NSUIntegerMax;
 }
+
 
 - (void)release {
-	//do nothing
+    // Do nothing
 }
 
+
 - (id)autorelease {
-	return self;
+    return self;
 }
 
 @end
