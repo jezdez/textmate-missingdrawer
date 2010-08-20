@@ -10,6 +10,12 @@ Run the following command to install into TextMate:
 
     $ curl -Lo MissingDrawer.zip http://github.com/downloads/jezdez/textmate-missingdrawer/MissingDrawer_2010-08-20.zip; unzip MissingDrawer.zip; open MissingDrawer.tmplugin; rm -f MissingDrawer.zip
 
+Want a blue sidebar? Just run this:
+
+    $ defaults write com.macromates.TextMate MDBlueSidebar 1
+
+Change the `1` to a `0` if you change your mind. Preferences UI is planned for the future.
+
 ## Authors
 
 The source code is released under the MIT license. Please see LICENSE for more information.
