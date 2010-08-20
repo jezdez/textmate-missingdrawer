@@ -2,7 +2,7 @@
 
 This plugin provides Xcode-like project window interface without drawer and adds "Open Terminal Here" button to the file list's button panel.
 
-![Screenshot](http://u1.ipernity.com/12/06/21/5520621.8b44798f.jpg?download=MissingDrawer%20January%20tweaks_o.jpg)
+![Screenshot](http://github.com/downloads/jezdez/textmate-missingdrawer/screenshot.png)
 
 ## Installation
 
