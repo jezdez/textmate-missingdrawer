@@ -20,7 +20,7 @@ or simply
 
 Change the `"white"` to `"blue"` if you changed your mind.
 
-Preferences UI is planned for the future, until then set the colors like above or set any RGB color using any RGB color you like.
+A preferences UI for that setting is planned, meanwhile set any RGB color you prefer like above.
 
 ## Authors
 
