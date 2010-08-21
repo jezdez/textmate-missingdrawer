@@ -33,11 +33,12 @@
 
 static MDSettings *_defaultSettings = nil;
 
-NSString *const kMD_Settings_key	= @"HTMDSplitViewLayoutPanels";
-NSString *const kMD_SideView_Frame	= @"SideViewFrame";
-NSString *const kMD_MainView_Frame	= @"MainViewFrame";
-NSString *const kMD_SideView_IsLeft	= @"SideViewIsLeft";
-NSString *const kMD_SideView_IsBlue	= @"MDBlueSidebar";
+NSString *const kMD_SideView_Frame = @"MDSideViewFrame";
+NSString *const kMD_MainView_Frame = @"MDMainViewFrame";
+NSString *const kMD_SideView_IsLeft = @"MDSideViewLeft";
+NSString *const kMD_SideView_bgColor = @"MDSideViewBgColor";
+NSString *const kMD_SideView_bgColorInactive = @"MDSideViewBgColorInactive";
+NSString *const kMD_SideView_namedColors = @"MDSideViewNamedColors";
 
 @implementation MDSettings
 
@@ -45,20 +46,75 @@ NSString *const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 @synthesize sideViewLayout = _sideViewLayout;
 @synthesize mainViewLayout = _mainViewLayout;
 @synthesize toggleSplitViewLayoutMenuItem = _toggleSplitViewLayoutMenuItem;
+@synthesize bgColor = _bgColor;
+@synthesize bgColorInactive = _bgColorInactive;
+@synthesize namedColors = _namedColors; 
+
+NSColor* NSColorFromRGBString(NSString* colorString) {
+	
+	// TODO: add named colors to dict in bundledDefaults
+	if([colorString isEqualToString:@"white"]) {
+		return [NSColor whiteColor];
+	}
+	
+	if([colorString isEqualToString:@"blue"]) {
+		return [NSColor colorWithCalibratedRed:0.871 green:0.894 blue:0.918 alpha:1.0];
+	}
+	
+	NSArray *rgb = [colorString componentsSeparatedByString:@";"];
+	
+	if([rgb count]!=3) 
+		return nil;
+	
+	return [NSColor colorWithDeviceRed:[[rgb objectAtIndex:0] floatValue]
+								 green:[[rgb objectAtIndex:1] floatValue]
+								  blue:[[rgb objectAtIndex:2] floatValue]
+								 alpha:1];
+}
+
+NSString* NSColorToRGBString(NSColor* color) {
+	return [NSString stringWithFormat:@"%f;%f;%f", [color redComponent], [color greenComponent], [color blueComponent]];
+}
 
 - (id) init {
 	if ((self = [super init])) {
-		NSDictionary* layout = [[NSUserDefaults standardUserDefaults] objectForKey:kMD_Settings_key];
-		if (layout && [layout isKindOfClass:[NSDictionary class]]) {
-			self.sideViewLayout = NSRectFromString([layout objectForKey:kMD_SideView_Frame]);
-			self.mainViewLayout = NSRectFromString([layout objectForKey:kMD_MainView_Frame]);
-			self.showSideViewOnLeft = [layout objectForKey:kMD_SideView_IsLeft]?[[layout objectForKey:kMD_SideView_IsLeft] boolValue]:YES;
-		} else {
-			self.sideViewLayout = NSRectFromCGRect(CGRectMake(0, 0, 135, 500));
-			self.mainViewLayout = NSRectFromCGRect(CGRectMake(135, 0, 300, 500));
-			self.showSideViewOnLeft = YES;
+		
+		//	self.sideViewLayout = NSRectFromCGRect(CGRectMake(0, 0, 135, 500)); -> {{0, 0}, {135, 500}}
+		//	self.mainViewLayout = NSRectFromCGRect(CGRectMake(135, 0, 300, 500)); -> {{135, 0}, {300, 500}}
+		//	self.showSideViewOnLeft = YES;
+		//	self.bgColor = [NSColor colorWithCalibratedRed:0.871 green:0.894 blue:0.918 alpha:1.0];
+		//	self.bgColorInactive = [NSColor colorWithDeviceRed:0.929 green:0.929 blue:0.929 alpha:1];
+		
+		NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+		
+		// initially register defaults from bundled defaultSettings.plist file
+		NSBundle *pluginBundle = [NSBundle bundleForClass:[self class]];
+		NSDictionary *bundledDefaultSettings = [[NSDictionary alloc] initWithContentsOfFile:[pluginBundle pathForResource:@"defaultSettings" ofType:@"plist"]];
+		
+		[defaults registerDefaults:bundledDefaultSettings];
+		
+		// clean up older settings
+		[defaults removeObjectForKey:@"MDSplitViewLayoutPanels"];
+		[defaults removeObjectForKey:@"HTMDSplitViewLayoutPanels"];
+		[defaults synchronize];
+		
+		self.sideViewLayout = NSRectFromString([defaults objectForKey:kMD_SideView_Frame]);
+		self.mainViewLayout = NSRectFromString([defaults objectForKey:kMD_MainView_Frame]);
+		self.showSideViewOnLeft = [defaults boolForKey:kMD_SideView_IsLeft];
+		self.bgColor = NSColorFromRGBString([defaults objectForKey:kMD_SideView_bgColor]);
+		self.bgColorInactive = NSColorFromRGBString([defaults objectForKey:kMD_SideView_bgColorInactive]);
+		
+		// reset colors to bundledDefaults if something ain't right
+		if (!self.bgColor || !self.bgColorInactive) {
+			if (!self.bgColor) {
+				self.bgColor = NSColorFromRGBString([bundledDefaultSettings objectForKey:kMD_SideView_bgColor]);
+			} 
+			if (!self.bgColorInactive) {
+				self.bgColorInactive = NSColorFromRGBString([bundledDefaultSettings objectForKey:kMD_SideView_bgColorInactive]);
+			} 			
 			[self save];
 		}
+		[bundledDefaultSettings release];
 		
 		NSString *menuTitle = self.showSideViewOnLeft ? @"Toggle Sideview Right" : @"Toggle Sideview Left";
 		_toggleSplitViewLayoutMenuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(toggleSideViewLayout:) keyEquivalent:@""];
@@ -67,7 +123,6 @@ NSString *const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 	}
 	return self;
 }
-
 
 - (IBAction)toggleSideViewLayout:(id)sender {
 	MDLog();
@@ -80,20 +135,15 @@ NSString *const kMD_SideView_IsBlue	= @"MDBlueSidebar";
 	}
 }
 
-
 - (void)save {
-	NSMutableDictionary* layout = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-								   NSStringFromRect(self.sideViewLayout), kMD_SideView_Frame,
-								   NSStringFromRect(self.mainViewLayout), kMD_MainView_Frame,
-								   [NSNumber numberWithBool:self.showSideViewOnLeft], kMD_SideView_IsLeft, 
-								   nil];
-	
-	[[NSUserDefaults standardUserDefaults] setObject:layout forKey:kMD_Settings_key];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	[layout release];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:NSStringFromRect(self.sideViewLayout) forKey:kMD_SideView_Frame];
+	[defaults setObject:NSStringFromRect(self.mainViewLayout) forKey:kMD_MainView_Frame];
+	[defaults setBool:self.showSideViewOnLeft forKey:kMD_SideView_IsLeft];
+	[defaults setObject:NSColorToRGBString(self.bgColor) forKey:kMD_SideView_bgColor];
+	[defaults setObject:NSColorToRGBString(self.bgColorInactive) forKey:kMD_SideView_bgColorInactive];
+	[defaults synchronize];
 }
-
-
 
 #pragma mark Singleton
 

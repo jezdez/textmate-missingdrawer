@@ -44,12 +44,10 @@
 	// call original
     [(NSWindowController *)self MD_repl_windowDidLoad];
 	[(NSWindowController *)self MD_splitWindowIfNeeded];
-	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMD_SideView_IsBlue]) {
-		NSWindow *window = [(NSWindowController *)self window];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MD_windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:window];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MD_windowDidResignMain:) name:NSWindowDidResignMainNotification object:window];
-	}
+
+	NSWindow *window = [(NSWindowController *)self window];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MD_windowDidBecomeMain:) name:NSWindowDidBecomeMainNotification object:window];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(MD_windowDidResignMain:) name:NSWindowDidResignMainNotification object:window];
 }
 
 
@@ -58,10 +56,8 @@
 	
     NSWindow *window = [notification object];
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMD_SideView_IsBlue]) {
-		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidBecomeMainNotification object:window];
-		[[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidResignMainNotification object:window];
-	}
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidBecomeMainNotification object:window];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowDidResignMainNotification object:window];
 	
     id splitView = [window contentView];
     if ([splitView isKindOfClass:[MDSplitView class]]) {

@@ -29,24 +29,30 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-extern NSString *const kMD_Settings_key;
 extern NSString *const kMD_SideView_Frame;
 extern NSString *const kMD_MainView_Frame;
 extern NSString *const kMD_SideView_IsLeft;
-extern NSString *const kMD_SideView_IsBlue;
+extern NSString *const kMD_SideView_bgColor;
+extern NSString *const kMD_SideView_bgColorInactive;
+extern NSString *const kMD_SideView_namedColors;
 
 @interface MDSettings : NSObject {
-	
 	BOOL _showSideViewOnLeft;
 	NSRect _sideViewLayout;
 	NSRect _mainViewLayout;
 	NSMenuItem *_toggleSplitViewLayoutMenuItem;
+	NSColor *_bgColor;
+	NSColor *_bgColorInactive;
+	NSDictionary *_namedColors;
 }
 
 @property (nonatomic, readonly) NSMenuItem *toggleSplitViewLayoutMenuItem;
 @property BOOL showSideViewOnLeft;
 @property NSRect sideViewLayout;
 @property NSRect mainViewLayout;
+@property (nonatomic, retain) NSColor *bgColor;
+@property (nonatomic, retain) NSColor *bgColorInactive;
+@property (nonatomic, readonly) NSDictionary *namedColors;
 
 + (MDSettings *)defaultSettings;
 

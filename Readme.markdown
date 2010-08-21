@@ -10,11 +10,17 @@ Run the following command to install into TextMate:
 
     $ curl -Lo MissingDrawer.zip http://github.com/downloads/jezdez/textmate-missingdrawer/MissingDrawer_2010-08-20.zip; unzip MissingDrawer.zip; open MissingDrawer.tmplugin; rm -f MissingDrawer.zip
 
-Want a blue sidebar? Just run this:
+Rather like a white sidebar background color? Just run this (for white):
 
-    $ defaults write com.macromates.TextMate MDBlueSidebar 1
+    $ defaults write com.macromates.TextMate MDSideViewBgColor "1.0;1.0;1.0"
 
-Change the `1` to a `0` if you change your mind. Preferences UI is planned for the future.
+or simply 
+
+    $ defaults write com.macromates.TextMate MDSideViewBgColor "white"
+
+Change the `"white"` to `"blue"` if you changed your mind.
+
+Preferences UI is planned for the future, until then set the colors like above or set any RGB color using any RGB color you like.
 
 ## Authors
 
@@ -22,5 +28,5 @@ The source code is released under the MIT license. Please see LICENSE for more i
 
 * [hetima computer](http://hetima.com/) -  hetima@hetima.com
 * [Jannis Leidel](http://jannisleidel.com) - jannis@leidel.info
-* Christoph Meißner - post@christophmeissner.de
+* [Christoph Meißner](http://christophmeissner.wordpress.com) - post@christophmeissner.de
 * [Sam Soffes](http://samsoff.es) - sam@samsoff.es

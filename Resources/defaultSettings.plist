@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MDSideViewFrame</key>
+	<string>{{0, 0}, {135, 500}}</string>
+	<key>MDMainViewFrame</key>
+	<string>{{135, 0}, {300, 500}}</string>
+	<key>MDSideViewLeft</key>
+	<true/>
+	<key>MDSideViewBgColor</key>
+	<string>0.871;0.894;0.918</string>
+	<key>MDSideViewBgColorInactive</key>
+	<string>0.929;0.929;0.929</string>
+</dict>
+</plist>

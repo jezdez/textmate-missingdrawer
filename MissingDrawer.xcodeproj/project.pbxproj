@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17A67ED71220168000BECE6F /* defaultSettings.plist */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		B2B89112121CD28E00AC78F1 /* MDMissingDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */; };
 		B2B89113121CD28E00AC78F1 /* MDResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FE121CD28D00AC78F1 /* MDResizer.m */; };
@@ -26,6 +27,7 @@
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		17A67ED71220168000BECE6F /* defaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultSettings.plist; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B890FB121CD28D00AC78F1 /* MDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMissingDrawer.h; sourceTree = "<group>"; };
 		B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMissingDrawer.m; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		B2B89106121CD28D00AC78F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17A67ED71220168000BECE6F /* defaultSettings.plist */,
 				B2B89107121CD28D00AC78F1 /* DrawerBorder.png */,
 				B2B89109121CD28D00AC78F1 /* DrawerResizeHandle.png */,
 				B2B8910B121CD28D00AC78F1 /* InfoPlist.strings */,
@@ -228,6 +231,7 @@
 				B2B89119121CD28E00AC78F1 /* InfoPlist.strings in Resources */,
 				B2B8911A121CD28E00AC78F1 /* OpenTerminalHere.png in Resources */,
 				B2B8911B121CD28E00AC78F1 /* OpenTerminalHerePressed.png in Resources */,
+				17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
