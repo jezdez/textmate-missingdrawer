@@ -11,6 +11,7 @@ To install the plugin to TextMate, download the latest version from the [Project
     $ unzip MissingDrawer.zip
     $ open MissingDrawer/MissingDrawer.tmplugin
 
+## Changing the sidebar background color
 Rather like a white sidebar background color instead of the cool new default blue? Just run this (for white):
 
     $ defaults write com.macromates.TextMate MDSideViewBgColor "1.0;1.0;1.0"
