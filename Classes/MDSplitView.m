@@ -44,6 +44,7 @@
 #pragma mark NSObject
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_sideView release];
 	[_mainView release];
 	[super dealloc];
@@ -84,10 +85,25 @@
 		}
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleLayout) name:@"MDSideviewLayoutHasBeenChangedNotification" object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(focusSideView) name:@"MDFocusSideViewPressed" object:nil];
     }
     return self;
 }
 
+#pragma mark -
+
+- (void) focusSideView {
+	if([_sideView acceptsFirstResponder]){
+		[_sideView becomeFirstResponder];
+	} else {
+		for(NSView *view in [_sideView subviews]){
+			if([view acceptsFirstResponder]){
+				[view becomeFirstResponder];
+				break;
+			}
+		}
+	}
+}
 
 #pragma mark Drawing
 
