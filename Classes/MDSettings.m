@@ -46,6 +46,7 @@ NSString *const kMD_SideView_namedColors = @"MDSideViewNamedColors";
 @synthesize sideViewLayout = _sideViewLayout;
 @synthesize mainViewLayout = _mainViewLayout;
 @synthesize toggleSplitViewLayoutMenuItem = _toggleSplitViewLayoutMenuItem;
+@synthesize focusSideViewMenuItem = _focusSideViewMenuItem;
 @synthesize bgColor = _bgColor;
 @synthesize bgColorInactive = _bgColorInactive;
 @synthesize namedColors = _namedColors; 
@@ -120,6 +121,11 @@ NSString* NSColorToRGBString(NSColor* color) {
 		_toggleSplitViewLayoutMenuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(toggleSideViewLayout:) keyEquivalent:@""];
 		[_toggleSplitViewLayoutMenuItem setTarget:self];
 		[_toggleSplitViewLayoutMenuItem setEnabled:YES];
+
+		_focusSideViewMenuItem = [[NSMenuItem alloc] initWithTitle:@"Focus Sideview" action:@selector(focusSideView:) keyEquivalent:@"["];
+		[_focusSideViewMenuItem setKeyEquivalentModifierMask:(NSShiftKeyMask | NSCommandKeyMask)];
+		[_focusSideViewMenuItem setTarget:self];
+		[_focusSideViewMenuItem setEnabled:YES];
 	}
 	return self;
 }
@@ -133,6 +139,10 @@ NSString* NSColorToRGBString(NSColor* color) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MDSideviewLayoutHasBeenChangedNotification" object:nil];
 		[(NSMenuItem*)sender setTitle:self.showSideViewOnLeft ? @"Toggle Sideview Right" : @"Toggle Sideview Left"];
 	}
+}
+
+- (IBAction)focusSideView:(id)sender{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"MDFocusSideViewPressed" object:nil];
 }
 
 - (void)save {

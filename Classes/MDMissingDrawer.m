@@ -104,6 +104,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 	NSMenu* drawerMenu = [[NSMenu alloc] initWithTitle:@"Project Drawer"];
 	[drawerSubmenuItem setSubmenu:drawerMenu];
 	[drawerMenu addItem:settings.toggleSplitViewLayoutMenuItem];
+	[drawerMenu addItem:settings.focusSideViewMenuItem];
 	[showHideDrawerMenuItem retain];
 	[viewMenu removeItemAtIndex:drawerMenuItemIndex];
 	[drawerMenu insertItem:showHideDrawerMenuItem atIndex:0];

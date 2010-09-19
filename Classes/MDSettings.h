@@ -41,12 +41,14 @@ extern NSString *const kMD_SideView_namedColors;
 	NSRect _sideViewLayout;
 	NSRect _mainViewLayout;
 	NSMenuItem *_toggleSplitViewLayoutMenuItem;
+	NSMenuItem *_focusSideViewMenuItem;
 	NSColor *_bgColor;
 	NSColor *_bgColorInactive;
 	NSDictionary *_namedColors;
 }
 
 @property (nonatomic, readonly) NSMenuItem *toggleSplitViewLayoutMenuItem;
+@property (nonatomic, readonly) NSMenuItem *focusSideViewMenuItem;
 @property BOOL showSideViewOnLeft;
 @property NSRect sideViewLayout;
 @property NSRect mainViewLayout;
@@ -58,5 +60,6 @@ extern NSString *const kMD_SideView_namedColors;
 
 - (void)save;
 - (IBAction)toggleSideViewLayout:(id)sender;
+- (IBAction)focusSideView:(id)sender;
 
 @end
