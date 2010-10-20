@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>TerminalLauncherAppName</key>
+	<string>Terminal</string>
 	<key>MDSideViewFrame</key>
 	<string>{{0, 0}, {135, 500}}</string>
 	<key>MDMainViewFrame</key>

@@ -35,6 +35,7 @@ extern NSString *const kMD_SideView_IsLeft;
 extern NSString *const kMD_SideView_bgColor;
 extern NSString *const kMD_SideView_bgColorInactive;
 extern NSString *const kMD_SideView_namedColors;
+extern NSString *const kMD_TerminalLauncherAppName;
 
 @interface MDSettings : NSObject {
 	BOOL _showSideViewOnLeft;
@@ -45,6 +46,7 @@ extern NSString *const kMD_SideView_namedColors;
 	NSColor *_bgColor;
 	NSColor *_bgColorInactive;
 	NSDictionary *_namedColors;
+	NSString *_terminalLauncherAppName;
 }
 
 @property (nonatomic, readonly) NSMenuItem *toggleSplitViewLayoutMenuItem;
@@ -55,6 +57,7 @@ extern NSString *const kMD_SideView_namedColors;
 @property (nonatomic, retain) NSColor *bgColor;
 @property (nonatomic, retain) NSColor *bgColorInactive;
 @property (nonatomic, readonly) NSDictionary *namedColors;
+@property (nonatomic, retain) NSString *terminalLauncherAppName;
 
 + (MDSettings *)defaultSettings;
 

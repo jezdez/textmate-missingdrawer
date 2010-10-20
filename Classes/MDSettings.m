@@ -39,6 +39,7 @@ NSString *const kMD_SideView_IsLeft = @"MDSideViewLeft";
 NSString *const kMD_SideView_bgColor = @"MDSideViewBgColor";
 NSString *const kMD_SideView_bgColorInactive = @"MDSideViewBgColorInactive";
 NSString *const kMD_SideView_namedColors = @"MDSideViewNamedColors";
+NSString *const kMD_TerminalLauncherAppName = @"TerminalLauncherAppName";
 
 @implementation MDSettings
 
@@ -50,6 +51,7 @@ NSString *const kMD_SideView_namedColors = @"MDSideViewNamedColors";
 @synthesize bgColor = _bgColor;
 @synthesize bgColorInactive = _bgColorInactive;
 @synthesize namedColors = _namedColors; 
+@synthesize terminalLauncherAppName = _terminalLauncherAppName;
 
 NSColor* NSColorFromRGBString(NSString* colorString) {
 	
@@ -104,6 +106,7 @@ NSString* NSColorToRGBString(NSColor* color) {
 		self.showSideViewOnLeft = [defaults boolForKey:kMD_SideView_IsLeft];
 		self.bgColor = NSColorFromRGBString([defaults objectForKey:kMD_SideView_bgColor]);
 		self.bgColorInactive = NSColorFromRGBString([defaults objectForKey:kMD_SideView_bgColorInactive]);
+		self.terminalLauncherAppName = [defaults objectForKey:kMD_TerminalLauncherAppName];
 		
 		// reset colors to bundledDefaults if something ain't right
 		if (!self.bgColor || !self.bgColorInactive) {

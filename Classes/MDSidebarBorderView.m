@@ -247,9 +247,19 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 		
         if (path) {
             path = [path stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\\\\\""];
-            NSString *s = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
-            MDLog("script:\n%@", s);
-            NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
+			NSString *appName = [[MDSettings defaultSettings] terminalLauncherAppName];
+			NSString *appleScriptCommand;
+			
+			if ([appName caseInsensitiveCompare:@"iTerm"] == NSOrderedSame) {
+				appleScriptCommand = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
+			} else if ([appName caseInsensitiveCompare:@"Terminal"] == NSOrderedSame) {
+				appleScriptCommand = [NSString stringWithFormat:@"tell application \"Terminal\"\n\tdo script \"cd \\\"%@\\\"\"\n\tactivate\nend tell", path];
+			} else {
+				return;
+			}
+			
+            MDLog("script:\n%@", appleScriptCommand);
+            NSAppleScript *as = [[NSAppleScript alloc] initWithSource: appleScriptCommand];
             [as executeAndReturnError:nil];
 			[as release];
             return;
