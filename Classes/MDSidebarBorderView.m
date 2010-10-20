@@ -247,7 +247,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 		
         if (path) {
             path = [path stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\\\\\""];
-            NSString *s = [NSString stringWithFormat:@"tell application \"Terminal\"\n\tdo script \"cd \\\"%@\\\"\"\n\tactivate\nend tell", path];
+            NSString *s = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
             MDLog("script:\n%@", s);
             NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
             [as executeAndReturnError:nil];
