@@ -24,6 +24,8 @@ Change the `"white"` to `"blue"` if you changed your mind.
 
 A preferences UI for that setting is planned, meanwhile set any RGB color you prefer like above.
 
+## Changing the terminal application launched from the sidebar
+
 By default, the "open terminal window" button launches the Terminal application. To use iTerm, run
     
     $ defaults write com.macromates.TextMate TerminalLauncherAppName "iTerm"
