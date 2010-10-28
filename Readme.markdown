@@ -4,6 +4,10 @@ This plugin provides Xcode-like project window interface without drawer and adds
 
 ![Screenshot](http://github.com/downloads/jezdez/textmate-missingdrawer/Screen%20shot%202010-08-20.png)
 
+## Requirements ##
+
+The latest version of MissingDrawer currently requires Mac OS X 10.6. If you are running Mac OS X 10.5 or earlier, please download and install [this earlier version](http://github.com/downloads/jezdez/textmate-missingdrawer/MissingDrawer_2009-01-27.zip.zip). Unfortunately, this version does not support changing the sidebar color or the "Open Terminal Here" button.
+
 ## Installation
 To install the plugin to TextMate, download the latest version from the [Project download page](http://github.com/jezdez/textmate-missingdrawer/downloads) and double click the MissingDrawer.plugin file contained or simply run the following commands in Terminal:
 
