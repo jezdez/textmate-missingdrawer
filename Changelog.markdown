@@ -1,3 +1,9 @@
+### 2010-10-29
+
+* target 10.5 SDK
+* remove NSSplitViewDelegate (10.6 only) dependency
+* updated split view initialization logic so it works with 10.5
+
 ### 2010-07-08
 
 * added a "Open Terminal Here" button to the drawer's button panel
