@@ -2,10 +2,7 @@
 //  MDDebugUtils.h
 //  MissingDrawer
 //
-//	Copyright (c) 2006 hetima computer, 
-//                2008, 2009 Jannis Leidel, 
-//                2010 Christoph Meißner
-//                2010 Sam Soffes
+//	Copyright (c) The MissingDrawer authors.
 //
 //	Permission is hereby granted, free of charge, to any person
 //	obtaining a copy of this software and associated documentation
