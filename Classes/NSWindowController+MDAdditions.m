@@ -42,21 +42,26 @@
 		NSView* contentView = [window contentView];
 		
 		if (contentView && ![contentView isKindOfClass:[MDSplitView class]]) {
+			// If a drawer is displayed by TextMate, replace the contentView
+			// with one that uses the MissingDrawer.
 			NSDrawer* drawer = [[window drawers] objectAtIndex:0];
-			NSView* leftView = [[drawer contentView] retain];
-			[drawer setContentView:nil];
-			[window setContentView:nil];
+			if (drawer)
+			{
+				NSView* leftView = [[drawer contentView] retain];
+				[drawer setContentView:nil];
+				[window setContentView:nil];
 			
-			MDSidebarBorderView* borderView = [[MDSidebarBorderView alloc] initWithFrame:[leftView frame]];
-			[borderView addToSuperview:leftView];
+				MDSidebarBorderView* borderView = [[MDSidebarBorderView alloc] initWithFrame:[leftView frame]];
+				[borderView addToSuperview:leftView];
 			
-			MDSplitView* splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
-			MDLog("replacing current window with split view");
-			[window setContentView:splitView];
+				MDSplitView* splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
+				MDLog("replacing current window with split view");
+				[window setContentView:splitView];
 			
-			[borderView release];
-			[leftView release];
-			[splitView restoreLayout];
+				[borderView release];
+				[leftView release];
+				[splitView restoreLayout];
+			}
 		}
 	}
 }

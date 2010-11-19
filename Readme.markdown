@@ -42,3 +42,4 @@ The source code is released under the MIT license. Please see LICENSE for more i
 * [Jannis Leidel](http://jannisleidel.com) - jannis@leidel.info
 * [Christoph Meißner](http://christophmeissner.wordpress.com) - post@christophmeissner.de
 * [Sam Soffes](http://samsoff.es) - sam@samsoff.es
+* [Derek Prior](http://prioritized.net)
