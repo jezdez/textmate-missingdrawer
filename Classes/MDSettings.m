@@ -117,7 +117,7 @@ NSString* NSColorToRGBString(NSColor* color) {
 		}
 		[bundledDefaultSettings release];
 		
-		NSString *menuTitle = self.showSideViewOnLeft ? @"Toggle Sideview Right" : @"Toggle Sideview Left";
+		NSString *menuTitle = self.showSideViewOnLeft ? @"Show on the Right" : @"Show on the Left";
 		_toggleSplitViewLayoutMenuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(toggleSideViewLayout:) keyEquivalent:@""];
 		[_toggleSplitViewLayoutMenuItem setTarget:self];
 		[_toggleSplitViewLayoutMenuItem setEnabled:YES];
@@ -137,7 +137,7 @@ NSString* NSColorToRGBString(NSColor* color) {
 	
 	if ([sender isKindOfClass:[NSMenuItem class]]) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MDSideviewLayoutHasBeenChangedNotification" object:nil];
-		[(NSMenuItem*)sender setTitle:self.showSideViewOnLeft ? @"Toggle Sideview Right" : @"Toggle Sideview Left"];
+		[(NSMenuItem*)sender setTitle:self.showSideViewOnLeft ? @"Show on the Right" : @"Show on the Left"];
 	}
 }
 
