@@ -159,8 +159,8 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
         NSFont *font = [NSFont fontWithName:@"Lucida Grande" size:12];
         NSLayoutManager *layoutManager = [NSLayoutManager new]; 
         [realOutlineView setRowHeight:[layoutManager defaultLineHeightForFont:font]];
+		[realOutlineView setIntercellSpacing:NSMakeSize (4.0, 2.0)];
         [layoutManager release];
-        [realOutlineView setIntercellSpacing:NSMakeSize (6.0, 4.0)];
         [realOutlineView reloadData];
     }
 	
