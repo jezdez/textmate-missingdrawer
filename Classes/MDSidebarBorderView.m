@@ -231,7 +231,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 		[projectFileOutlineView respondsToSelector:@selector(selectedItems)]) {
         selectedItems = [projectFileOutlineView performSelector:@selector(selectedItems)];
         if (!selectedItems || ![selectedItems isKindOfClass:[NSArray class]] || [selectedItems count] == 0) {
-            return;
+			selectedItems = [NSArray arrayWithObject:[(NSOutlineView *)projectFileOutlineView itemAtRow:0]];
         }
     }
 	
