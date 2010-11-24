@@ -123,7 +123,7 @@ NSString* NSColorToRGBString(NSColor* color) {
 		[_toggleSplitViewLayoutMenuItem setEnabled:YES];
 
 		_focusSideViewMenuItem = [[NSMenuItem alloc] initWithTitle:@"Focus Sideview" action:@selector(focusSideView:) keyEquivalent:@"["];
-		[_focusSideViewMenuItem setKeyEquivalentModifierMask:(NSShiftKeyMask | NSCommandKeyMask)];
+		[_focusSideViewMenuItem setKeyEquivalentModifierMask:(NSControlKeyMask | NSAlternateKeyMask | NSCommandKeyMask)];
 		[_focusSideViewMenuItem setTarget:self];
 		[_focusSideViewMenuItem setEnabled:YES];
 	}
