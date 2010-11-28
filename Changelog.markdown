@@ -1,3 +1,9 @@
+### 2010-11-28
+
+* Fixed focus sideview shortcut regarding the recent tab select shortcut changes.
+* Limit cell spacing of sidebar again to XCode-like values.
+* If there is no selection, then the "Terminal Button" opens the terminal with the path of the first item in the sidebar.
+
 ### 2010-10-29
 
 * target 10.5 SDK
