@@ -7,7 +7,7 @@ This plugin provides Xcode-like project window interface without drawer and adds
 ## Installation
 To install the plugin to TextMate, download the latest version from the [Project download page](http://github.com/jezdez/textmate-missingdrawer/downloads) and double click the MissingDrawer.plugin file contained or simply run the following commands in Terminal:
 
-    $ curl -L https://github.com/downloads/jezdez/textmate-missingdrawer/MissingDrawer_2010-11-19.zip | tar -xf - && open MissingDrawer.tmplugin
+    $ curl -L https://github.com/downloads/jezdez/textmate-missingdrawer/MissingDrawer_2010-11-28.zip | tar -xf - && open MissingDrawer.tmplugin
 
 ## Changing the sidebar background color
 Rather like a white sidebar background color instead of the cool new default blue? Just run this (for white):
