@@ -121,8 +121,9 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     }
 	
     [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
+
+		// Terminal button
     NSButton *lastButton = [btns lastObject];
-	
     NSRect terminalButtonFrame;
     terminalButtonFrame.size.width = 23;
     terminalButtonFrame.size.height = [lastButton frame].size.height;
@@ -143,7 +144,29 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     [terminalButton setBordered:NO];
     [btns addObject:terminalButton];
 	[terminalButton release];
+
+		// Gitx button
+    NSRect gitxButtonFrame;
+    gitxButtonFrame.size.width = 23;
+    gitxButtonFrame.size.height = [terminalButton frame].size.height;
+    gitxButtonFrame.origin.x = [terminalButton frame].origin.x + gitxButtonFrame.size.width;
+    gitxButtonFrame.origin.y = [terminalButton frame].origin.y;
 	
+    NSButton *gitxButton = [[NSButton alloc] initWithFrame:gitxButtonFrame];
+	
+    NSImage *gitxButtonImage = [MDSidebarBorderView bundledImageWithName:@"gitx"];
+    NSImage *gitxButtonImagePressed = [MDSidebarBorderView bundledImageWithName:@"gitxPressed"]; 
+	
+	[gitxButton setToolTip:@"Open gitx window here"];
+    [gitxButton setImage:gitxButtonImage];
+    [gitxButton setAlternateImage:gitxButtonImagePressed];
+    [gitxButton setAction:@selector(gitxButtonPressed:)];
+    [gitxButton setTarget:self];
+	
+    [gitxButton setBordered:NO];
+    [btns addObject:gitxButton];
+	[gitxButton release];
+	                                    
 //  [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
 	
 	// Adjust outlineView frame
@@ -267,6 +290,40 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
             return;
         }
     }
-}
+}           
+
+- (void)gitxButtonPressed:(id)sender {
+    NSArray *selectedItems = nil;
+    if (projectFileOutlineView && 
+		[projectFileOutlineView respondsToSelector:@selector(selectedItems)]) {
+        selectedItems = [projectFileOutlineView performSelector:@selector(selectedItems)];
+        if (!selectedItems || ![selectedItems isKindOfClass:[NSArray class]] || [selectedItems count] == 0) {
+			selectedItems = [NSArray arrayWithObject:[(NSOutlineView *)projectFileOutlineView itemAtRow:0]];
+        }
+    }
+	
+    for (NSDictionary *item in selectedItems) {
+        MDLog("[projectFileOutlineView selectedItems]: %@", item);
+        NSString *path = [item objectForKey:@"sourceDirectory"];
+        if (!path) {
+            path = [[item objectForKey:@"filename"] stringByDeletingLastPathComponent];
+        }
+		
+        if (path) {
+            path = [path stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\\\\\""];
+			NSString *appName = [[MDSettings defaultSettings] terminalLauncherAppName];
+			BOOL openTerminalInTab = [[MDSettings defaultSettings] openTerminalInTab]; 
+			NSString *appleScriptCommand;
+			
+			appleScriptCommand = [NSString stringWithFormat:@"do shell script \"cd %@; /usr/local/bin/gitx .\"", path];
+			
+      MDLog("script:\n%@", appleScriptCommand);
+      NSAppleScript *as = [[NSAppleScript alloc] initWithSource: appleScriptCommand];
+      [as executeAndReturnError:nil];
+			[as release];
+      return;
+    }
+  }
+}   
 
 @end
