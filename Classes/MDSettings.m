@@ -33,8 +33,6 @@ static MDSettings *_defaultSettings = nil;
 NSString *const kMD_SideView_Frame = @"MDSideViewFrame";
 NSString *const kMD_MainView_Frame = @"MDMainViewFrame";
 NSString *const kMD_SideView_IsLeft = @"MDSideViewLeft";
-NSString *const kMD_SideView_bgColor = @"MDSideViewBgColor";
-NSString *const kMD_SideView_bgColorInactive = @"MDSideViewBgColorInactive";
 NSString *const kMD_SideView_namedColors = @"MDSideViewNamedColors";
 NSString *const kMD_TerminalLauncherAppName = @"TerminalLauncherAppName";
 
@@ -101,20 +99,9 @@ NSString* NSColorToRGBString(NSColor* color) {
 		self.sideViewLayout = NSRectFromString([defaults objectForKey:kMD_SideView_Frame]);
 		self.mainViewLayout = NSRectFromString([defaults objectForKey:kMD_MainView_Frame]);
 		self.showSideViewOnLeft = [defaults boolForKey:kMD_SideView_IsLeft];
-		self.bgColor = NSColorFromRGBString([defaults objectForKey:kMD_SideView_bgColor]);
-		self.bgColorInactive = NSColorFromRGBString([defaults objectForKey:kMD_SideView_bgColorInactive]);
 		self.terminalLauncherAppName = [defaults objectForKey:kMD_TerminalLauncherAppName];
 		
-		// reset colors to bundledDefaults if something ain't right
-		if (!self.bgColor || !self.bgColorInactive) {
-			if (!self.bgColor) {
-				self.bgColor = NSColorFromRGBString([bundledDefaultSettings objectForKey:kMD_SideView_bgColor]);
-			} 
-			if (!self.bgColorInactive) {
-				self.bgColorInactive = NSColorFromRGBString([bundledDefaultSettings objectForKey:kMD_SideView_bgColorInactive]);
-			} 			
-			[self save];
-		}
+		
 		[bundledDefaultSettings release];
 		
 		NSString *menuTitle = self.showSideViewOnLeft ? @"Show on the Right" : @"Show on the Left";
@@ -150,8 +137,6 @@ NSString* NSColorToRGBString(NSColor* color) {
 	[defaults setObject:NSStringFromRect(self.sideViewLayout) forKey:kMD_SideView_Frame];
 	[defaults setObject:NSStringFromRect(self.mainViewLayout) forKey:kMD_MainView_Frame];
 	[defaults setBool:self.showSideViewOnLeft forKey:kMD_SideView_IsLeft];
-	[defaults setObject:NSColorToRGBString(self.bgColor) forKey:kMD_SideView_bgColor];
-	[defaults setObject:NSColorToRGBString(self.bgColorInactive) forKey:kMD_SideView_bgColorInactive];
 	[defaults synchronize];
 }
 

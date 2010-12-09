@@ -73,12 +73,27 @@
 
 
 - (void) MD_windowDidBecomeMain:(NSNotification *)notification {
-	[[self MD_outlineView] setBackgroundColor:[NSColor colorWithCalibratedRed:0.871 green:0.894 blue:0.918 alpha:1.0]];	
+	
+	NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
+	[bindingOptions setObject:NSUnarchiveFromDataTransformerName
+					   forKey:@"NSValueTransformerName"];
+	
+	[[self MD_outlineView] bind:@"backgroundColor"
+					   toObject:[NSUserDefaultsController sharedUserDefaultsController]
+					withKeyPath:@"values.MDSideViewBgColorNew"
+						options:bindingOptions];
 }
 
 
 - (void) MD_windowDidResignMain:(NSNotification *)notification {
-	[[self MD_outlineView] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.929 alpha:1.0]];		
+	NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
+	[bindingOptions setObject:NSUnarchiveFromDataTransformerName
+					   forKey:@"NSValueTransformerName"];
+	
+	[[self MD_outlineView] bind:@"backgroundColor"
+					   toObject:[NSUserDefaultsController sharedUserDefaultsController]
+					withKeyPath:@"values.MDSideViewBgColorIdle"
+						options:bindingOptions];
 }
 
 @end
