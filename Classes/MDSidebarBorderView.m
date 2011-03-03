@@ -274,11 +274,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 			if ([appName caseInsensitiveCompare:@"iTerm"] == NSOrderedSame) {
 				appleScriptCommand = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
 			} else if ([appName caseInsensitiveCompare:@"Terminal"] == NSOrderedSame) {
-				if (openTerminalInTab) {
-					appleScriptCommand = [NSString stringWithFormat:@"activate application \"Terminal\"\n\ttell application \"System Events\"\n\tkeystroke \"t\" using {command down}\n\tend tell\n\ttell application \"Terminal\"\n\trepeat with win in windows\n\ttry\n\tif get frontmost of win is true then\n\tdo script \"cd \\\"%@\\\"; clear\" in (selected tab of win)\n\tend if\n\tend try\n\tend repeat\n\tend tell", path];
-				} else { 
-					appleScriptCommand = [NSString stringWithFormat:@"tell application \"Terminal\"\n\tdo script \"cd \\\"%@\\\"\"\n\tactivate\nend tell", path];
-				}
+				appleScriptCommand = [NSString stringWithFormat:@"activate application \"Terminal\"\n\ttell application \"System Events\"\n\tkeystroke \"t\" using {command down}\n\tend tell\n\ttell application \"Terminal\"\n\trepeat with win in windows\n\ttry\n\tif get frontmost of win is true then\n\tdo script \"cd \\\"%@\\\"; clear\" in (selected tab of win)\n\tend if\n\tend try\n\tend repeat\n\tend tell", path];
 			} else {
 				return;
 			}

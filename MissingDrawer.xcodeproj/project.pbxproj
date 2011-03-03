@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		093EFCA712AFEF0E00D8A18C /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 093EFCA512AFEF0E00D8A18C /* Preferences.xib */; };
+		093EFCAF12AFF0EA00D8A18C /* NSWindowController+Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 093EFCAE12AFF0EA00D8A18C /* NSWindowController+Preferences.m */; };
+		097A211712B115F300614549 /* MDPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097A211612B115F300614549 /* MDPreferenceController.m */; };
 		17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17A67ED71220168000BECE6F /* defaultSettings.plist */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		B2B89112121CD28E00AC78F1 /* MDMissingDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */; };
@@ -28,6 +31,11 @@
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		093EFCA612AFEF0E00D8A18C /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
+		093EFCAD12AFF0EA00D8A18C /* NSWindowController+Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindowController+Preferences.h"; sourceTree = "<group>"; };
+		093EFCAE12AFF0EA00D8A18C /* NSWindowController+Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindowController+Preferences.m"; sourceTree = "<group>"; };
+		097A211512B115F300614549 /* MDPreferenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDPreferenceController.h; sourceTree = "<group>"; };
+		097A211612B115F300614549 /* MDPreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPreferenceController.m; sourceTree = "<group>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		17A67ED71220168000BECE6F /* defaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultSettings.plist; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +141,7 @@
 			children = (
 				C3B4564E12AD2EF4000A3A77 /* gitx.png */,
 				C3B4565012AD2EF4000A3A77 /* gitxPressed.png */,
+				093EFCA512AFEF0E00D8A18C /* Preferences.xib */,
 				17A67ED71220168000BECE6F /* defaultSettings.plist */,
 				B2B89107121CD28D00AC78F1 /* DrawerBorder.png */,
 				B2B89109121CD28D00AC78F1 /* DrawerResizeHandle.png */,
@@ -156,6 +165,8 @@
 		B2B891D2121CDC7000AC78F1 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				093EFCAD12AFF0EA00D8A18C /* NSWindowController+Preferences.h */,
+				093EFCAE12AFF0EA00D8A18C /* NSWindowController+Preferences.m */,
 				B2B89192121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.h */,
 				B2B89193121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m */,
 				B2B89195121CDA5800AC78F1 /* NSWindowController+MDAdditions.h */,
@@ -185,6 +196,8 @@
 				B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */,
 				B2B890FF121CD28D00AC78F1 /* MDSettings.h */,
 				B2B89100121CD28D00AC78F1 /* MDSettings.m */,
+				097A211512B115F300614549 /* MDPreferenceController.h */,
+				097A211612B115F300614549 /* MDPreferenceController.m */,
 			);
 			name = Plugin;
 			sourceTree = "<group>";
@@ -247,6 +260,7 @@
 				17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */,
 				C3B4565212AD2EF4000A3A77 /* gitx.png in Resources */,
 				C3B4565312AD2EF4000A3A77 /* gitxPressed.png in Resources */,
+				093EFCA712AFEF0E00D8A18C /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,12 +278,22 @@
 				B2B89116121CD28E00AC78F1 /* MDSplitView.m in Sources */,
 				B2B89194121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m in Sources */,
 				B2B89197121CDA5800AC78F1 /* NSWindowController+MDAdditions.m in Sources */,
+				093EFCAF12AFF0EA00D8A18C /* NSWindowController+Preferences.m in Sources */,
+				097A211712B115F300614549 /* MDPreferenceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		093EFCA512AFEF0E00D8A18C /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				093EFCA612AFEF0E00D8A18C /* English */,
+			);
+			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
 		B2B89107121CD28D00AC78F1 /* DrawerBorder.png */ = {
 			isa = PBXVariantGroup;
 			children = (
