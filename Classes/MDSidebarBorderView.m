@@ -311,7 +311,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 			BOOL openTerminalInTab = [[MDSettings defaultSettings] openTerminalInTab]; 
 			NSString *appleScriptCommand;
 			
-			appleScriptCommand = [NSString stringWithFormat:@"do shell script \"cd %@; /usr/local/bin/gitx .\"", path];
+			appleScriptCommand = [NSString stringWithFormat:@"do shell script \"cd %@; /usr/local/bin/gitx -c .\"", path];
 			
       MDLog("script:\n%@", appleScriptCommand);
       NSAppleScript *as = [[NSAppleScript alloc] initWithSource: appleScriptCommand];
