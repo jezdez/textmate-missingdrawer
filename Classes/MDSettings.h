@@ -33,6 +33,7 @@ extern NSString *const kMD_SideView_bgColor;
 extern NSString *const kMD_SideView_bgColorInactive;
 extern NSString *const kMD_SideView_namedColors;
 extern NSString *const kMD_TerminalLauncherAppName;
+extern NSString *const kMD_OpenTerminalInTab;
 
 @interface MDSettings : NSObject {
 	
@@ -46,6 +47,7 @@ extern NSString *const kMD_TerminalLauncherAppName;
 	NSColor *_bgColorInactive;
 	NSDictionary *_namedColors;
 	NSString *_terminalLauncherAppName;
+	BOOL _openTerminalInTab;	
 }
 
 @property (nonatomic, readonly) NSMenuItem *toggleSplitViewLayoutMenuItem;
@@ -57,6 +59,7 @@ extern NSString *const kMD_TerminalLauncherAppName;
 @property (nonatomic, retain) NSColor *bgColorInactive;
 @property (nonatomic, readonly) NSDictionary *namedColors;
 @property (nonatomic, retain) NSString *terminalLauncherAppName;
+@property BOOL openTerminalInTab;
 
 + (MDSettings *)defaultSettings;
 

@@ -44,6 +44,11 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 	return NSOrderedSame;
 }
 
+@interface MDSidebarBorderView (PrivateMethods)
+- (NSString *)_selectedFilePath;
+@end
+
+
 @implementation MDSidebarBorderView
 
 #pragma mark Class Methods
@@ -72,7 +77,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 #pragma mark Drawing
 
-- (void)addToSuperview:(NSView*)superview {
+- (void)addToSuperview:(NSView *)superview {
     NSScrollView *outlineView = nil;
     int i, cnt;
 	BOOL showSidebarOnLeft = [[MDSettings defaultSettings] showSideViewOnLeft];
@@ -121,8 +126,9 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     }
 	
     [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
+
+	// Terminal button
     NSButton *lastButton = [btns lastObject];
-	
     NSRect terminalButtonFrame;
     terminalButtonFrame.size.width = 23;
     terminalButtonFrame.size.height = [lastButton frame].size.height;
@@ -143,7 +149,29 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     [terminalButton setBordered:NO];
     [btns addObject:terminalButton];
 	[terminalButton release];
+
+	// Gitx button
+    NSRect gitButtonFrame;
+    gitButtonFrame.size.width = 23;
+    gitButtonFrame.size.height = [terminalButton frame].size.height;
+    gitButtonFrame.origin.x = [terminalButton frame].origin.x + gitButtonFrame.size.width;
+    gitButtonFrame.origin.y = [terminalButton frame].origin.y;
 	
+    NSButton *gitButton = [[NSButton alloc] initWithFrame:gitButtonFrame];
+	
+    NSImage *gitButtonImage = [MDSidebarBorderView bundledImageWithName:@"git"];
+    NSImage *gitButtonImagePressed = [MDSidebarBorderView bundledImageWithName:@"gitPressed"]; 
+	
+	[gitButton setToolTip:@"Open git window here"];
+    [gitButton setImage:gitButtonImage];
+    [gitButton setAlternateImage:gitButtonImagePressed];
+    [gitButton setAction:@selector(gitButtonPressed:)];
+    [gitButton setTarget:self];
+	
+    [gitButton setBordered:NO];
+    [btns addObject:gitButton];
+	[gitButton release];
+	                                    
 //  [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
 	
 	// Adjust outlineView frame
@@ -226,42 +254,76 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 #pragma mark Actions
 
 - (void)terminalButtonPressed:(id)sender {
-    NSArray *selectedItems = nil;
-    if (_projectFileOutlineView && 
-		[_projectFileOutlineView respondsToSelector:@selector(selectedItems)]) {
-        selectedItems = [_projectFileOutlineView performSelector:@selector(selectedItems)];
-        if (!selectedItems || ![selectedItems isKindOfClass:[NSArray class]] || [selectedItems count] == 0) {
-			selectedItems = [NSArray arrayWithObject:[(NSOutlineView *)_projectFileOutlineView itemAtRow:0]];
-        }
-    }
+	NSString *path = [self _selectedFilePath];
+	if (!path) {
+		return;
+	}
 	
-    for (NSDictionary *item in selectedItems) {
-        MDLog(@"[_projectFileOutlineView selectedItems]: %@", item);
-        NSString *path = [item objectForKey:@"sourceDirectory"];
-        if (!path) {
-            path = [[item objectForKey:@"filename"] stringByDeletingLastPathComponent];
-        }
+	
+	path = [path stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\\\\\""];
+	NSString *appName = [[MDSettings defaultSettings] terminalLauncherAppName];
+//	BOOL openTerminalInTab = [[MDSettings defaultSettings] openTerminalInTab]; 
+	NSString *appleScriptCommand = nil;
+	
+	if ([appName caseInsensitiveCompare:@"iTerm"] == NSOrderedSame) {
+		appleScriptCommand = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
+	} else if ([appName caseInsensitiveCompare:@"Terminal"] == NSOrderedSame) {
+		appleScriptCommand = [NSString stringWithFormat:@"activate application \"Terminal\"\n\ttell application \"System Events\"\n\tkeystroke \"t\" using {command down}\n\tend tell\n\ttell application \"Terminal\"\n\trepeat with win in windows\n\ttry\n\tif get frontmost of win is true then\n\tdo script \"cd \\\"%@\\\"; clear\" in (selected tab of win)\n\tend if\n\tend try\n\tend repeat\n\tend tell", path];
+	} else {
+		return;
+	}
+	
+	MDLog(@"script:\n%@", appleScriptCommand);
+	NSAppleScript *as = [[NSAppleScript alloc] initWithSource: appleScriptCommand];
+	[as executeAndReturnError:nil];
+	[as release];
+	return;
+}           
+
+- (void)gitButtonPressed:(id)sender {
+	NSString *path = [self _selectedFilePath];
+	if (!path) {
+		return;
+	}
+	
+	// Try to launch GitX
+	if (![[NSWorkspace sharedWorkspace] openFile:path withApplication:@"GitX"]) {
+		// Otherwise launch gitk
+		// TODO: Fix
+//		NSTask *task = [[NSTask alloc] init];
+//		[task setLaunchPath:@"/usr/local/bin/gitk"];
+//		[task setCurrentDirectoryPath:path];
+//		[task launch];
+//		[task waitUntilExit];
+//		[task release];
+	}
+}
+
+
+#pragma mark Private Methods
+
+- (NSString *)_selectedFilePath {
+	NSArray *selectedItems = nil;
+	if (_projectFileOutlineView && 
+		[_projectFileOutlineView respondsToSelector:@selector(selectedItems)]) {
+		selectedItems = [_projectFileOutlineView performSelector:@selector(selectedItems)];
+		if (!selectedItems || ![selectedItems isKindOfClass:[NSArray class]] || [selectedItems count] == 0) {
+			selectedItems = [NSArray arrayWithObject:[(NSOutlineView *)_projectFileOutlineView itemAtRow:0]];
+		}
+	}
+	
+	for (NSDictionary *item in selectedItems) {
+		NSString *path = [item objectForKey:@"sourceDirectory"];
+		if (!path) {
+			path = [[item objectForKey:@"filename"] stringByDeletingLastPathComponent];
+		}
 		
-        if (path) {
-            path = [path stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\\\\\""];
-			NSString *appName = [[MDSettings defaultSettings] terminalLauncherAppName];
-			NSString *appleScriptCommand;
-			
-			if ([appName caseInsensitiveCompare:@"iTerm"] == NSOrderedSame) {
-				appleScriptCommand = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
-			} else if ([appName caseInsensitiveCompare:@"Terminal"] == NSOrderedSame) {
-				appleScriptCommand = [NSString stringWithFormat:@"tell application \"Terminal\"\n\tdo script \"cd \\\"%@\\\"\"\n\tactivate\nend tell", path];
-			} else {
-				return;
-			}
-			
-            MDLog(@"script:\n%@", appleScriptCommand);
-            NSAppleScript *as = [[NSAppleScript alloc] initWithSource: appleScriptCommand];
-            [as executeAndReturnError:nil];
-			[as release];
-            return;
-        }
-    }
+		if (path) {
+			return path;
+		}
+	}
+	
+	return nil;
 }
 
 @end

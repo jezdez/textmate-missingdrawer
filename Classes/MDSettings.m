@@ -35,6 +35,7 @@ NSString *const kMD_MainView_Frame = @"MDMainViewFrame";
 NSString *const kMD_SideView_IsLeft = @"MDSideViewLeft";
 NSString *const kMD_SideView_namedColors = @"MDSideViewNamedColors";
 NSString *const kMD_TerminalLauncherAppName = @"TerminalLauncherAppName";
+NSString *const kMD_OpenTerminalInTab = @"OpenTerminalInTab";
 
 @implementation MDSettings
 
@@ -47,6 +48,7 @@ NSString *const kMD_TerminalLauncherAppName = @"TerminalLauncherAppName";
 @synthesize bgColorInactive = _bgColorInactive;
 @synthesize namedColors = _namedColors; 
 @synthesize terminalLauncherAppName = _terminalLauncherAppName;
+@synthesize openTerminalInTab = _openTerminalInTab;
 
 NSColor *NSColorFromRGBString(NSString *colorString) {
 	
@@ -100,8 +102,10 @@ NSString *NSColorToRGBString(NSColor *color) {
 		self.mainViewLayout = NSRectFromString([defaults objectForKey:kMD_MainView_Frame]);
 		self.showSideViewOnLeft = [defaults boolForKey:kMD_SideView_IsLeft];
 		self.terminalLauncherAppName = [defaults objectForKey:kMD_TerminalLauncherAppName];
+		self.openTerminalInTab = [[defaults objectForKey:kMD_OpenTerminalInTab] boolValue];
 		
 		
+		// reset colors to bundledDefaults if something ain't right
 		[bundledDefaultSettings release];
 		
 		NSString *menuTitle = self.showSideViewOnLeft ? @"Show on the Right" : @"Show on the Left";

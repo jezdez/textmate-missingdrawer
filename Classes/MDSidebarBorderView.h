@@ -41,5 +41,6 @@
 
 // Actions
 - (void)terminalButtonPressed:(id)sender;
+- (void)gitButtonPressed:(id)sender;
 
 @end

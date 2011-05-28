@@ -32,6 +32,13 @@ To reset back to Terminal, run
 
     $ defaults write com.macromates.TextMate TerminalLauncherAppName "Terminal"
 
+## Changing the termial open in new tab instead of new window
+
+By default it must open in new tab, if it doesn't run:
+
+    $ defaults write com.macromates.TextMate MDOpenTerminalInTab true
+
+
 ## Authors
 
 The source code is released under the MIT license. Please see LICENSE for more information.

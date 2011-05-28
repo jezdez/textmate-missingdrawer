@@ -12,6 +12,8 @@
 		097A211712B115F300614549 /* MDPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097A211612B115F300614549 /* MDPreferenceController.m */; };
 		17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17A67ED71220168000BECE6F /* defaultSettings.plist */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		B264E0CE1390D58600AE5317 /* git.png in Resources */ = {isa = PBXBuildFile; fileRef = B264E0CA1390D58600AE5317 /* git.png */; };
+		B264E0CF1390D58600AE5317 /* gitPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B264E0CC1390D58600AE5317 /* gitPressed.png */; };
 		B2B89112121CD28E00AC78F1 /* MDMissingDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */; };
 		B2B89113121CD28E00AC78F1 /* MDResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FE121CD28D00AC78F1 /* MDResizer.m */; };
 		B2B89114121CD28E00AC78F1 /* MDSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89100121CD28D00AC78F1 /* MDSettings.m */; };
@@ -37,6 +39,8 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		17A67ED71220168000BECE6F /* defaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultSettings.plist; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		B264E0CB1390D58600AE5317 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/git.png; sourceTree = "<group>"; };
+		B264E0CD1390D58600AE5317 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/gitPressed.png; sourceTree = "<group>"; };
 		B2B890FB121CD28D00AC78F1 /* MDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMissingDrawer.h; sourceTree = "<group>"; };
 		B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMissingDrawer.m; sourceTree = "<group>"; };
 		B2B890FD121CD28D00AC78F1 /* MDResizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDResizer.h; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 		B2B89106121CD28D00AC78F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B264E0CA1390D58600AE5317 /* git.png */,
+				B264E0CC1390D58600AE5317 /* gitPressed.png */,
 				093EFCA512AFEF0E00D8A18C /* Preferences.xib */,
 				17A67ED71220168000BECE6F /* defaultSettings.plist */,
 				B2B89107121CD28D00AC78F1 /* DrawerBorder.png */,
@@ -253,6 +259,8 @@
 				B2B8911B121CD28E00AC78F1 /* OpenTerminalHerePressed.png in Resources */,
 				17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */,
 				093EFCA712AFEF0E00D8A18C /* Preferences.xib in Resources */,
+				B264E0CE1390D58600AE5317 /* git.png in Resources */,
+				B264E0CF1390D58600AE5317 /* gitPressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +292,22 @@
 				093EFCA612AFEF0E00D8A18C /* English */,
 			);
 			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
+		B264E0CA1390D58600AE5317 /* git.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B264E0CB1390D58600AE5317 /* English */,
+			);
+			name = git.png;
+			sourceTree = "<group>";
+		};
+		B264E0CC1390D58600AE5317 /* gitPressed.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B264E0CD1390D58600AE5317 /* English */,
+			);
+			name = gitPressed.png;
 			sourceTree = "<group>";
 		};
 		B2B89107121CD28D00AC78F1 /* DrawerBorder.png */ = {
