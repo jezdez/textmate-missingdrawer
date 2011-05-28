@@ -58,5 +58,15 @@ static MDPreferenceController *sharedInstance = nil;
 }
 
 
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
+	NSBundle *pluginBundle = [NSBundle bundleForClass:[self class]];
+	NSString *version = [[pluginBundle infoDictionary] objectForKey:@"CFBundleVersion"];
+	
+	NSString *string = [[NSString alloc] initWithFormat:@"Missing Drawer %@", version];
+	[versionTextField setStringValue:string];
+	[string release];
+}
 
 @end

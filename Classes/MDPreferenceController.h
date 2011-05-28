@@ -29,6 +29,7 @@
 @interface MDPreferenceController : NSObject {
 
 	IBOutlet NSView *preferencesView;
+	IBOutlet NSTextField *versionTextField;
 	
 @private
 	

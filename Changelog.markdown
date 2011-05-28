@@ -1,20 +1,25 @@
+### 2011-05-28
+
+* Added version to Missing Drawer and display it in preferences
+* Added preferences UI for colors, the Terminal button, and the git button. Thanks [@shell](http://github.com/shell) for the initial work on this and the git button.
+
 ### 2010-11-28
 
 * Fixed focus sideview shortcut regarding the recent tab select shortcut changes.
-* Limit cell spacing of sidebar again to XCode-like values.
+* Limit cell spacing of sidebar again to Xcode-like values.
 * If there is no selection, then the "Terminal Button" opens the terminal with the path of the first item in the sidebar.
 
 ### 2010-10-29
 
-* target 10.5 SDK
-* remove NSSplitViewDelegate (10.6 only) dependency
-* updated split view initialization logic so it works with 10.5
+* Target 10.5 SDK
+* Remove NSSplitViewDelegate (10.6 only) dependency
+* Updated split view initialization logic so it works with 10.5
 
 ### 2010-07-08
 
-* added a "Open Terminal Here" button to the drawer's button panel
-* fixed the issue of an actual missing drawer when opening a TextMate project (``*.tmproj``) by double clicking it or a directory by dragging it to the dock icon when TextMate is not running already 
-* added lefty support for toggling the file list to be displayed left or right to edit window
+* Added a "Open Terminal Here" button to the drawer's button panel
+* Fixed the issue of an actual missing drawer when opening a TextMate project (``*.tmproj``) by double clicking it or a directory by dragging it to the dock icon when TextMate is not running already 
+* Added lefty support for toggling the file list to be displayed left or right to edit window
 
 ### 2009-01-27
 
