@@ -30,13 +30,6 @@
 
 static MDSettings *_defaultSettings = nil;
 
-NSString *const kMD_SideView_Frame = @"MDSideViewFrame";
-NSString *const kMD_MainView_Frame = @"MDMainViewFrame";
-NSString *const kMD_SideView_IsLeft = @"MDSideViewLeft";
-NSString *const kMD_SideView_namedColors = @"MDSideViewNamedColors";
-NSString *const kMD_TerminalLauncherAppName = @"TerminalLauncherAppName";
-NSString *const kMD_OpenTerminalInTab = @"OpenTerminalInTab";
-
 @implementation MDSettings
 
 @synthesize showSideViewOnLeft = _showSideViewOnLeft;
@@ -47,66 +40,21 @@ NSString *const kMD_OpenTerminalInTab = @"OpenTerminalInTab";
 @synthesize bgColor = _bgColor;
 @synthesize bgColorInactive = _bgColorInactive;
 @synthesize namedColors = _namedColors; 
-@synthesize terminalLauncherAppName = _terminalLauncherAppName;
-@synthesize openTerminalInTab = _openTerminalInTab;
-
-NSColor *NSColorFromRGBString(NSString *colorString) {
-	
-	// TODO: add named colors to dict in bundledDefaults
-	if([colorString isEqualToString:@"white"]) {
-		return [NSColor whiteColor];
-	}
-	
-	if([colorString isEqualToString:@"blue"]) {
-		return [NSColor colorWithCalibratedRed:0.871 green:0.894 blue:0.918 alpha:1.0];
-	}
-	
-	NSArray *rgb = [colorString componentsSeparatedByString:@";"];
-	
-	if([rgb count]!=3) 
-		return nil;
-	
-	return [NSColor colorWithDeviceRed:[[rgb objectAtIndex:0] floatValue]
-								 green:[[rgb objectAtIndex:1] floatValue]
-								  blue:[[rgb objectAtIndex:2] floatValue]
-								 alpha:1];
-}
-
-NSString *NSColorToRGBString(NSColor *color) {
-	return [NSString stringWithFormat:@"%f;%f;%f", [color redComponent], [color greenComponent], [color blueComponent]];
-}
 
 - (id)init {
 	if ((self = [super init])) {
-		
-		//	self.sideViewLayout = NSRectFromCGRect(CGRectMake(0, 0, 135, 500)); -> {{0, 0}, {135, 500}}
-		//	self.mainViewLayout = NSRectFromCGRect(CGRectMake(135, 0, 300, 500)); -> {{135, 0}, {300, 500}}
-		//	self.showSideViewOnLeft = YES;
-		//	self.bgColor = [NSColor colorWithCalibratedRed:0.871 green:0.894 blue:0.918 alpha:1.0];
-		//	self.bgColorInactive = [NSColor colorWithDeviceRed:0.929 green:0.929 blue:0.929 alpha:1];
-		
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		
 		// initially register defaults from bundled defaultSettings.plist file
 		NSBundle *pluginBundle = [NSBundle bundleForClass:[self class]];
 		NSDictionary *bundledDefaultSettings = [[NSDictionary alloc] initWithContentsOfFile:[pluginBundle pathForResource:@"defaultSettings" ofType:@"plist"]];
-		
 		[defaults registerDefaults:bundledDefaultSettings];
-		
-		// clean up older settings
-		[defaults removeObjectForKey:@"MDSplitViewLayoutPanels"];
-		[defaults removeObjectForKey:@"HTMDSplitViewLayoutPanels"];
+		[bundledDefaultSettings release];
 		[defaults synchronize];
 		
-		self.sideViewLayout = NSRectFromString([defaults objectForKey:kMD_SideView_Frame]);
-		self.mainViewLayout = NSRectFromString([defaults objectForKey:kMD_MainView_Frame]);
-		self.showSideViewOnLeft = [defaults boolForKey:kMD_SideView_IsLeft];
-		self.terminalLauncherAppName = [defaults objectForKey:kMD_TerminalLauncherAppName];
-		self.openTerminalInTab = [[defaults objectForKey:kMD_OpenTerminalInTab] boolValue];
-		
-		
-		// reset colors to bundledDefaults if something ain't right
-		[bundledDefaultSettings release];
+		self.sideViewLayout = NSRectFromString([defaults objectForKey:kMDSideViewFrameKey]);
+		self.mainViewLayout = NSRectFromString([defaults objectForKey:kMDMainViewFrameKey]);
+		self.showSideViewOnLeft = [defaults boolForKey:kMDSideViewLeftKey];
 		
 		NSString *menuTitle = self.showSideViewOnLeft ? @"Show on the Right" : @"Show on the Left";
 		_toggleSplitViewLayoutMenuItem = [[NSMenuItem alloc] initWithTitle:menuTitle action:@selector(toggleSideViewLayout:) keyEquivalent:@""];
@@ -138,9 +86,9 @@ NSString *NSColorToRGBString(NSColor *color) {
 
 - (void)save {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults setObject:NSStringFromRect(self.sideViewLayout) forKey:kMD_SideView_Frame];
-	[defaults setObject:NSStringFromRect(self.mainViewLayout) forKey:kMD_MainView_Frame];
-	[defaults setBool:self.showSideViewOnLeft forKey:kMD_SideView_IsLeft];
+	[defaults setObject:NSStringFromRect(self.sideViewLayout) forKey:kMDSideViewFrameKey];
+	[defaults setObject:NSStringFromRect(self.mainViewLayout) forKey:kMDMainViewFrameKey];
+	[defaults setBool:self.showSideViewOnLeft forKey:kMDSideViewLeftKey];
 	[defaults synchronize];
 }
 

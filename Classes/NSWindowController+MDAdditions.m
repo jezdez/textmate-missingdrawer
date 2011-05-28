@@ -31,9 +31,6 @@
 #import "MDSplitView.h"
 #import "MDSidebarBorderView.h"
 
-NSString *const kMDSidebarBackgroundColorActiveKey = @"MDSidebarBackgroundColorActive";
-NSString *const kMDSidebarBackgroundColorIdleKey = @"MDSidebarBackgroundColorIdle";
-
 @implementation NSWindowController (MDAdditions)
 
 - (void)MD_splitWindowIfNeeded {
@@ -96,7 +93,7 @@ NSString *const kMDSidebarBackgroundColorIdleKey = @"MDSidebarBackgroundColorIdl
 	
 	[[self MD_outlineView] bind:@"backgroundColor"
 					   toObject:[NSUserDefaultsController sharedUserDefaultsController]
-					withKeyPath:@"values.MDSideViewBgColorIdle"
+					withKeyPath:keyPath
 						options:bindingOptions];
 	
 	[bindingOptions release];

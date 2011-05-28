@@ -12,8 +12,11 @@
 		097A211712B115F300614549 /* MDPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097A211612B115F300614549 /* MDPreferenceController.m */; };
 		17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17A67ED71220168000BECE6F /* defaultSettings.plist */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		B264E0CE1390D58600AE5317 /* git.png in Resources */ = {isa = PBXBuildFile; fileRef = B264E0CA1390D58600AE5317 /* git.png */; };
-		B264E0CF1390D58600AE5317 /* gitPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B264E0CC1390D58600AE5317 /* gitPressed.png */; };
+		B21734D813916D0200299F09 /* MDDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = B21734D713916D0200299F09 /* MDDefines.m */; };
+		B21734ED13916FBD00299F09 /* ButtonGit.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734E513916FBD00299F09 /* ButtonGit.png */; };
+		B21734EE13916FBD00299F09 /* ButtonGitPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734E713916FBD00299F09 /* ButtonGitPressed.png */; };
+		B21734EF13916FBD00299F09 /* ButtonTerminal.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734E913916FBD00299F09 /* ButtonTerminal.png */; };
+		B21734F013916FBD00299F09 /* ButtonTerminalPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734EB13916FBD00299F09 /* ButtonTerminalPressed.png */; };
 		B2B89112121CD28E00AC78F1 /* MDMissingDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */; };
 		B2B89113121CD28E00AC78F1 /* MDResizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FE121CD28D00AC78F1 /* MDResizer.m */; };
 		B2B89114121CD28E00AC78F1 /* MDSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89100121CD28D00AC78F1 /* MDSettings.m */; };
@@ -21,9 +24,6 @@
 		B2B89116121CD28E00AC78F1 /* MDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89104121CD28D00AC78F1 /* MDSplitView.m */; };
 		B2B89117121CD28E00AC78F1 /* DrawerBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B89107121CD28D00AC78F1 /* DrawerBorder.png */; };
 		B2B89118121CD28E00AC78F1 /* DrawerResizeHandle.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B89109121CD28D00AC78F1 /* DrawerResizeHandle.png */; };
-		B2B89119121CD28E00AC78F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B8910B121CD28D00AC78F1 /* InfoPlist.strings */; };
-		B2B8911A121CD28E00AC78F1 /* OpenTerminalHere.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8910D121CD28D00AC78F1 /* OpenTerminalHere.png */; };
-		B2B8911B121CD28E00AC78F1 /* OpenTerminalHerePressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B8910F121CD28D00AC78F1 /* OpenTerminalHerePressed.png */; };
 		B2B89194121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89193121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m */; };
 		B2B89197121CDA5800AC78F1 /* NSWindowController+MDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B89196121CDA5800AC78F1 /* NSWindowController+MDAdditions.m */; };
 /* End PBXBuildFile section */
@@ -39,8 +39,12 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		17A67ED71220168000BECE6F /* defaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultSettings.plist; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
-		B264E0CB1390D58600AE5317 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/git.png; sourceTree = "<group>"; };
-		B264E0CD1390D58600AE5317 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/gitPressed.png; sourceTree = "<group>"; };
+		B21734D613916D0200299F09 /* MDDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDefines.h; sourceTree = "<group>"; };
+		B21734D713916D0200299F09 /* MDDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDefines.m; sourceTree = "<group>"; };
+		B21734E613916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonGit.png; sourceTree = "<group>"; };
+		B21734E813916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonGitPressed.png; sourceTree = "<group>"; };
+		B21734EA13916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonTerminal.png; sourceTree = "<group>"; };
+		B21734EC13916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonTerminalPressed.png; sourceTree = "<group>"; };
 		B2B890FB121CD28D00AC78F1 /* MDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMissingDrawer.h; sourceTree = "<group>"; };
 		B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMissingDrawer.m; sourceTree = "<group>"; };
 		B2B890FD121CD28D00AC78F1 /* MDResizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDResizer.h; sourceTree = "<group>"; };
@@ -53,9 +57,6 @@
 		B2B89104121CD28D00AC78F1 /* MDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSplitView.m; sourceTree = "<group>"; };
 		B2B89108121CD28D00AC78F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/DrawerBorder.png; sourceTree = "<group>"; };
 		B2B8910A121CD28D00AC78F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/DrawerResizeHandle.png; sourceTree = "<group>"; };
-		B2B8910C121CD28D00AC78F1 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B2B8910E121CD28D00AC78F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/OpenTerminalHere.png; sourceTree = "<group>"; };
-		B2B89110121CD28D00AC78F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/OpenTerminalHerePressed.png; sourceTree = "<group>"; };
 		B2B89111121CD28E00AC78F1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2B89128121CD2B800AC78F1 /* MissingDrawer_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissingDrawer_Prefix.pch; sourceTree = "<group>"; };
 		B2B89134121CD38D00AC78F1 /* TMPlugInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMPlugInController.h; sourceTree = "<group>"; };
@@ -139,15 +140,14 @@
 		B2B89106121CD28D00AC78F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B264E0CA1390D58600AE5317 /* git.png */,
-				B264E0CC1390D58600AE5317 /* gitPressed.png */,
+				B21734E513916FBD00299F09 /* ButtonGit.png */,
+				B21734E713916FBD00299F09 /* ButtonGitPressed.png */,
+				B21734E913916FBD00299F09 /* ButtonTerminal.png */,
+				B21734EB13916FBD00299F09 /* ButtonTerminalPressed.png */,
 				093EFCA512AFEF0E00D8A18C /* Preferences.xib */,
 				17A67ED71220168000BECE6F /* defaultSettings.plist */,
 				B2B89107121CD28D00AC78F1 /* DrawerBorder.png */,
 				B2B89109121CD28D00AC78F1 /* DrawerResizeHandle.png */,
-				B2B8910B121CD28D00AC78F1 /* InfoPlist.strings */,
-				B2B8910D121CD28D00AC78F1 /* OpenTerminalHere.png */,
-				B2B8910F121CD28D00AC78F1 /* OpenTerminalHerePressed.png */,
 				B2B89111121CD28E00AC78F1 /* Info.plist */,
 			);
 			path = Resources;
@@ -156,6 +156,8 @@
 		B2B89127121CD2B800AC78F1 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				B21734D613916D0200299F09 /* MDDefines.h */,
+				B21734D713916D0200299F09 /* MDDefines.m */,
 				B2B891DD121CDCAA00AC78F1 /* MDDebugUtils.h */,
 				B2B89128121CD2B800AC78F1 /* MissingDrawer_Prefix.pch */,
 			);
@@ -254,13 +256,12 @@
 			files = (
 				B2B89117121CD28E00AC78F1 /* DrawerBorder.png in Resources */,
 				B2B89118121CD28E00AC78F1 /* DrawerResizeHandle.png in Resources */,
-				B2B89119121CD28E00AC78F1 /* InfoPlist.strings in Resources */,
-				B2B8911A121CD28E00AC78F1 /* OpenTerminalHere.png in Resources */,
-				B2B8911B121CD28E00AC78F1 /* OpenTerminalHerePressed.png in Resources */,
 				17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */,
 				093EFCA712AFEF0E00D8A18C /* Preferences.xib in Resources */,
-				B264E0CE1390D58600AE5317 /* git.png in Resources */,
-				B264E0CF1390D58600AE5317 /* gitPressed.png in Resources */,
+				B21734ED13916FBD00299F09 /* ButtonGit.png in Resources */,
+				B21734EE13916FBD00299F09 /* ButtonGitPressed.png in Resources */,
+				B21734EF13916FBD00299F09 /* ButtonTerminal.png in Resources */,
+				B21734F013916FBD00299F09 /* ButtonTerminalPressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +281,7 @@
 				B2B89197121CDA5800AC78F1 /* NSWindowController+MDAdditions.m in Sources */,
 				093EFCAF12AFF0EA00D8A18C /* NSWindowController+Preferences.m in Sources */,
 				097A211712B115F300614549 /* MDPreferenceController.m in Sources */,
+				B21734D813916D0200299F09 /* MDDefines.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,20 +296,36 @@
 			name = Preferences.xib;
 			sourceTree = "<group>";
 		};
-		B264E0CA1390D58600AE5317 /* git.png */ = {
+		B21734E513916FBD00299F09 /* ButtonGit.png */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B264E0CB1390D58600AE5317 /* English */,
+				B21734E613916FBD00299F09 /* English */,
 			);
-			name = git.png;
+			name = ButtonGit.png;
 			sourceTree = "<group>";
 		};
-		B264E0CC1390D58600AE5317 /* gitPressed.png */ = {
+		B21734E713916FBD00299F09 /* ButtonGitPressed.png */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B264E0CD1390D58600AE5317 /* English */,
+				B21734E813916FBD00299F09 /* English */,
 			);
-			name = gitPressed.png;
+			name = ButtonGitPressed.png;
+			sourceTree = "<group>";
+		};
+		B21734E913916FBD00299F09 /* ButtonTerminal.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B21734EA13916FBD00299F09 /* English */,
+			);
+			name = ButtonTerminal.png;
+			sourceTree = "<group>";
+		};
+		B21734EB13916FBD00299F09 /* ButtonTerminalPressed.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B21734EC13916FBD00299F09 /* English */,
+			);
+			name = ButtonTerminalPressed.png;
 			sourceTree = "<group>";
 		};
 		B2B89107121CD28D00AC78F1 /* DrawerBorder.png */ = {
@@ -324,30 +342,6 @@
 				B2B8910A121CD28D00AC78F1 /* English */,
 			);
 			name = DrawerResizeHandle.png;
-			sourceTree = "<group>";
-		};
-		B2B8910B121CD28D00AC78F1 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B2B8910C121CD28D00AC78F1 /* English */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		B2B8910D121CD28D00AC78F1 /* OpenTerminalHere.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B2B8910E121CD28D00AC78F1 /* English */,
-			);
-			name = OpenTerminalHere.png;
-			sourceTree = "<group>";
-		};
-		B2B8910F121CD28D00AC78F1 /* OpenTerminalHerePressed.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B2B89110121CD28D00AC78F1 /* English */,
-			);
-			name = OpenTerminalHerePressed.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

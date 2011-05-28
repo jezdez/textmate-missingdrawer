@@ -2,19 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>OpenTerminalInTab</key>
+	<key>MDSideViewLeft</key>
 	<true/>
-	<key>TerminalLauncherAppName</key>
-	<string>Terminal</string>
 	<key>MDSideViewFrame</key>
 	<string>{{0, 0}, {135, 500}}</string>
 	<key>MDMainViewFrame</key>
 	<string>{{135, 0}, {300, 500}}</string>
-	<key>MDSideViewLeft</key>
+	<key>MDSidebarBackgroundColorActive</key>
+	<data>BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMChARmZmZmg9/dXT+D5uRkP4Ps6mo/AYY=</data>
+	<key>MDSidebarBackgroundColorIdle</key>
+	<data>BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2JqZWN0AIWEAWMChARmZmZmg+/tbT+D7+1tP4Pv7W0/AYY=</data>
+	<key>MDTerminalButtonEnabled</key>
 	<true/>
-	<key>MDSideViewBgColor</key>
-	<string>0.871;0.894;0.918</string>
-	<key>MDSideViewBgColorInactive</key>
-	<string>0.929;0.929;0.929</string>
+	<key>MDTerminalApplication</key>
+	<string>Terminal</string>
+	<key>MDTerminalOpenTab</key>
+	<true/>
+	<key>MDGitButtonEnabled</key>
+	<false/>
 </dict>
 </plist>

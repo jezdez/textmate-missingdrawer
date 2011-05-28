@@ -28,4 +28,5 @@
 #ifdef __OBJC__
 	#import <Cocoa/Cocoa.h>
 	#import "MDDebugUtils.h"
+	#import "MDDefines.h"
 #endif

@@ -5,39 +5,21 @@ This plugin provides Xcode-like project window interface without drawer and adds
 ![Screenshot](https://github.com/downloads/jezdez/textmate-missingdrawer/Screen%20shot%202010-08-20.png)
 
 ## Installation
-To install the plugin to TextMate, download the latest version from the [Project download page](http://github.com/jezdez/textmate-missingdrawer/downloads) and double click the MissingDrawer.plugin file contained or simply run the following commands in Terminal:
 
-    $ curl -L https://github.com/downloads/jezdez/textmate-missingdrawer/MissingDrawer_2010-11-28.zip | tar -xf - && open MissingDrawer.tmplugin
+Simply run the following command to download the latest version from [GitHub](http://github.com/jezdex/textmate-missingdrawer).
 
-## Changing the sidebar background color
-Rather like a white sidebar background color instead of the cool new default blue? Just run this (for white):
+	$ curl -L https://github.com/downloads/jezdez/textmate-missingdrawer/MissingDrawer_2010-11-28.zip | tar -xf - && open MissingDrawer.tmplugin
 
-    $ defaults write com.macromates.TextMate MDSideViewBgColor "1.0;1.0;1.0"
+You may also download the latest version from the [project download page](http://github.com/jezdez/textmate-missingdrawer/downloads) and double click the MissingDrawer.plugin file contained.
 
-or simply 
+## Configuring
 
-    $ defaults write com.macromates.TextMate MDSideViewBgColor "white"
+To configure Missing Drawer, simply open TextMate's preferences, click the double arrow icon in the top right of the window, and choose Missing Drawer from the menu. The following preferences are supported:
 
-Change the `"white"` to `"blue"` if you changed your mind.
-
-A preferences UI for that setting is planned, meanwhile set any RGB color you prefer like above.
-
-## Changing the terminal application launched from the sidebar
-
-By default, the "open terminal window" button launches the Terminal application. To use iTerm, run
-    
-    $ defaults write com.macromates.TextMate TerminalLauncherAppName "iTerm"
-
-To reset back to Terminal, run
-
-    $ defaults write com.macromates.TextMate TerminalLauncherAppName "Terminal"
-
-## Changing the termial open in new tab instead of new window
-
-By default it must open in new tab, if it doesn't run:
-
-    $ defaults write com.macromates.TextMate MDOpenTerminalInTab true
-
+* Changing the sidebar's color
+* Enabling/Disabling the open terminal button
+* Choosing the terminal application. Terminal and iTerm are supported
+* Enabling the git button
 
 ## Authors
 

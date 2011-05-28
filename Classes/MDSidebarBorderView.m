@@ -45,7 +45,6 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 }
 
 @interface MDSidebarBorderView (PrivateMethods)
-- (BOOL)_gitInstalled;
 - (NSString *)_selectedFilePath;
 @end
 
@@ -127,42 +126,39 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     }
 	
     [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
-
+	
+	NSRect tmButtonFrame = [[btns lastObject] frame];
+	NSRect buttonFrame = NSMakeRect(tmButtonFrame.origin.x + tmButtonFrame.size.width, tmButtonFrame.origin.y,
+									23.0f, tmButtonFrame.size.height);
+	
 	// Terminal button
-    NSButton *lastButton = [btns lastObject];
-    NSRect terminalButtonFrame;
-    terminalButtonFrame.size.width = 23;
-    terminalButtonFrame.size.height = [lastButton frame].size.height;
-    terminalButtonFrame.origin.x = [lastButton frame].origin.x + terminalButtonFrame.size.width;
-    terminalButtonFrame.origin.y = [lastButton frame].origin.y;
-	
-    NSButton *terminalButton = [[NSButton alloc] initWithFrame:terminalButtonFrame];
-	
-    NSImage *buttonImage = [MDSidebarBorderView bundledImageWithName:@"OpenTerminalHere"];
-    NSImage *buttonImagePressed = [MDSidebarBorderView bundledImageWithName:@"OpenTerminalHerePressed"]; 
-	
-	[terminalButton setToolTip:@"Open Terminal window and 'cd' to selected file/folder"];
-    [terminalButton setImage:buttonImage];
-    [terminalButton setAlternateImage:buttonImagePressed];
-    [terminalButton setAction:@selector(terminalButtonPressed:)];
-    [terminalButton setTarget:self];
-	
-    [terminalButton setBordered:NO];
-    [btns addObject:terminalButton];
-	[terminalButton release];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMDTerminalButtonEnabledKey]) {
+		NSButton *terminalButton = [[NSButton alloc] initWithFrame:buttonFrame];
+		
+		NSImage *buttonImage = [MDSidebarBorderView bundledImageWithName:@"ButtonTerminal"];
+		NSImage *buttonImagePressed = [MDSidebarBorderView bundledImageWithName:@"ButtonTerminalPressed"]; 
+		
+		[terminalButton setToolTip:@"Open Terminal window and 'cd' to selected file/folder"];
+		[terminalButton setImage:buttonImage];
+		[terminalButton setAlternateImage:buttonImagePressed];
+		[terminalButton setAction:@selector(terminalButtonPressed:)];
+		[terminalButton setTarget:self];
+		
+		[terminalButton setBordered:NO];
+		[btns addObject:terminalButton];
+		[terminalButton release];
+		
+		// Move over for git button
+		buttonFrame = NSMakeRect(buttonFrame.origin.x + buttonFrame.size.width, buttonFrame.origin.y,
+								 buttonFrame.size.width, buttonFrame.size.height);
+	}
 	
 	// Git button
-	if ([self _gitInstalled]) {
-		NSRect gitButtonFrame;
-		gitButtonFrame.size.width = 23;
-		gitButtonFrame.size.height = [terminalButton frame].size.height;
-		gitButtonFrame.origin.x = [terminalButton frame].origin.x + gitButtonFrame.size.width;
-		gitButtonFrame.origin.y = [terminalButton frame].origin.y;
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMDGitButtonEnabledKey]) {
+		NSButton *gitButton = [[NSButton alloc] initWithFrame:buttonFrame];
 
-		NSButton *gitButton = [[NSButton alloc] initWithFrame:gitButtonFrame];
-
-		NSImage *gitButtonImage = [MDSidebarBorderView bundledImageWithName:@"git"];
-		NSImage *gitButtonImagePressed = [MDSidebarBorderView bundledImageWithName:@"gitPressed"]; 
+		NSImage *gitButtonImage = [MDSidebarBorderView bundledImageWithName:@"ButtonGit"];
+		NSImage *gitButtonImagePressed = [MDSidebarBorderView bundledImageWithName:@"ButtonGitPressed"]; 
 
 		[gitButton setToolTip:@"Open git window here"];
 		[gitButton setImage:gitButtonImage];
@@ -174,8 +170,6 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 		[btns addObject:gitButton];
 		[gitButton release];
 	}
-	                                    
-//  [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
 	
 	// Adjust outlineView frame
     if (outlineView) {
@@ -194,43 +188,6 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
         [layoutManager release];
         [realOutlineView reloadData];
     }
-	
-	//place buttons into sideboardview (self)
-
-//  alternative A: "Add file" button gets partially covered by window resizer handle when displaying buttons 
-//	on the right outside when in lefty mode
-	
-//	if(showSidebarOnLeft) {
-//		float leftLoc = 0;
-//		
-//		for (NSView* button in btns) {
-//			
-//			NSRect buttonFrame = [button frame];
-//			buttonFrame.origin.y = -4;
-//			buttonFrame.origin.x = leftLoc;
-//			leftLoc = leftLoc + (buttonFrame.size.width-1);
-//			
-//			[button setAutoresizingMask:NSViewMaxXMargin];
-//			[button removeFromSuperview];
-//			[button setFrame:buttonFrame];
-//			[self addSubview:button];
-//			
-//		}	
-//	} else {
-//		float pos = 0;
-//		
-//		for (NSView* button in btns) {
-//			NSRect buttonFrame = [button frame];
-//			buttonFrame.origin.y = -4;
-//			pos = pos + (buttonFrame.size.width-1);
-//			buttonFrame.origin.x = [self frame].size.width-pos;
-//			
-//			[button removeFromSuperview];
-//			[button setFrame:buttonFrame];
-//			[button setAutoresizingMask:NSViewMinXMargin];
-//			[self addSubview:button];
-//		}
-//	}
 	
 	float leftLoc = 0;
 	if (!showSidebarOnLeft) {
@@ -262,18 +219,15 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 		return;
 	}
 	
-	
 	path = [path stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\\\\\""];
-	NSString *appName = [[MDSettings defaultSettings] terminalLauncherAppName];
+	NSString *appName = [[NSUserDefaults standardUserDefaults] stringForKey:kMDTerminalApplicationKey];
 //	BOOL openTerminalInTab = [[MDSettings defaultSettings] openTerminalInTab]; 
 	NSString *appleScriptCommand = nil;
 	
-	if ([appName caseInsensitiveCompare:@"iTerm"] == NSOrderedSame) {
+	if ([appName isEqualToString:@"iTerm"]) {
 		appleScriptCommand = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
-	} else if ([appName caseInsensitiveCompare:@"Terminal"] == NSOrderedSame) {
-		appleScriptCommand = [NSString stringWithFormat:@"activate application \"Terminal\"\n\ttell application \"System Events\"\n\tkeystroke \"t\" using {command down}\n\tend tell\n\ttell application \"Terminal\"\n\trepeat with win in windows\n\ttry\n\tif get frontmost of win is true then\n\tdo script \"cd \\\"%@\\\"; clear\" in (selected tab of win)\n\tend if\n\tend try\n\tend repeat\n\tend tell", path];
 	} else {
-		return;
+		appleScriptCommand = [NSString stringWithFormat:@"activate application \"Terminal\"\n\ttell application \"System Events\"\n\tkeystroke \"t\" using {command down}\n\tend tell\n\ttell application \"Terminal\"\n\trepeat with win in windows\n\ttry\n\tif get frontmost of win is true then\n\tdo script \"cd \\\"%@\\\"; clear\" in (selected tab of win)\n\tend if\n\tend try\n\tend repeat\n\tend tell", path];
 	}
 	
 	MDLog(@"script:\n%@", appleScriptCommand);
@@ -304,11 +258,6 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 
 #pragma mark Private Methods
-
-- (BOOL)_gitInstalled {
-	return [[NSFileManager defaultManager] fileExistsAtPath:@"/usr/local/bin/git"];
-}
-
 
 - (NSString *)_selectedFilePath {
 	NSArray *selectedItems = nil;
