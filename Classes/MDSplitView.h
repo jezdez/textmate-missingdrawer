@@ -26,7 +26,7 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@interface MDSplitView : NSSplitView {
+@interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
 	
     NSView *_sideView;
     NSView *_mainView;
