@@ -44,8 +44,8 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 @interface MDMissingDrawer (PrivateMethods)
 - (void)_injectPluginMethods;
 - (void)_installMenuItems;
+- (void)_injectPreferenceMethods;
 @end
-
 
 @implementation MDMissingDrawer
 
@@ -67,7 +67,8 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
         [self _injectPluginMethods];
 		[[[NSApp mainWindow] windowController] MD_splitWindowIfNeeded];
 		[self _installMenuItems];
-    }
+		[self _injectPreferenceMethods];
+    }	
     return self;
 }
 
@@ -121,6 +122,19 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
     swapInstanceMethods(oakProjectController, @selector(windowWillClose:),   @selector(MD_repl_windowWillClose:));
     swapInstanceMethods(oakProjectController, @selector(openProjectDrawer:), @selector(MD_repl_openProjectDrawer:));
     swapInstanceMethods(oakProjectController, @selector(revealInProject:),   @selector(MD_repl_revealInProject:));
+}
+
+- (void)_injectPreferenceMethods {
+	MDLog("swapping OakPreferencesManager methods");
+	
+	Class oakPreferenceController = NSClassFromString(@"OakPreferencesManager");
+	swapInstanceMethods(oakPreferenceController, @selector(toolbarAllowedItemIdentifiers:),		@selector(MD_toolbarAllowedItemIdentifiers:));
+	swapInstanceMethods(oakPreferenceController, @selector(toolbarDefaultItemIdentifiers:),		@selector(MD_toolbarDefaultItemIdentifiers:));
+	swapInstanceMethods(oakPreferenceController, @selector(toolbarSelectableItemIdentifiers:),  @selector(MD_toolbarSelectableItemIdentifiers:));
+	swapInstanceMethods(oakPreferenceController, @selector(selectToolbarItem:),					@selector(MD_selectToolbarItem:));
+	
+	swapInstanceMethods(oakPreferenceController, @selector(toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:),   
+												 @selector(MD_toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:));
 }
 
 @end
