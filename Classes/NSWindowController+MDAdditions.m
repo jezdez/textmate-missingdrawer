@@ -34,25 +34,24 @@
 @implementation NSWindowController (MDAdditions)
 
 - (void)MD_splitWindowIfNeeded {
-	NSWindow* window = [(NSWindowController*)self window];
+	NSWindow *window = [(NSWindowController *)self window];
 	if (window) {
-		NSView* contentView = [window contentView];
+		NSView *contentView = [window contentView];
 		
 		if (contentView && ![contentView isKindOfClass:[MDSplitView class]]) {
 			// If a drawer is displayed by TextMate, replace the contentView
 			// with one that uses the MissingDrawer.
-			NSDrawer* drawer = [[window drawers] objectAtIndex:0];
-			if (drawer)
-			{
-				NSView* leftView = [[drawer contentView] retain];
+			NSDrawer *drawer = [[window drawers] objectAtIndex:0];
+			if (drawer)	{
+				NSView *leftView = [[drawer contentView] retain];
 				[drawer setContentView:nil];
 				[window setContentView:nil];
 			
-				MDSidebarBorderView* borderView = [[MDSidebarBorderView alloc] initWithFrame:[leftView frame]];
+				MDSidebarBorderView *borderView = [[MDSidebarBorderView alloc] initWithFrame:[leftView frame]];
 				[borderView addToSuperview:leftView];
 			
-				MDSplitView* splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
-				MDLog("replacing current window with split view");
+				MDSplitView *splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
+				MDLog(@"replacing current window with split view");
 				[window setContentView:splitView];
 			
 				[borderView release];
@@ -65,7 +64,7 @@
 
 
 - (NSOutlineView *)MD_outlineView {
-	MDSplitView* contentView = (MDSplitView *)[[(NSWindowController *)self window] contentView];
+	MDSplitView *contentView = (MDSplitView *)[[(NSWindowController *)self window] contentView];
 	NSScrollView *scrollView = [[contentView.sideView subviews] objectAtIndex:0];
 	NSClipView *clipView = [[scrollView subviews] objectAtIndex:0];
 	return [[clipView subviews] lastObject];

@@ -73,7 +73,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 #pragma mark Drawing
 
 - (void)addToSuperview:(NSView*)superview {
-    NSScrollView* outlineView = nil;
+    NSScrollView *outlineView = nil;
     int i, cnt;
 	BOOL showSidebarOnLeft = [[MDSettings defaultSettings] showSideViewOnLeft];
 	
@@ -236,7 +236,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     }
 	
     for (NSDictionary *item in selectedItems) {
-        MDLog("[projectFileOutlineView selectedItems]: %@", item);
+        MDLog(@"[projectFileOutlineView selectedItems]: %@", item);
         NSString *path = [item objectForKey:@"sourceDirectory"];
         if (!path) {
             path = [[item objectForKey:@"filename"] stringByDeletingLastPathComponent];
@@ -255,7 +255,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 				return;
 			}
 			
-            MDLog("script:\n%@", appleScriptCommand);
+            MDLog(@"script:\n%@", appleScriptCommand);
             NSAppleScript *as = [[NSAppleScript alloc] initWithSource: appleScriptCommand];
             [as executeAndReturnError:nil];
 			[as release];

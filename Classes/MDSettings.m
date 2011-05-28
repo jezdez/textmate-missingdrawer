@@ -50,7 +50,7 @@ NSString *const kMD_TerminalLauncherAppName = @"TerminalLauncherAppName";
 @synthesize namedColors = _namedColors; 
 @synthesize terminalLauncherAppName = _terminalLauncherAppName;
 
-NSColor* NSColorFromRGBString(NSString* colorString) {
+NSColor *NSColorFromRGBString(NSString *colorString) {
 	
 	// TODO: add named colors to dict in bundledDefaults
 	if([colorString isEqualToString:@"white"]) {
@@ -72,11 +72,11 @@ NSColor* NSColorFromRGBString(NSString* colorString) {
 								 alpha:1];
 }
 
-NSString* NSColorToRGBString(NSColor* color) {
+NSString *NSColorToRGBString(NSColor *color) {
 	return [NSString stringWithFormat:@"%f;%f;%f", [color redComponent], [color greenComponent], [color blueComponent]];
 }
 
-- (id) init {
+- (id)init {
 	if ((self = [super init])) {
 		
 		//	self.sideViewLayout = NSRectFromCGRect(CGRectMake(0, 0, 135, 500)); -> {{0, 0}, {135, 500}}
@@ -85,7 +85,7 @@ NSString* NSColorToRGBString(NSColor* color) {
 		//	self.bgColor = [NSColor colorWithCalibratedRed:0.871 green:0.894 blue:0.918 alpha:1.0];
 		//	self.bgColorInactive = [NSColor colorWithDeviceRed:0.929 green:0.929 blue:0.929 alpha:1];
 		
-		NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 		
 		// initially register defaults from bundled defaultSettings.plist file
 		NSBundle *pluginBundle = [NSBundle bundleForClass:[self class]];

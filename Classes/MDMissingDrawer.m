@@ -51,7 +51,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 
 #pragma mark Class Methods
 
-+ (MDSplitView *)makeSplitViewWithMainView:(NSView*)contentView sideView:(NSView*)sideView {
++ (MDSplitView *)makeSplitViewWithMainView:(NSView *)contentView sideView:(NSView *)sideView {
 	MDLog();
     MDSplitView *splitView = [[MDSplitView alloc] initWithFrame:[contentView frame] mainView:contentView sideView:sideView];
     [splitView setVertical:YES];
@@ -63,7 +63,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 
 - (id)initWithPlugInController:(id<TMPlugInController>)aController {
 	if (self = [super init]) {
-		MDLog("initializing 'MissingDrawer' plugin");
+		MDLog(@"initializing 'MissingDrawer' plugin");
         [self _injectPluginMethods];
 		[[[NSApp mainWindow] windowController] MD_splitWindowIfNeeded];
 		[self _installMenuItems];
@@ -75,7 +75,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 #pragma mark Actions
 
 - (void)toggleSplitViewLayout:(id)sender {
-	MDLog("Toggle Left/Right");
+	MDLog(@"Toggle Left/Right");
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MDToggleSplitViewLayout" object:nil];
 }
 
@@ -83,22 +83,22 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 #pragma mark Private Methods
 
 - (void)_installMenuItems {
-	NSMenu* viewMenu = [[[NSApp mainMenu] itemWithTitle:@"View"] submenu];
+	NSMenu *viewMenu = [[[NSApp mainMenu] itemWithTitle:@"View"] submenu];
 	
-	NSMenuItem* showHideDrawerMenuItem = nil;
+	NSMenuItem *showHideDrawerMenuItem = nil;
 	NSInteger drawerMenuItemIndex = 0;
 	
-	MDSettings* settings = [MDSettings defaultSettings];
+	MDSettings *settings = [MDSettings defaultSettings];
 	
-	for (NSMenuItem* menuItem in [viewMenu itemArray]) {
+	for (NSMenuItem *menuItem in [viewMenu itemArray]) {
 		if ([[menuItem title] isEqualToString:@"Show/Hide Project Drawer"]) {
 			showHideDrawerMenuItem = menuItem;
 			drawerMenuItemIndex = [[viewMenu itemArray] indexOfObject:menuItem];
 		}
 	}
 	
-	NSMenuItem* drawerSubmenuItem =  [[NSMenuItem alloc] initWithTitle:@"Project Drawer" action:nil keyEquivalent:@""];
-	NSMenu* drawerMenu = [[NSMenu alloc] initWithTitle:@"Project Drawer"];
+	NSMenuItem *drawerSubmenuItem =  [[NSMenuItem alloc] initWithTitle:@"Project Drawer" action:nil keyEquivalent:@""];
+	NSMenu *drawerMenu = [[NSMenu alloc] initWithTitle:@"Project Drawer"];
 	[drawerSubmenuItem setSubmenu:drawerMenu];
 	[drawerMenu addItem:settings.toggleSplitViewLayoutMenuItem];
 	[drawerMenu addItem:settings.focusSideViewMenuItem];
@@ -114,7 +114,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 
 
 - (void)_injectPluginMethods {
-	MDLog("swapping OakProjectController methods");
+	MDLog(@"swapping OakProjectController methods");
 	
     Class oakProjectController = NSClassFromString(@"OakProjectController");
     swapInstanceMethods(oakProjectController, @selector(windowDidLoad),      @selector(MD_repl_windowDidLoad));

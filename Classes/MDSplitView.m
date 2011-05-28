@@ -56,7 +56,7 @@
 
 
 - (void) drawDividerInRect:(NSRect)aRect {
-    [[NSColor colorWithDeviceWhite:.625 alpha:1] setFill];
+    [[NSColor colorWithDeviceWhite:0.625 alpha:1] setFill];
     [NSBezierPath fillRect:aRect];
 }
 
@@ -65,7 +65,11 @@
 
 - (id)initWithFrame:(NSRect)frame mainView:(NSView *)aMainView sideView:(NSView *)aSideView {
     if ((self = [super initWithFrame:frame])) {
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+		[self setDelegate:(id <NSSplitViewDelegate>)self];
+#else
 		[self setDelegate:self];
+#endif
 		
 		_mainView = [aMainView retain];
 		_sideView = [aSideView retain];
@@ -105,7 +109,7 @@
 #pragma mark Drawing
 
 - (void)toggleLayout {
-	MDLog("toggling views");
+	MDLog(@"toggling views");
 	NSView *leftView = [[[self subviews] objectAtIndex:0] retain];
 	[leftView removeFromSuperview];
 	[self addSubview:leftView];
@@ -121,10 +125,10 @@
 #pragma mark Layout
 
 - (void)windowWillCloseWillCall {
-    MDLog("windowWillCloseWillCall");
+    MDLog(@"windowWillCloseWillCall");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     if ([self.sideView frame].size.width <= 0) {
-		MDLog("save only when frame not collapsed");
+		MDLog(@"save only when frame not collapsed");
 		NSRect sideViewFrame = [self.sideView frame];
         sideViewFrame.size.width = MIN_SIDEVIEW_WIDTH;
         [self.sideView setFrame:sideViewFrame];

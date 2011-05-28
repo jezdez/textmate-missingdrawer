@@ -69,23 +69,23 @@
 - (void) MD_repl_openProjectDrawer:(id)sender {
 	MDLog();
 	
-    NSWindow* window = [(NSWindowController*)self window];
+    NSWindow *window = [(NSWindowController*)self window];
     
 	if ([[window contentView] isKindOfClass:[MDSplitView class]]) {
         
-		MDLog("panel exists and menu item was clicked");
+		MDLog(@"panel exists and menu item was clicked");
 		
-		MDSplitView* contentView = (MDSplitView*)[window contentView];
+		MDSplitView *contentView = (MDSplitView *)[window contentView];
 		
-		NSView* sideView = contentView.sideView; //[[contentView subviews]objectAtIndex:0];
+		NSView *sideView = contentView.sideView; //[[contentView subviews]objectAtIndex:0];
         NSRect sideViewFrame = [sideView frame];
 		
         if (sideViewFrame.size.width == 0) {
-            MDLog("show hidden panel");
+            MDLog(@"show hidden panel");
 			[contentView restoreLayout];
             [contentView adjustSubviews];
         } else {
-            MDLog("hide visible panel");
+            MDLog(@"hide visible panel");
 			[contentView saveLayout];
             sideViewFrame.size.width = 0;
             [sideView setFrame:sideViewFrame];
@@ -100,11 +100,11 @@
     [self MD_repl_revealInProject:sender];
     [self MD_repl_revealInProject:sender]; //TODO: twice?
 	
-    NSWindow* window= [(NSWindowController*)self window];
-    NSView* contentView = [window contentView];
+    NSWindow *window = [(NSWindowController*)self window];
+    NSView *contentView = [window contentView];
 	
     if ([[contentView className] isEqualToString:@"MDSplitView"]) {
-        NSView* leftView = [[contentView subviews] objectAtIndex:0];
+        NSView *leftView = [[contentView subviews] objectAtIndex:0];
         NSRect leftFrame = [leftView frame];
         if (leftFrame.size.width == 0) {
             [self MD_repl_openProjectDrawer:sender];
