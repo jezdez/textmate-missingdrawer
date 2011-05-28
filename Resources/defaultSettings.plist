@@ -18,7 +18,5 @@
 	<string>Terminal</string>
 	<key>MDTerminalOpenTab</key>
 	<true/>
-	<key>MDGitButtonEnabled</key>
-	<false/>
 </dict>
 </plist>

@@ -28,8 +28,8 @@
 
 #import "MDSidebarBorderView.h"
 #import "MDResizer.h"
-#import "Foundation/NSGeometry.h"
 #import "MDSettings.h"
+#import "MDMissingDrawer.h"
 
 NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     float v1 = [viewA frame].origin.x;
@@ -51,14 +51,6 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 @implementation MDSidebarBorderView
 
-#pragma mark Class Methods
-
-+ (NSImage *)bundledImageWithName:(NSString *)imageName {
-	NSBundle *pluginBundle = [NSBundle bundleForClass:[self class]];
-	return [[[NSImage alloc] initWithContentsOfFile:[pluginBundle pathForResource:imageName ofType:@"png"]] autorelease];
-}
-
-
 #pragma mark NSView
 
 - (BOOL)mouseDownCanMoveWindow {
@@ -68,7 +60,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 - (void)drawRect:(NSRect)rect {
     NSRect fromRect = NSZeroRect;
-    NSImage *image = [MDSidebarBorderView bundledImageWithName:@"DrawerBorder"];
+    NSImage *image = [MDMissingDrawer bundledImageWithName:@"DrawerBorder"];
     fromRect.size = [image size];
 	
     [image drawInRect:[self frame] fromRect:fromRect operation:NSCompositeSourceOver fraction:1.0];
@@ -83,7 +75,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 	BOOL showSidebarOnLeft = [[MDSettings defaultSettings] showSideViewOnLeft];
 	
     // Adjust frame
-    NSImage *image = [MDSidebarBorderView bundledImageWithName:@"DrawerBorder"];
+    NSImage *image = [MDMissingDrawer bundledImageWithName:@"DrawerBorder"];
     NSRect borderRect = NSZeroRect;
 	borderRect.origin.x = showSidebarOnLeft ? -1.0 : 1.0;
     borderRect.size.height = [image size].height;
@@ -91,7 +83,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 	
     // Add resizer image
     NSRect handleRect = NSZeroRect;
-    NSImage *sidebarResizerImage = [MDSidebarBorderView bundledImageWithName:@"DrawerResizeHandle"];
+    NSImage *sidebarResizerImage = [MDMissingDrawer bundledImageWithName:@"DrawerResizeHandle"];
     handleRect.size = [sidebarResizerImage size];
     handleRect.origin.y = 0;
 	if (showSidebarOnLeft) {
@@ -127,16 +119,16 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 	
     [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
 	
-	NSRect tmButtonFrame = [[btns lastObject] frame];
-	NSRect buttonFrame = NSMakeRect(tmButtonFrame.origin.x + tmButtonFrame.size.width, tmButtonFrame.origin.y,
-									23.0f, tmButtonFrame.size.height);
-	
 	// Terminal button
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMDTerminalButtonEnabledKey]) {
+		NSRect tmButtonFrame = [[btns lastObject] frame];
+		NSRect buttonFrame = NSMakeRect(tmButtonFrame.origin.x + tmButtonFrame.size.width, tmButtonFrame.origin.y,
+										23.0f, tmButtonFrame.size.height);
+
 		NSButton *terminalButton = [[NSButton alloc] initWithFrame:buttonFrame];
 		
-		NSImage *buttonImage = [MDSidebarBorderView bundledImageWithName:@"ButtonTerminal"];
-		NSImage *buttonImagePressed = [MDSidebarBorderView bundledImageWithName:@"ButtonTerminalPressed"]; 
+		NSImage *buttonImage = [MDMissingDrawer bundledImageWithName:@"ButtonTerminal"];
+		NSImage *buttonImagePressed = [MDMissingDrawer bundledImageWithName:@"ButtonTerminalPressed"]; 
 		
 		[terminalButton setToolTip:@"Open Terminal window and 'cd' to selected file/folder"];
 		[terminalButton setImage:buttonImage];
@@ -147,28 +139,6 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 		[terminalButton setBordered:NO];
 		[btns addObject:terminalButton];
 		[terminalButton release];
-		
-		// Move over for git button
-		buttonFrame = NSMakeRect(buttonFrame.origin.x + buttonFrame.size.width, buttonFrame.origin.y,
-								 buttonFrame.size.width, buttonFrame.size.height);
-	}
-	
-	// Git button
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:kMDGitButtonEnabledKey]) {
-		NSButton *gitButton = [[NSButton alloc] initWithFrame:buttonFrame];
-
-		NSImage *gitButtonImage = [MDSidebarBorderView bundledImageWithName:@"ButtonGit"];
-		NSImage *gitButtonImagePressed = [MDSidebarBorderView bundledImageWithName:@"ButtonGitPressed"]; 
-
-		[gitButton setToolTip:@"Open git window here"];
-		[gitButton setImage:gitButtonImage];
-		[gitButton setAlternateImage:gitButtonImagePressed];
-		[gitButton setAction:@selector(gitButtonPressed:)];
-		[gitButton setTarget:self];
-
-		[gitButton setBordered:NO];
-		[btns addObject:gitButton];
-		[gitButton release];
 	}
 	
 	// Adjust outlineView frame
@@ -235,25 +205,6 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 	[as executeAndReturnError:nil];
 	[as release];
 	return;
-}           
-
-- (void)gitButtonPressed:(id)sender {
-	NSString *path = [self _selectedFilePath];
-	if (!path) {
-		return;
-	}
-	
-	// Try to launch GitX
-	if (![[NSWorkspace sharedWorkspace] openFile:path withApplication:@"GitX"]) {
-		// Otherwise launch gitk
-		// TODO: Fix
-//		NSTask *task = [[NSTask alloc] init];
-//		[task setLaunchPath:@"/usr/local/bin/gitk"];
-//		[task setCurrentDirectoryPath:path];
-//		[task launch];
-//		[task waitUntilExit];
-//		[task release];
-	}
 }
 
 

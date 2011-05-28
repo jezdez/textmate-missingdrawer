@@ -36,6 +36,8 @@
 }
 
 // Class Methods
++ (NSBundle *)pluginBundle;
++ (NSImage *)bundledImageWithName:(NSString *)imageName;
 + (MDSplitView *)makeSplitViewWithMainView:(NSView *)contentView sideView:(NSView *)sideView;
 
 // Plugin hook

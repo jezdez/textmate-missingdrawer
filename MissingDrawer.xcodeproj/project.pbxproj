@@ -13,8 +13,6 @@
 		17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17A67ED71220168000BECE6F /* defaultSettings.plist */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		B21734D813916D0200299F09 /* MDDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = B21734D713916D0200299F09 /* MDDefines.m */; };
-		B21734ED13916FBD00299F09 /* ButtonGit.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734E513916FBD00299F09 /* ButtonGit.png */; };
-		B21734EE13916FBD00299F09 /* ButtonGitPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734E713916FBD00299F09 /* ButtonGitPressed.png */; };
 		B21734EF13916FBD00299F09 /* ButtonTerminal.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734E913916FBD00299F09 /* ButtonTerminal.png */; };
 		B21734F013916FBD00299F09 /* ButtonTerminalPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734EB13916FBD00299F09 /* ButtonTerminalPressed.png */; };
 		B2B89112121CD28E00AC78F1 /* MDMissingDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B890FC121CD28D00AC78F1 /* MDMissingDrawer.m */; };
@@ -41,8 +39,6 @@
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21734D613916D0200299F09 /* MDDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDefines.h; sourceTree = "<group>"; };
 		B21734D713916D0200299F09 /* MDDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDefines.m; sourceTree = "<group>"; };
-		B21734E613916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonGit.png; sourceTree = "<group>"; };
-		B21734E813916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonGitPressed.png; sourceTree = "<group>"; };
 		B21734EA13916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonTerminal.png; sourceTree = "<group>"; };
 		B21734EC13916FBD00299F09 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/ButtonTerminalPressed.png; sourceTree = "<group>"; };
 		B2B890FB121CD28D00AC78F1 /* MDMissingDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMissingDrawer.h; sourceTree = "<group>"; };
@@ -140,8 +136,6 @@
 		B2B89106121CD28D00AC78F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B21734E513916FBD00299F09 /* ButtonGit.png */,
-				B21734E713916FBD00299F09 /* ButtonGitPressed.png */,
 				B21734E913916FBD00299F09 /* ButtonTerminal.png */,
 				B21734EB13916FBD00299F09 /* ButtonTerminalPressed.png */,
 				093EFCA512AFEF0E00D8A18C /* Preferences.xib */,
@@ -258,8 +252,6 @@
 				B2B89118121CD28E00AC78F1 /* DrawerResizeHandle.png in Resources */,
 				17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */,
 				093EFCA712AFEF0E00D8A18C /* Preferences.xib in Resources */,
-				B21734ED13916FBD00299F09 /* ButtonGit.png in Resources */,
-				B21734EE13916FBD00299F09 /* ButtonGitPressed.png in Resources */,
 				B21734EF13916FBD00299F09 /* ButtonTerminal.png in Resources */,
 				B21734F013916FBD00299F09 /* ButtonTerminalPressed.png in Resources */,
 			);
@@ -294,22 +286,6 @@
 				093EFCA612AFEF0E00D8A18C /* English */,
 			);
 			name = Preferences.xib;
-			sourceTree = "<group>";
-		};
-		B21734E513916FBD00299F09 /* ButtonGit.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B21734E613916FBD00299F09 /* English */,
-			);
-			name = ButtonGit.png;
-			sourceTree = "<group>";
-		};
-		B21734E713916FBD00299F09 /* ButtonGitPressed.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B21734E813916FBD00299F09 /* English */,
-			);
-			name = ButtonGitPressed.png;
 			sourceTree = "<group>";
 		};
 		B21734E913916FBD00299F09 /* ButtonTerminal.png */ = {

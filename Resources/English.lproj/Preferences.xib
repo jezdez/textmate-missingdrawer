@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="41"/>
+			<integer value="517"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -53,7 +53,7 @@
 							<object class="NSTabViewItem" id="926000077">
 								<string key="NSIdentifier">General</string>
 								<object class="NSView" key="NSView" id="980884557">
-									<reference key="NSNextResponder" ref="520768783"/>
+									<nil key="NSNextResponder"/>
 									<int key="NSvFlags">256</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
@@ -193,7 +193,6 @@
 										</object>
 									</object>
 									<string key="NSFrame">{{10, 33}, {402, 248}}</string>
-									<reference key="NSSuperview" ref="520768783"/>
 								</object>
 								<string key="NSLabel">Sidebar</string>
 								<reference key="NSColor" ref="646245018"/>
@@ -202,7 +201,7 @@
 							<object class="NSTabViewItem" id="371939547">
 								<string key="NSIdentifier">Item 1</string>
 								<object class="NSView" key="NSView" id="699082563">
-									<nil key="NSNextResponder"/>
+									<reference key="NSNextResponder" ref="520768783"/>
 									<int key="NSvFlags">256</int>
 									<object class="NSMutableArray" key="NSSubviews">
 										<bool key="EncodedWithXMLCoder">YES</bool>
@@ -220,11 +219,11 @@
 												<reference key="NSControlView" ref="417958924"/>
 												<int key="NSButtonFlags">1211912703</int>
 												<int key="NSButtonFlags2">2</int>
-												<object class="NSCustomResource" key="NSNormalImage" id="11518815">
+												<object class="NSCustomResource" key="NSNormalImage">
 													<string key="NSClassName">NSImage</string>
 													<string key="NSResourceName">NSSwitch</string>
 												</object>
-												<object class="NSButtonImageSource" key="NSAlternateImage" id="13106247">
+												<object class="NSButtonImageSource" key="NSAlternateImage">
 													<string key="NSImageName">NSSwitch</string>
 												</object>
 												<string key="NSAlternateContents"/>
@@ -245,44 +244,6 @@
 												<string key="NSContents">Pressing the Terminal button will open a new tab in your terminal application to the directory of the selected file.</string>
 												<reference key="NSSupport" ref="26"/>
 												<reference key="NSControlView" ref="485567724"/>
-												<reference key="NSBackgroundColor" ref="646245018"/>
-												<reference key="NSTextColor" ref="1015082757"/>
-											</object>
-										</object>
-										<object class="NSButton" id="213183491">
-											<reference key="NSNextResponder" ref="699082563"/>
-											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{15, 81}, {172, 18}}</string>
-											<reference key="NSSuperview" ref="699082563"/>
-											<bool key="NSEnabled">YES</bool>
-											<object class="NSButtonCell" key="NSCell" id="371019732">
-												<int key="NSCellFlags">67239424</int>
-												<int key="NSCellFlags2">0</int>
-												<string key="NSContents">Enable Git button</string>
-												<reference key="NSSupport" ref="62353035"/>
-												<reference key="NSControlView" ref="213183491"/>
-												<int key="NSButtonFlags">1211912703</int>
-												<int key="NSButtonFlags2">2</int>
-												<reference key="NSNormalImage" ref="11518815"/>
-												<reference key="NSAlternateImage" ref="13106247"/>
-												<string key="NSAlternateContents"/>
-												<string key="NSKeyEquivalent"/>
-												<int key="NSPeriodicDelay">200</int>
-												<int key="NSPeriodicInterval">25</int>
-											</object>
-										</object>
-										<object class="NSTextField" id="515243203">
-											<reference key="NSNextResponder" ref="699082563"/>
-											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{14, 42}, {374, 33}}</string>
-											<reference key="NSSuperview" ref="699082563"/>
-											<bool key="NSEnabled">YES</bool>
-											<object class="NSTextFieldCell" key="NSCell" id="721503175">
-												<int key="NSCellFlags">67239424</int>
-												<int key="NSCellFlags2">272760832</int>
-												<string key="NSContents">Pressing the Git button will launch GitX for the current repository. gitk is used if GitX is not installed.</string>
-												<reference key="NSSupport" ref="26"/>
-												<reference key="NSControlView" ref="515243203"/>
 												<reference key="NSBackgroundColor" ref="646245018"/>
 												<reference key="NSTextColor" ref="1015082757"/>
 											</object>
@@ -366,20 +327,21 @@
 										</object>
 									</object>
 									<string key="NSFrame">{{10, 33}, {402, 248}}</string>
+									<reference key="NSSuperview" ref="520768783"/>
 								</object>
 								<string key="NSLabel">Extras</string>
 								<reference key="NSColor" ref="646245018"/>
 								<reference key="NSTabView" ref="520768783"/>
 							</object>
 						</object>
-						<reference key="NSSelectedTabViewItem" ref="926000077"/>
+						<reference key="NSSelectedTabViewItem" ref="371939547"/>
 						<reference key="NSFont" ref="62353035"/>
 						<int key="NSTvFlags">0</int>
 						<bool key="NSAllowTruncatedLabels">YES</bool>
 						<bool key="NSDrawsBackground">YES</bool>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="980884557"/>
+							<reference ref="699082563"/>
 						</object>
 					</object>
 				</object>
@@ -481,22 +443,6 @@
 						</object>
 					</object>
 					<int key="connectionID">547</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.MDGitButtonEnabled</string>
-						<reference key="source" ref="213183491"/>
-						<reference key="destination" ref="330941994"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="213183491"/>
-							<reference key="NSDestination" ref="330941994"/>
-							<string key="NSLabel">value: values.MDGitButtonEnabled</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.MDGitButtonEnabled</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">549</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -635,8 +581,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="417958924"/>
 							<reference ref="485567724"/>
-							<reference ref="213183491"/>
-							<reference ref="515243203"/>
 							<reference ref="513639681"/>
 							<reference ref="665235037"/>
 						</object>
@@ -669,34 +613,6 @@
 						<int key="objectID">523</int>
 						<reference key="object" ref="458627629"/>
 						<reference key="parent" ref="485567724"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">524</int>
-						<reference key="object" ref="213183491"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="371019732"/>
-						</object>
-						<reference key="parent" ref="699082563"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">525</int>
-						<reference key="object" ref="515243203"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="721503175"/>
-						</object>
-						<reference key="parent" ref="699082563"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">526</int>
-						<reference key="object" ref="721503175"/>
-						<reference key="parent" ref="515243203"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">527</int>
-						<reference key="object" ref="371019732"/>
-						<reference key="parent" ref="213183491"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">528</int>
@@ -810,12 +726,6 @@
 					<string>522.IBPluginDependency</string>
 					<string>522.IBViewBoundsToFrameTransform</string>
 					<string>523.IBPluginDependency</string>
-					<string>524.IBPluginDependency</string>
-					<string>524.IBViewBoundsToFrameTransform</string>
-					<string>525.IBPluginDependency</string>
-					<string>525.IBViewBoundsToFrameTransform</string>
-					<string>526.IBPluginDependency</string>
-					<string>527.IBPluginDependency</string>
 					<string>528.IBPluginDependency</string>
 					<string>528.IBViewBoundsToFrameTransform</string>
 					<string>529.IBPluginDependency</string>
@@ -881,16 +791,6 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABBYAAAw1YAAA</bytes>
 					</object>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABBcAAAwuIAAA</bytes>
-					</object>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABBYAAAwrIAAA</bytes>
-					</object>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSAffineTransform">

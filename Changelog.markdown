@@ -1,7 +1,7 @@
 ### 2011-05-28
 
 * Added version to Missing Drawer and display it in preferences
-* Added preferences UI for colors, the Terminal button, and the git button. Thanks [@shell](http://github.com/shell) for the initial work on this and the git button.
+* Added preferences UI for colors (thanks [@shell](http://github.com/shell)) and the terminal button.
 
 ### 2010-11-28
 

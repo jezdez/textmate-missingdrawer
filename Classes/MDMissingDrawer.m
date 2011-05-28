@@ -51,6 +51,17 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 
 #pragma mark Class Methods
 
++ (NSBundle *)pluginBundle {
+	return [NSBundle bundleForClass:[self class]];
+}
+
+
++ (NSImage *)bundledImageWithName:(NSString *)imageName {
+	NSBundle *pluginBundle = [[self class] pluginBundle];
+	return [[[NSImage alloc] initWithContentsOfFile:[pluginBundle pathForResource:imageName ofType:@"png"]] autorelease];
+}
+
+
 + (MDSplitView *)makeSplitViewWithMainView:(NSView *)contentView sideView:(NSView *)sideView {
 	MDLog();
     MDSplitView *splitView = [[MDSplitView alloc] initWithFrame:[contentView frame] mainView:contentView sideView:sideView];

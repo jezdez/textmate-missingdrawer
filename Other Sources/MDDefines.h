@@ -21,7 +21,4 @@ extern NSString *const kMDTerminalButtonEnabledKey;
 extern NSString *const kMDTerminalApplicationKey;
 extern NSString *const kMDTerminalOpenTabKey;
 
-// Git
-extern NSString *const kMDGitButtonEnabledKey;
-
 #endif

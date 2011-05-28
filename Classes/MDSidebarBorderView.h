@@ -33,14 +33,10 @@
     id<NSObject> _projectFileOutlineView;
 }
 
-// Class Methods
-+ (NSImage *)bundledImageWithName:(NSString *)imageName;
-
 // Drawing
 - (void)addToSuperview:(NSView *)superview;
 
 // Actions
 - (void)terminalButtonPressed:(id)sender;
-- (void)gitButtonPressed:(id)sender;
 
 @end

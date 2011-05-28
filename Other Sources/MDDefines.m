@@ -19,6 +19,3 @@ NSString *const kMDSidebarBackgroundColorIdleKey = @"MDSidebarBackgroundColorIdl
 NSString *const kMDTerminalButtonEnabledKey = @"MDTerminalButtonEnabled";
 NSString *const kMDTerminalApplicationKey = @"MDTerminalApplication";
 NSString *const kMDTerminalOpenTabKey = @"MDTerminalOpenTab";
-
-// Git
-NSString *const kMDGitButtonEnabledKey = @"MDGitButtonEnabled";
