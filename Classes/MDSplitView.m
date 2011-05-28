@@ -50,11 +50,6 @@
 
 #pragma mark NSSplitView
 
-- (CGFloat) dividerThickness {
-    return 1;
-}
-
-
 - (void) drawDividerInRect:(NSRect)aRect {
     [[NSColor colorWithDeviceWhite:.625 alpha:1] setFill];
     [NSBezierPath fillRect:aRect];
@@ -199,7 +194,9 @@
 - (void) splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize {
 	MDLog();
 	
-	float dividerThickness = [self dividerThickness];
+	[self setDividerStyle:2];
+	
+	CGFloat dividerThickness = [self dividerThickness];
     
 	NSRect windowFrame = [[NSApp mainWindow] frame];
 	windowFrame.size.width = MAX(3 * MIN_SIDEVIEW_WIDTH + dividerThickness, windowFrame.size.width);
