@@ -198,7 +198,7 @@
 - (void) splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize {
 	MDLog();
 	
-	[self setDividerStyle:2];
+	[self setDividerStyle:NSSplitViewDividerStyleThin];
 	
 	CGFloat dividerThickness = [self dividerThickness];
     
