@@ -31,7 +31,8 @@
 @class MDSplitView;
 
 @interface MDMissingDrawer : NSObject {
-	
+
+
 }
 
 // Class Methods
