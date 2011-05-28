@@ -50,7 +50,7 @@
 
 #pragma mark NSSplitView
 
-- (void) drawDividerInRect:(NSRect)aRect {
+- (void)drawDividerInRect:(NSRect)aRect {
     [[NSColor colorWithDeviceWhite:0.625 alpha:1] setFill];
     [NSBezierPath fillRect:aRect];
 }
@@ -88,7 +88,7 @@
 
 #pragma mark -
 
-- (void) focusSideView {
+- (void)focusSideView {
 	if([_sideView acceptsFirstResponder]){
 		[_sideView becomeFirstResponder];
 	} else {
@@ -171,12 +171,12 @@
 
 #pragma mark NSSplitView Delegate
 
-- (BOOL) splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview {
+- (BOOL)splitView:(NSSplitView *)sender canCollapseSubview:(NSView *)subview {
     return NO;
 }
 
 
-- (CGFloat) splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset {
+- (CGFloat)splitView:(NSSplitView *)sender constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)offset {
 	if ([[self subviews] objectAtIndex:offset] == self.sideView) {
 		return MIN_SIDEVIEW_WIDTH;
 	} else {
@@ -186,7 +186,7 @@
 }
 
 
-- (CGFloat) splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset {
+- (CGFloat)splitView:(NSSplitView *)sender constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)offset {
 	if ([[self subviews] objectAtIndex:offset] == self.sideView) {
 		return MAX_SIDEVIEW_WIDTH;
 	} else {
@@ -195,7 +195,7 @@
 }
 
 
-- (void) splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize {
+- (void)splitView:(NSSplitView *)splitView resizeSubviewsWithOldSize:(NSSize)oldSize {
 	MDLog();
 	
 	[self setDividerStyle:NSSplitViewDividerStyleThin];
@@ -246,22 +246,22 @@
     NSPoint clickLocation = [theEvent locationInWindow];
     NSView *clickReceiver = [self hitTest:clickLocation];
     if ([clickReceiver isKindOfClass:[MDResizer class]]) {
-        inResizeMode = YES;
+        _inResizeMode = YES;
     } else {
-        inResizeMode = NO;
+        _inResizeMode = NO;
         [super mouseDown:theEvent];
     }
 }
 
 - (void)mouseUp:(NSEvent *)theEvent {
 	MDLog();
-    inResizeMode = NO;
+    _inResizeMode = NO;
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
 	MDLog();
 	
-    if (inResizeMode == NO) {
+    if (_inResizeMode == NO) {
         [super mouseDragged:theEvent];
         return;
     }

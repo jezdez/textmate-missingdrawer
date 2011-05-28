@@ -28,7 +28,9 @@
 
 @interface MDSidebarBorderView : NSView {
 	
-    id<NSObject> projectFileOutlineView;
+@private
+	
+    id<NSObject> _projectFileOutlineView;
 }
 
 // Class Methods

@@ -27,12 +27,15 @@
 //
 
 @interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
+
+	IBOutlet id resizeSlider;
+	
+@private
 	
     NSView *_sideView;
     NSView *_mainView;
- 
-    IBOutlet id resizeSlider;
-    BOOL inResizeMode;
+	
+    BOOL _inResizeMode;
 }
 
 @property (readonly) NSView *sideView;

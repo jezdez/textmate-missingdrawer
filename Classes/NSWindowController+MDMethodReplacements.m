@@ -35,7 +35,7 @@
 
 @implementation NSWindowController (MDMethodReplacements)
 
-- (void) MD_repl_windowDidLoad {
+- (void)MD_repl_windowDidLoad {
     MDLog();
     
 	// call original
@@ -48,7 +48,7 @@
 }
 
 
-- (void) MD_repl_windowWillClose:(NSNotification*)notification {
+- (void)MD_repl_windowWillClose:(NSNotification*)notification {
     MDLog();
 	
     NSWindow *window = [notification object];
@@ -66,7 +66,7 @@
 }
 
 
-- (void) MD_repl_openProjectDrawer:(id)sender {
+- (void)MD_repl_openProjectDrawer:(id)sender {
 	MDLog();
 	
     NSWindow *window = [(NSWindowController*)self window];
@@ -95,7 +95,7 @@
 }
 
 
-- (void) MD_repl_revealInProject:(id)sender {
+- (void)MD_repl_revealInProject:(id)sender {
 	MDLog();
     [self MD_repl_revealInProject:sender];
     [self MD_repl_revealInProject:sender]; //TODO: twice?

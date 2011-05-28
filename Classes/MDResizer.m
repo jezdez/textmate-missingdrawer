@@ -30,13 +30,13 @@
 
 @implementation MDResizer
 
-- (void) mouseDown:(NSEvent *)theEvent {
+- (void)mouseDown:(NSEvent *)theEvent {
     MDLog(@"mouseDown in sliderImage");
     [[[self superview] superview] mouseDown:theEvent];
 }
 
 
-- (void) mouseDragged:(NSEvent *)theEvent {
+- (void)mouseDragged:(NSEvent *)theEvent {
     MDLog(@"mouseDragged in sliderImage");
     [[[self superview] superview] mouseDragged:theEvent];
 }

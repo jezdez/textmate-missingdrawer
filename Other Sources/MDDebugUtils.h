@@ -26,9 +26,7 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#define _MDLog(fmt, args...)	{\
-								NSLog(fmt, ##args);\
-							}
+#define _MDLog(fmt, args...) NSLog(fmt, ##args);
 
 #if ENABLE_DEBUG_MODE
 	#define MDLog(fmt, args...) _MDLog(@"%s(%i): " fmt, __FUNCTION__, __LINE__, ##args)

@@ -35,6 +35,8 @@ extern NSString *const kMD_SideView_namedColors;
 extern NSString *const kMD_TerminalLauncherAppName;
 
 @interface MDSettings : NSObject {
+	
+@private
 	BOOL _showSideViewOnLeft;
 	NSRect _sideViewLayout;
 	NSRect _mainViewLayout;

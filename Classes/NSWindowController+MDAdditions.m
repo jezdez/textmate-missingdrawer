@@ -31,6 +31,9 @@
 #import "MDSplitView.h"
 #import "MDSidebarBorderView.h"
 
+NSString *const kMDSidebarBackgroundColorActiveKey = @"MDSidebarBackgroundColorActive";
+NSString *const kMDSidebarBackgroundColorIdleKey = @"MDSidebarBackgroundColorIdle";
+
 @implementation NSWindowController (MDAdditions)
 
 - (void)MD_splitWindowIfNeeded {
@@ -71,28 +74,33 @@
 }
 
 
-- (void) MD_windowDidBecomeMain:(NSNotification *)notification {
-	
-	NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
-	[bindingOptions setObject:NSUnarchiveFromDataTransformerName
-					   forKey:@"NSValueTransformerName"];
+- (void)MD_windowDidBecomeMain:(NSNotification *)notification {
+	NSDictionary *bindingOptions = [[NSDictionary alloc] initWithObjectsAndKeys:
+									NSUnarchiveFromDataTransformerName, @"NSValueTransformerName", nil];
+	NSString *keyPath = [[NSString alloc] initWithFormat:@"values.%@", kMDSidebarBackgroundColorActiveKey];
 	
 	[[self MD_outlineView] bind:@"backgroundColor"
 					   toObject:[NSUserDefaultsController sharedUserDefaultsController]
-					withKeyPath:@"values.MDSideViewBgColorNew"
+					withKeyPath:keyPath
 						options:bindingOptions];
+	
+	[bindingOptions release];
+	[keyPath release];
 }
 
 
-- (void) MD_windowDidResignMain:(NSNotification *)notification {
-	NSMutableDictionary *bindingOptions = [NSMutableDictionary dictionary];
-	[bindingOptions setObject:NSUnarchiveFromDataTransformerName
-					   forKey:@"NSValueTransformerName"];
+- (void)MD_windowDidResignMain:(NSNotification *)notification {
+	NSDictionary *bindingOptions = [[NSDictionary alloc] initWithObjectsAndKeys:
+									NSUnarchiveFromDataTransformerName, @"NSValueTransformerName", nil];
+	NSString *keyPath = [[NSString alloc] initWithFormat:@"values.%@", kMDSidebarBackgroundColorIdleKey];
 	
 	[[self MD_outlineView] bind:@"backgroundColor"
 					   toObject:[NSUserDefaultsController sharedUserDefaultsController]
 					withKeyPath:@"values.MDSideViewBgColorIdle"
 						options:bindingOptions];
+	
+	[bindingOptions release];
+	[keyPath release];
 }
 
 @end

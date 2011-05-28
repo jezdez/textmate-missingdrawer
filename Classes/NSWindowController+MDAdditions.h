@@ -26,6 +26,9 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
+extern NSString *const kMDSidebarBackgroundColorActiveKey;
+extern NSString *const kMDSidebarBackgroundColorIdleKey;
+
 @interface NSWindowController (MDAdditions)
 
 - (void)MD_splitWindowIfNeeded;

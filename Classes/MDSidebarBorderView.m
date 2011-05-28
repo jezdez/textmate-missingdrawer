@@ -116,7 +116,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
             [btns addObject:aView];
         } else if ([aView isKindOfClass:[NSScrollView class]]) {
             outlineView = (NSScrollView *)aView;
-            projectFileOutlineView = [[outlineView contentView] documentView];
+            _projectFileOutlineView = [[outlineView contentView] documentView];
         }
     }
 	
@@ -227,16 +227,16 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 - (void)terminalButtonPressed:(id)sender {
     NSArray *selectedItems = nil;
-    if (projectFileOutlineView && 
-		[projectFileOutlineView respondsToSelector:@selector(selectedItems)]) {
-        selectedItems = [projectFileOutlineView performSelector:@selector(selectedItems)];
+    if (_projectFileOutlineView && 
+		[_projectFileOutlineView respondsToSelector:@selector(selectedItems)]) {
+        selectedItems = [_projectFileOutlineView performSelector:@selector(selectedItems)];
         if (!selectedItems || ![selectedItems isKindOfClass:[NSArray class]] || [selectedItems count] == 0) {
-			selectedItems = [NSArray arrayWithObject:[(NSOutlineView *)projectFileOutlineView itemAtRow:0]];
+			selectedItems = [NSArray arrayWithObject:[(NSOutlineView *)_projectFileOutlineView itemAtRow:0]];
         }
     }
 	
     for (NSDictionary *item in selectedItems) {
-        MDLog(@"[projectFileOutlineView selectedItems]: %@", item);
+        MDLog(@"[_projectFileOutlineView selectedItems]: %@", item);
         NSString *path = [item objectForKey:@"sourceDirectory"];
         if (!path) {
             path = [[item objectForKey:@"filename"] stringByDeletingLastPathComponent];

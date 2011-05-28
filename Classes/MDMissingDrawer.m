@@ -64,6 +64,19 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 - (id)initWithPlugInController:(id<TMPlugInController>)aController {
 	if (self = [super init]) {
 		MDLog(@"initializing 'MissingDrawer' plugin");
+		
+		// Setup defaults
+		NSColor *activeColor = [NSColor colorWithCalibratedRed:0.867f green:0.894f blue:0.918f alpha:1.0f];
+		NSColor *idleColor = [NSColor colorWithCalibratedRed:0.929f green:0.929f blue:0.929f alpha:1.0f];
+		NSDictionary *defaults = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  [NSKeyedArchiver archivedDataWithRootObject:activeColor], kMDSidebarBackgroundColorActiveKey,
+								  [NSKeyedArchiver archivedDataWithRootObject:idleColor], kMDSidebarBackgroundColorIdleKey,
+								  nil];
+		
+		[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+		[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:defaults];
+		[defaults release];
+		
         [self _injectPluginMethods];
 		[[[NSApp mainWindow] windowController] MD_splitWindowIfNeeded];
 		[self _installMenuItems];
