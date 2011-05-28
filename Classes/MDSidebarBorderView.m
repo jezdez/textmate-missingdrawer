@@ -45,6 +45,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 }
 
 @interface MDSidebarBorderView (PrivateMethods)
+- (BOOL)_gitInstalled;
 - (NSString *)_selectedFilePath;
 @end
 
@@ -149,33 +150,35 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
     [terminalButton setBordered:NO];
     [btns addObject:terminalButton];
 	[terminalButton release];
+	
+	// Git button
+	if ([self _gitInstalled]) {
+		NSRect gitButtonFrame;
+		gitButtonFrame.size.width = 23;
+		gitButtonFrame.size.height = [terminalButton frame].size.height;
+		gitButtonFrame.origin.x = [terminalButton frame].origin.x + gitButtonFrame.size.width;
+		gitButtonFrame.origin.y = [terminalButton frame].origin.y;
 
-	// Gitx button
-    NSRect gitButtonFrame;
-    gitButtonFrame.size.width = 23;
-    gitButtonFrame.size.height = [terminalButton frame].size.height;
-    gitButtonFrame.origin.x = [terminalButton frame].origin.x + gitButtonFrame.size.width;
-    gitButtonFrame.origin.y = [terminalButton frame].origin.y;
-	
-    NSButton *gitButton = [[NSButton alloc] initWithFrame:gitButtonFrame];
-	
-    NSImage *gitButtonImage = [MDSidebarBorderView bundledImageWithName:@"git"];
-    NSImage *gitButtonImagePressed = [MDSidebarBorderView bundledImageWithName:@"gitPressed"]; 
-	
-	[gitButton setToolTip:@"Open git window here"];
-    [gitButton setImage:gitButtonImage];
-    [gitButton setAlternateImage:gitButtonImagePressed];
-    [gitButton setAction:@selector(gitButtonPressed:)];
-    [gitButton setTarget:self];
-	
-    [gitButton setBordered:NO];
-    [btns addObject:gitButton];
-	[gitButton release];
+		NSButton *gitButton = [[NSButton alloc] initWithFrame:gitButtonFrame];
+
+		NSImage *gitButtonImage = [MDSidebarBorderView bundledImageWithName:@"git"];
+		NSImage *gitButtonImagePressed = [MDSidebarBorderView bundledImageWithName:@"gitPressed"]; 
+
+		[gitButton setToolTip:@"Open git window here"];
+		[gitButton setImage:gitButtonImage];
+		[gitButton setAlternateImage:gitButtonImagePressed];
+		[gitButton setAction:@selector(gitButtonPressed:)];
+		[gitButton setTarget:self];
+
+		[gitButton setBordered:NO];
+		[btns addObject:gitButton];
+		[gitButton release];
+	}
 	                                    
 //  [btns sortUsingFunction:(NSInteger (*)(id, id, void *))compareFrameOriginX context:nil];
 	
 	// Adjust outlineView frame
-    if (outlineView){
+    if (outlineView) {
         NSRect aRect = [superview frame];
         aRect.origin.x = -1.0;
         aRect.origin.y = [self frame].size.height;
@@ -301,6 +304,11 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 
 #pragma mark Private Methods
+
+- (BOOL)_gitInstalled {
+	return [[NSFileManager defaultManager] fileExistsAtPath:@"/usr/local/bin/git"];
+}
+
 
 - (NSString *)_selectedFilePath {
 	NSArray *selectedItems = nil;
