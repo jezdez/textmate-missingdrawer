@@ -60,11 +60,7 @@
 
 - (id)initWithFrame:(NSRect)frame mainView:(NSView *)aMainView sideView:(NSView *)aSideView {
     if ((self = [super initWithFrame:frame])) {
-#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
-		[self setDelegate:(id <NSSplitViewDelegate>)self];
-#else
 		[self setDelegate:self];
-#endif
 		
 		_mainView = [aMainView retain];
 		_sideView = [aSideView retain];

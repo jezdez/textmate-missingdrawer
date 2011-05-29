@@ -26,7 +26,7 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
+@interface MDSplitView : NSSplitView {
 
 	IBOutlet id resizeSlider;
 	
