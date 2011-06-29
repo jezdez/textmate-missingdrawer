@@ -43,6 +43,8 @@
 			// with one that uses the MissingDrawer.
 			NSDrawer *drawer = [[window drawers] objectAtIndex:0];
 			if (drawer)	{
+				[drawer close]; // does no harm if the drawer is already closed
+
 				NSView *leftView = [[drawer contentView] retain];
 				[drawer setContentView:nil];
 				[window setContentView:nil];

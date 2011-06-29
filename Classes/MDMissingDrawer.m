@@ -90,6 +90,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 		
         [self _injectPluginMethods];
 		[[[NSApp mainWindow] windowController] MD_splitWindowIfNeeded];
+		[[[NSApp mainWindow] windowController] MD_windowDidBecomeMain:nil];
 		[self _installMenuItems];
 		[self _injectPreferenceMethods];
     }	
