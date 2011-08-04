@@ -26,8 +26,9 @@ To configure Missing Drawer, simply open TextMate's preferences, click the doubl
 The source code is released under the MIT license. Please see LICENSE for more information.
 
 * [hetima computer](http://hetima.com/) -  hetima@hetima.com
-* [Jannis Leidel](http://jannisleidel.com) - jannis@leidel.info
+* [Jannis Leidel](http://github.com/jezdez) - jannis@leidel.info
 * [Christoph Meißner](http://christophmeissner.wordpress.com) - post@christophmeissner.de
 * [Sam Soffes](http://samsoff.es) - sam@samsoff.es
 * [Derek Prior](http://prioritized.net)
 * [Mads Hartmann](http://sidewayscoding.com) - mads379@gmail.com
+* [Jordy Rose](http://belkadan.com) - jrose@belkadan.com
