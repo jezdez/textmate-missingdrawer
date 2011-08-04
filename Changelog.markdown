@@ -1,3 +1,7 @@
+### 2011-08-04
+
+* Requires Mac OS 10.6 from now on.
+
 ### 2011-05-28
 
 * Added version to Missing Drawer and display it in preferences
