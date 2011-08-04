@@ -339,10 +339,10 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				INSTALL_PATH = "$(HOME)/Library/Application Support/TextMate/PlugIns";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = MissingDrawer;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = tmplugin;
 				ZERO_LINK = YES;
 			};
@@ -361,11 +361,11 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				INFOPLIST_FILE = Resources/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				INSTALL_PATH = "$(HOME)/Library/Application Support/TextMate/PlugIns";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MissingDrawer;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				WRAPPER_EXTENSION = tmplugin;
 			};
 			name = Release;
@@ -379,7 +379,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				PRODUCT_NAME = MissingDrawer;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Debug;
 		};
@@ -391,7 +392,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				PRODUCT_NAME = MissingDrawer;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 			};
 			name = Release;
 		};
