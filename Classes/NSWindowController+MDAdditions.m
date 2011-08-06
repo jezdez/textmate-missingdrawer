@@ -55,9 +55,9 @@
 				MDSplitView *splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
 				MDLog(@"replacing current window with split view");
 				[window setContentView:splitView];
-
+        
         [[NSNotificationCenter defaultCenter] addObserver:splitView selector:@selector(filterOutlineView:) name:NSControlTextDidChangeNotification object:borderView.searchField];
-
+        
 				[borderView release];
 				[leftView release];
 				[splitView restoreLayout];

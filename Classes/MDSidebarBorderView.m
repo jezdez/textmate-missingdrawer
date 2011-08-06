@@ -216,7 +216,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 - (void)resizeSubviewsWithOldSize:(NSSize)oldSize {
   [super resizeSubviewsWithOldSize:oldSize];
-
+  
   NSRect rect = _searchField.frame;
 	BOOL showSidebarOnLeft = [[MDSettings defaultSettings] showSideViewOnLeft];
   rect.size.width = [self frame].size.width - rect.origin.x - (showSidebarOnLeft ? _handleSize.width : 0);
