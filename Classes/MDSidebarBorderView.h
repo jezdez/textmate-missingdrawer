@@ -29,10 +29,12 @@
 @interface MDSidebarBorderView : NSView {
 	
 @private
-	
-    id<NSObject> _projectFileOutlineView;
+  id<NSObject> _projectFileOutlineView;
+  NSSize _handleSize;
+  NSSearchField *_searchField;
 }
 
+@property (nonatomic, readonly) NSSearchField* searchField;
 // Drawing
 - (void)addToSuperview:(NSView *)superview;
 

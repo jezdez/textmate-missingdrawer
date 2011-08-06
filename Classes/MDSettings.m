@@ -37,6 +37,7 @@ static MDSettings *_defaultSettings = nil;
 @synthesize mainViewLayout = _mainViewLayout;
 @synthesize toggleSplitViewLayoutMenuItem = _toggleSplitViewLayoutMenuItem;
 @synthesize focusSideViewMenuItem = _focusSideViewMenuItem;
+@synthesize filterInDrawerMenuItem = _filterInDrawerMenuItem;
 @synthesize bgColor = _bgColor;
 @synthesize bgColorInactive = _bgColorInactive;
 @synthesize namedColors = _namedColors; 
@@ -65,6 +66,11 @@ static MDSettings *_defaultSettings = nil;
 		[_focusSideViewMenuItem setKeyEquivalentModifierMask:(NSControlKeyMask | NSAlternateKeyMask | NSCommandKeyMask)];
 		[_focusSideViewMenuItem setTarget:self];
 		[_focusSideViewMenuItem setEnabled:YES];
+    
+    _filterInDrawerMenuItem = [[NSMenuItem alloc] initWithTitle:@"Filter in Drawer" action:@selector(filterInDrawer:) keyEquivalent:@"j"];
+		[_filterInDrawerMenuItem setKeyEquivalentModifierMask:(NSAlternateKeyMask | NSCommandKeyMask)];
+		[_filterInDrawerMenuItem setTarget:self];
+		[_filterInDrawerMenuItem setEnabled:YES];
 	}
 	return self;
 }
@@ -82,6 +88,10 @@ static MDSettings *_defaultSettings = nil;
 
 - (IBAction)focusSideView:(id)sender{
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MDFocusSideViewPressed" object:nil];
+}
+
+- (IBAction)filterInDrawer:(id)sender {
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"MDFilterInDrawerNotification" object:nil];
 }
 
 - (void)save {

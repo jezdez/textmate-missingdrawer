@@ -32,10 +32,12 @@
 	
 @private
 	
-    NSView *_sideView;
-    NSView *_mainView;
+  NSView *_sideView;
+  NSView *_mainView;
+  NSOutlineView *_outlineView;
+  id<NSOutlineViewDataSource> _outlineDataSource;
 	
-    BOOL _inResizeMode;
+  BOOL _inResizeMode;
 }
 
 @property (readonly) NSView *sideView;
@@ -52,5 +54,8 @@
 - (void)windowWillCloseWillCall;
 - (void)saveLayout;
 - (void)restoreLayout;
+
+// Filtering
+- (void)filterOutlineView:(NSNotification*)notification;
 
 @end
