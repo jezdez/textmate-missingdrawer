@@ -122,7 +122,7 @@ static MDSettings *_defaultSettings = nil;
 }
 
 
-- (void)release {
+- (oneway void)release {
     // Do nothing
 }
 
