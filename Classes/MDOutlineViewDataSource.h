@@ -6,8 +6,18 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@interface MDOutlineViewDataSource : NSObject <NSOutlineViewDataSource> {
+@private
+  id<NSOutlineViewDataSource> _originalDataSource;
+  NSString* _currentFilter;
+  NSMutableDictionary* _rootDirectoryInfo;
+}
 
-@interface MDOutlineViewDataSource : NSObject
+- (id)initWithOriginalDataSource:(id<NSOutlineViewDataSource>)originalDataSource;
 
+@property (nonatomic, readonly) id<NSOutlineViewDataSource> originalDataSource;
+@property (nonatomic, retain) NSString* currentFilter;
+@property (nonatomic, readonly) NSMutableDictionary* rootDirectoryInfo;
+
+- (void)recalculateTreeFilter;
 @end

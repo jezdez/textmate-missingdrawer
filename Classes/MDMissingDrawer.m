@@ -32,6 +32,7 @@
 #import "MDSettings.h"
 #import "NSWindowController+MDMethodReplacements.h"
 #import "NSWindowController+MDAdditions.h"
+#import "NSOutlineView+MDMethodReplacements.h"
 #import <objc/objc-runtime.h>
 
 void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
@@ -45,6 +46,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 - (void)_injectPluginMethods;
 - (void)_installMenuItems;
 - (void)_injectPreferenceMethods;
+- (void)_injectOutlineMethods;
 @end
 
 @implementation MDMissingDrawer
@@ -93,6 +95,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 		[[[NSApp mainWindow] windowController] MD_windowDidBecomeMain:nil];
 		[self _installMenuItems];
 		[self _injectPreferenceMethods];
+    [self _injectOutlineMethods];
   }	
   return self;
 }
@@ -161,6 +164,14 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 	
 	swapInstanceMethods(oakPreferenceController, @selector(toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:),   
                       @selector(MD_toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:));
+}
+
+- (void)_injectOutlineMethods {
+  MDLog("swapping OakOutlineView methods");
+  
+  Class oakOutlineView = NSClassFromString(@"OakOutlineView");
+  swapInstanceMethods(oakOutlineView, @selector(reloadItem:), @selector(MD_repl_reloadItem:));
+  swapInstanceMethods(oakOutlineView, @selector(reloadItem:reloadChildren:), @selector(MD_repl_reloadItem:reloadChildren:));
 }
 
 @end

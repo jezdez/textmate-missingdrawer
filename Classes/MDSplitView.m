@@ -27,26 +27,35 @@
 //
 
 #import "MDSplitView.h"
+#import "MDOutlineViewDataSource.h"
 #import "MDResizer.h"
 #import "MDSettings.h"
 
 #define MIN_SIDEVIEW_WIDTH 160.0
 #define MAX_SIDEVIEW_WIDTH 450.0
 @interface MDSplitView ()
--(void)_recurse:(id)obj :(NSString*)p ;
 @end
 
 @implementation MDSplitView
 
 @synthesize sideView = _sideView;
 @synthesize mainView = _mainView;
+@synthesize filterQueue = _filterQueue;
 
 #pragma mark NSObject
 
 - (void)dealloc {
+  if (_outlineView) {
+    _outlineView.dataSource = _outlineViewDataSource.originalDataSource;
+  }
+  
+  dispatch_release(_filterQueue);
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [_fullOutlineViewExpandedItems release];
 	[_sideView release];
 	[_mainView release];
+  [_outlineViewDataSource release];
+  [_outlineView release];
 	[super dealloc];
 }
 
@@ -67,9 +76,13 @@
 		
 		_mainView = [aMainView retain];
 		_sideView = [aSideView retain];
-    _outlineView = [[[_sideView subviews] objectAtIndex:0] documentView];
-    if (_outlineView)
-      _outlineDataSource = [_outlineView dataSource];
+    _outlineView = [[[[_sideView subviews] objectAtIndex:0] documentView] retain];
+    _fullOutlineViewExpandedItems = [[NSMutableArray alloc] init];
+    if (_outlineView) {
+      _outlineViewDataSource = [[MDOutlineViewDataSource alloc] initWithOriginalDataSource:[_outlineView dataSource]];
+      _outlineView.dataSource = _outlineViewDataSource;
+      
+    }
     
     [self.sideView setAutoresizingMask:NSViewHeightSizable];
     [self setVertical:YES];
@@ -77,11 +90,13 @@
     if([MDSettings defaultSettings].showSideViewOnLeft) {
       [self addSubview:self.sideView];
       [self addSubview:self.mainView];
-    } else {
+    }
+    else {
       [self addSubview:self.mainView];
       [self addSubview:self.sideView];
     }
     
+    _filterQueue = dispatch_queue_create("com.macromates.textmate.missingdrawer", NULL);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toggleLayout) name:@"MDSideviewLayoutHasBeenChangedNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(focusSideView) name:@"MDFocusSideViewPressed" object:nil];
   }
@@ -110,6 +125,7 @@
   NSView *leftView = [[[self subviews] objectAtIndex:0] retain];
   [leftView removeFromSuperview];
   [self addSubview:leftView];
+  [leftView release];
   [self adjustSubviews];
 }
 
@@ -299,21 +315,39 @@
 }
 
 #pragma mark Outline view filtering
-- (void)_recurse:(id)obj :(NSString*)p {
-  int l = [_outlineDataSource outlineView:_outlineView numberOfChildrenOfItem:obj];
-  for (int i = 0;i<l;++i) {
-    id o = [_outlineDataSource outlineView:_outlineView child:i ofItem:obj];
-    NSLog(@"%@%@", p,o);
-    if ([_outlineDataSource outlineView:_outlineView isItemExpandable:o]) {
-      [self _recurse:o :[p stringByAppendingString:@"**"]];
-    }
-  }
-}
 - (void)filterOutlineView:(NSNotification *)notification {
   NSSearchField* searchField = [notification object];
-  NSLog(@"%@", [searchField stringValue]);
   
-  //[self _recurse:nil :@""];
+  NSString* desiredFilter = [searchField stringValue];
+  if (_outlineViewDataSource.currentFilter == nil || [_outlineViewDataSource.currentFilter isEqualToString:[NSString string]]) {
+    [_fullOutlineViewExpandedItems removeAllObjects];
+    int numRows = [_outlineView numberOfRows];
+    for (int i = 0; i < numRows; ++i) {
+      id item = [_outlineView itemAtRow:i];
+      if ([_outlineView isItemExpanded:item]) {
+        [_fullOutlineViewExpandedItems addObject:item];
+      }
+    }
+  }
+
+  dispatch_async(_filterQueue, ^() {
+    if (![[searchField stringValue] isEqualToString:desiredFilter]) {
+      MDLog(@"skipping filtering on %@", desiredFilter);
+      return;
+    }
+    
+    _outlineViewDataSource.currentFilter = [searchField stringValue];
+    dispatch_async(dispatch_get_main_queue(), ^() {
+      [_outlineView reloadItem:nil reloadChildren:YES];
+      if (![_outlineViewDataSource.currentFilter isEqualToString:[NSString string]])
+        [_outlineView expandItem:nil expandChildren:YES];
+      else {
+        for (id item in _fullOutlineViewExpandedItems) {
+          [_outlineView expandItem:item];
+        }
+      }
+    });
+  });
 }
 
 @end

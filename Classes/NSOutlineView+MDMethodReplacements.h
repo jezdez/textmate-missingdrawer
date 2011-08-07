@@ -6,8 +6,8 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@interface NSOutlineView (MDOakOutlineViewMethodReplacements)
 
-@interface NSOutlineView_MDMethodReplacements : NSObject
-
+- (void)MD_repl_reloadItem:(id)item;
+- (void)MD_repl_reloadItem:(id)item reloadChildren:(BOOL)reloadChildren;
 @end

@@ -26,6 +26,8 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
+@class MDOutlineViewDataSource;
+
 @interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
   
 	IBOutlet id resizeSlider;
@@ -35,13 +37,16 @@
   NSView *_sideView;
   NSView *_mainView;
   NSOutlineView *_outlineView;
-  id<NSOutlineViewDataSource> _outlineDataSource;
+  MDOutlineViewDataSource *_outlineViewDataSource;
+  dispatch_queue_t _filterQueue;
+  NSMutableArray *_fullOutlineViewExpandedItems;
 	
   BOOL _inResizeMode;
 }
 
 @property (readonly) NSView *sideView;
 @property (readonly) NSView *mainView;
+@property (readonly) dispatch_queue_t filterQueue;
 
 // Initializer
 - (id)initWithFrame:(NSRect)frame mainView:(NSView *)aMainView sideView:(NSView *)aSideView;
@@ -57,5 +62,4 @@
 
 // Filtering
 - (void)filterOutlineView:(NSNotification*)notification;
-
 @end
