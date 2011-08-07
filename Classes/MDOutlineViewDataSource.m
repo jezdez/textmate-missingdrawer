@@ -38,28 +38,17 @@
   if (!self)
     return self;
   
-  _originalDataSource = originalDataSource;
+  _originalDataSource = [originalDataSource retain];
   _currentFilter = nil;
   _rootDirectoryInfo = [[NSMutableDictionary alloc] init];
   return self;
 }
 
 - (void)dealloc {
+  [_originalDataSource release];
   [_rootDirectoryInfo release];
   [_currentFilter release];
   [super dealloc];
-}
-
-
-- (void)setCurrentFilter:(NSString *)currentFilter {
-  if ([_currentFilter isEqualToString:currentFilter])
-    return;
-  
-  [self willChangeValueForKey:@"currentFilter"];
-  [_currentFilter release];
-  _currentFilter = [currentFilter retain];
-  [self didChangeValueForKey:@"currentFilter"];
-  [self recalculateTreeFilter];
 }
 
 - (BOOL)_recurse:(NSMutableDictionary*)node {

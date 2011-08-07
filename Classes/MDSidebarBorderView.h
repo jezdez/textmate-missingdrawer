@@ -26,17 +26,24 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
+@class MDResizer;
+
 @interface MDSidebarBorderView : NSView {
-	
-@private
   id<NSObject> _projectFileOutlineView;
-  NSSize _handleSize;
   NSSearchField *_searchField;
+  
+  BOOL _needsLayout;
+  NSArray* _buttons;
+  MDResizer* _resizer;
 }
 
 @property (nonatomic, readonly) NSSearchField* searchField;
+
 // Drawing
 - (void)addToSuperview:(NSView *)superview;
+
+// Layout
+- (void)setNeedsLayout;
 
 // Actions
 - (void)terminalButtonPressed:(id)sender;

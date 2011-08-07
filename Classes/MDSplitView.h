@@ -27,6 +27,7 @@
 //
 
 @class MDOutlineViewDataSource;
+@class MDSidebarBorderView;
 
 @interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
   
@@ -36,6 +37,8 @@
 	
   NSView *_sideView;
   NSView *_mainView;
+  
+  MDSidebarBorderView *_borderView;
   NSOutlineView *_outlineView;
   MDOutlineViewDataSource *_outlineViewDataSource;
   dispatch_queue_t _filterQueue;
@@ -46,6 +49,7 @@
 
 @property (readonly) NSView *sideView;
 @property (readonly) NSView *mainView;
+@property (nonatomic, retain) MDSidebarBorderView *borderView;
 @property (readonly) dispatch_queue_t filterQueue;
 
 // Initializer
@@ -53,7 +57,6 @@
 
 // Drawing
 - (void)toggleLayout;
-- (IBAction)adjustSubviews:(id)sender;
 
 // Layout
 - (void)windowWillCloseWillCall;

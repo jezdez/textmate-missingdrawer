@@ -28,6 +28,5 @@
 
 @interface NSOutlineView (MDOakOutlineViewMethodReplacements)
 
-- (void)MD_repl_reloadItem:(id)item;
 - (void)MD_repl_reloadItem:(id)item reloadChildren:(BOOL)reloadChildren;
 @end

@@ -27,35 +27,37 @@
 //
 
 #import "MDSplitView.h"
+
 #import "MDOutlineViewDataSource.h"
 #import "MDResizer.h"
 #import "MDSettings.h"
+#import "MDSidebarBorderView.h"
 
-#define MIN_SIDEVIEW_WIDTH 160.0
+#define MIN_SIDEVIEW_WIDTH 170.0
 #define MAX_SIDEVIEW_WIDTH 450.0
-@interface MDSplitView ()
-@end
 
 @implementation MDSplitView
 
 @synthesize sideView = _sideView;
 @synthesize mainView = _mainView;
+@synthesize borderView = _borderView;
 @synthesize filterQueue = _filterQueue;
 
 #pragma mark NSObject
 
 - (void)dealloc {
-  if (_outlineView) {
-    _outlineView.dataSource = _outlineViewDataSource.originalDataSource;
-  }
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  self.borderView = nil;
   
   dispatch_release(_filterQueue);
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
   [_fullOutlineViewExpandedItems release];
-	[_sideView release];
-	[_mainView release];
+  
   [_outlineViewDataSource release];
   [_outlineView release];
+  
+	[_sideView release];
+	[_mainView release];
 	[super dealloc];
 }
 
@@ -78,11 +80,10 @@
 		_sideView = [aSideView retain];
     _outlineView = [[[[_sideView subviews] objectAtIndex:0] documentView] retain];
     _fullOutlineViewExpandedItems = [[NSMutableArray alloc] init];
-    if (_outlineView) {
-      _outlineViewDataSource = [[MDOutlineViewDataSource alloc] initWithOriginalDataSource:[_outlineView dataSource]];
-      _outlineView.dataSource = _outlineViewDataSource;
-      
-    }
+    
+    // swap the original data source with ours
+    _outlineViewDataSource = [[MDOutlineViewDataSource alloc] initWithOriginalDataSource:_outlineView.dataSource];
+    _outlineView.dataSource = _outlineViewDataSource;
     
     [self.sideView setAutoresizingMask:NSViewHeightSizable];
     [self setVertical:YES];
@@ -90,8 +91,7 @@
     if([MDSettings defaultSettings].showSideViewOnLeft) {
       [self addSubview:self.sideView];
       [self addSubview:self.mainView];
-    }
-    else {
+    } else {
       [self addSubview:self.mainView];
       [self addSubview:self.sideView];
     }
@@ -127,13 +127,9 @@
   [self addSubview:leftView];
   [leftView release];
   [self adjustSubviews];
+  [_borderView setNeedsLayout];
+  [_borderView setNeedsDisplay:YES];
 }
-
-
-- (IBAction)adjustSubviews:(id)sender {
-  [self adjustSubviews];
-}
-
 
 #pragma mark Layout
 
@@ -319,6 +315,9 @@
   NSSearchField* searchField = [notification object];
   
   NSString* desiredFilter = [searchField stringValue];
+  // We are about to switch from an unfiltered to filtered tree.
+  // Go through the rows of the outline view and keep track of
+  // the items that have been expanded.
   if (_outlineViewDataSource.currentFilter == nil || [_outlineViewDataSource.currentFilter isEqualToString:[NSString string]]) {
     [_fullOutlineViewExpandedItems removeAllObjects];
     int numRows = [_outlineView numberOfRows];
@@ -329,19 +328,29 @@
       }
     }
   }
-
+  
   dispatch_async(_filterQueue, ^() {
-    if (![[searchField stringValue] isEqualToString:desiredFilter]) {
-      MDLog(@"skipping filtering on %@", desiredFilter);
+    // If the project has a particularly extensive directory structure,
+    // the user might have typed a few characters while the queue
+    // was processing one of the events. We do a sanity check against
+    // the string currently entered in the search field. If it's not
+    // the same, we can throw away this one, since we can assume that
+    // eventually we will get a queue task that does have the right
+    // desired filter string. This essentially coalesces the filter
+    // events.
+    if (![[searchField stringValue] isEqualToString:desiredFilter])
       return;
-    }
     
-    _outlineViewDataSource.currentFilter = [searchField stringValue];
+    _outlineViewDataSource.currentFilter = desiredFilter;
+    [_outlineViewDataSource recalculateTreeFilter];
+    
     dispatch_async(dispatch_get_main_queue(), ^() {
       [_outlineView reloadItem:nil reloadChildren:YES];
-      if (![_outlineViewDataSource.currentFilter isEqualToString:[NSString string]])
+      if (![desiredFilter isEqualToString:[NSString string]])
         [_outlineView expandItem:nil expandChildren:YES];
       else {
+        // We switched from a filtered to an unfiltered tree. We
+        // restore the expanded state of the items.
         for (id item in _fullOutlineViewExpandedItems) {
           [_outlineView expandItem:item];
         }

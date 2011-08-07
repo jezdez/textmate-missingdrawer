@@ -53,6 +53,7 @@
 				[borderView addToSuperview:leftView];
         
 				MDSplitView *splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
+        splitView.borderView = borderView;
 				MDLog(@"replacing current window with split view");
 				[window setContentView:splitView];
         
