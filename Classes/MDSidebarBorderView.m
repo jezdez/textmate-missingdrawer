@@ -28,6 +28,7 @@
 
 #import "MDSidebarBorderView.h"
 #import "MDResizer.h"
+#import "MDSearchField.h"
 #import "MDSettings.h"
 #import "MDMissingDrawer.h"
 
@@ -195,7 +196,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 	}
   
   const int padding = 5;
-  _searchField = [[NSSearchField alloc] initWithFrame:NSMakeRect(leftLoc + padding, 2, 10, _handleSize.height-4)];
+  _searchField = [[MDSearchField alloc] initWithFrame:NSMakeRect(leftLoc + padding, 2, 10, _handleSize.height-4)];
   [_searchField setAutoresizingMask:NSViewWidthSizable];
   NSSearchFieldCell* cell = [_searchField cell];
   [cell setMaximumRecents:0];
@@ -203,6 +204,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
   [cell setControlSize:NSMiniControlSize];
   [cell setFocusRingType:NSFocusRingTypeNone];
   [cell setScrollable:YES];
+  [[cell searchButtonCell] setImage:[MDMissingDrawer bundledImageWithName:@"FilterIcon"]];
   [_searchField sizeToFit];
   NSRect rect = _searchField.frame;
   rect.origin.y = 1;
