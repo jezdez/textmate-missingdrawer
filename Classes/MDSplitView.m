@@ -346,14 +346,22 @@
     
     dispatch_async(dispatch_get_main_queue(), ^() {
       [_outlineView reloadItem:nil reloadChildren:YES];
-      if (![desiredFilter isEqualToString:[NSString string]])
+      BOOL enableToolButtons = YES;
+      if (![desiredFilter isEqualToString:[NSString string]]) {
         [_outlineView expandItem:nil expandChildren:YES];
+        enableToolButtons = NO;
+      }
       else {
         // We switched from a filtered to an unfiltered tree. We
         // restore the expanded state of the items.
         for (id item in _fullOutlineViewExpandedItems) {
           [_outlineView expandItem:item];
         }
+      }
+      
+      // disable/enable the "Add file", "Add folder", and "Settings" buttons
+      for (int i = 0; i < 3; ++i) {
+        [[_borderView.toolButtons objectAtIndex:i] setEnabled:enableToolButtons];
       }
     });
   });

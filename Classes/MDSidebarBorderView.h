@@ -37,7 +37,8 @@
   MDResizer* _resizer;
 }
 
-@property (nonatomic, readonly) NSSearchField* searchField;
+@property (nonatomic, readonly) NSSearchField *searchField;
+@property (nonatomic, readonly) NSArray *toolButtons;
 
 // Drawing
 - (void)addToSuperview:(NSView *)superview;

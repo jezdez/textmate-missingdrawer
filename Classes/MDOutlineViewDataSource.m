@@ -28,6 +28,10 @@
 
 #import "MDOutlineViewDataSource.h"
 
+@interface MDOutlineViewDataSource (PrivateMethods)
+- (BOOL)_recurse:(NSMutableDictionary*)node;
+@end
+
 @implementation MDOutlineViewDataSource
 @synthesize currentFilter = _currentFilter;
 @synthesize originalDataSource = _originalDataSource;

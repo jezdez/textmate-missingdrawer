@@ -58,6 +58,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 
 @implementation MDSidebarBorderView
 @synthesize searchField = _searchField;
+@synthesize toolButtons = _buttons;
 
 - (id)initWithFrame:(NSRect)frameRect {
   self = [super initWithFrame:frameRect];
