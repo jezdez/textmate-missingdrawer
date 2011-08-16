@@ -12,6 +12,12 @@ Simply run the following command to download the latest version from [GitHub](ht
 
 You may also download the latest version from the [project download page](http://github.com/jezdez/textmate-missingdrawer/downloads) and double click the MissingDrawer.plugin file contained.
 
+## Uninstallation
+
+Delete the Missing Drawer plugin from the TextMate PlugIns directory in your Library.
+
+	$ rm -r "$HOME/Library/Application Support/TextMate/PlugIns/MissingDrawer.tmplugin"
+
 ## Configuring
 
 To configure Missing Drawer, simply open TextMate's preferences, click the double arrow icon in the top right of the window, and choose Missing Drawer from the menu. The following preferences are supported:
