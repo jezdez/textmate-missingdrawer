@@ -8,7 +8,7 @@ This plugin provides Xcode-like project window interface without drawer and adds
 
 Simply run the following command to download the latest version from [GitHub](http://github.com/jezdex/textmate-missingdrawer).
 
-	bash <(curl -s -L http://goo.gl/qOnTl)
+	bash <(curl -s -L http://goo.gl/4RUoP)
 
 You may also download the latest version from the [project download page](http://github.com/jezdez/textmate-missingdrawer/downloads) and double click the MissingDrawer.plugin file contained.
 
