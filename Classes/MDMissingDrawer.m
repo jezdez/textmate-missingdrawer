@@ -32,12 +32,13 @@
 #import "MDSettings.h"
 #import "NSWindowController+MDMethodReplacements.h"
 #import "NSWindowController+MDAdditions.h"
+#import "NSOutlineView+MDMethodReplacements.h"
 #import <objc/objc-runtime.h>
 
 void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
-    Method originalMethod = class_getInstanceMethod(cls, originalSel);
-    Method newMethod = class_getInstanceMethod(cls, newSel);
-    method_exchangeImplementations(originalMethod, newMethod);
+  Method originalMethod = class_getInstanceMethod(cls, originalSel);
+  Method newMethod = class_getInstanceMethod(cls, newSel);
+  method_exchangeImplementations(originalMethod, newMethod);
 }
 
 
@@ -45,6 +46,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 - (void)_injectPluginMethods;
 - (void)_installMenuItems;
 - (void)_injectPreferenceMethods;
+- (void)_injectOutlineMethods;
 @end
 
 @implementation MDMissingDrawer
@@ -64,9 +66,9 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 
 + (MDSplitView *)makeSplitViewWithMainView:(NSView *)contentView sideView:(NSView *)sideView {
 	MDLog();
-    MDSplitView *splitView = [[MDSplitView alloc] initWithFrame:[contentView frame] mainView:contentView sideView:sideView];
-    [splitView setVertical:YES];
-    return [splitView autorelease];
+  MDSplitView *splitView = [[MDSplitView alloc] initWithFrame:[contentView frame] mainView:contentView sideView:sideView];
+  [splitView setVertical:YES];
+  return [splitView autorelease];
 }
 
 
@@ -80,21 +82,22 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 		NSColor *activeColor = [NSColor colorWithCalibratedRed:0.867f green:0.894f blue:0.918f alpha:1.0f];
 		NSColor *idleColor = [NSColor colorWithCalibratedRed:0.929f green:0.929f blue:0.929f alpha:1.0f];
 		NSDictionary *defaults = [[NSDictionary alloc] initWithObjectsAndKeys:
-								  [NSKeyedArchiver archivedDataWithRootObject:activeColor], kMDSidebarBackgroundColorActiveKey,
-								  [NSKeyedArchiver archivedDataWithRootObject:idleColor], kMDSidebarBackgroundColorIdleKey,
-								  nil];
+                              [NSKeyedArchiver archivedDataWithRootObject:activeColor], kMDSidebarBackgroundColorActiveKey,
+                              [NSKeyedArchiver archivedDataWithRootObject:idleColor], kMDSidebarBackgroundColorIdleKey,
+                              nil];
 		
 		[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 		[[NSUserDefaultsController sharedUserDefaultsController] setInitialValues:defaults];
 		[defaults release];
 		
-        [self _injectPluginMethods];
+    [self _injectPluginMethods];
 		[[[NSApp mainWindow] windowController] MD_splitWindowIfNeeded];
 		[[[NSApp mainWindow] windowController] MD_windowDidBecomeMain:nil];
 		[self _installMenuItems];
 		[self _injectPreferenceMethods];
-    }	
-    return self;
+    [self _injectOutlineMethods];
+  }	
+  return self;
 }
 
 
@@ -128,6 +131,7 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 	[drawerSubmenuItem setSubmenu:drawerMenu];
 	[drawerMenu addItem:settings.toggleSplitViewLayoutMenuItem];
 	[drawerMenu addItem:settings.focusSideViewMenuItem];
+  [drawerMenu addItem:settings.filterInDrawerMenuItem];
 	[showHideDrawerMenuItem retain];
 	[viewMenu removeItemAtIndex:drawerMenuItemIndex];
 	[drawerMenu insertItem:showHideDrawerMenuItem atIndex:0];
@@ -142,11 +146,11 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 - (void)_injectPluginMethods {
 	MDLog(@"swapping OakProjectController methods");
 	
-    Class oakProjectController = NSClassFromString(@"OakProjectController");
-    swapInstanceMethods(oakProjectController, @selector(windowDidLoad),      @selector(MD_repl_windowDidLoad));
-    swapInstanceMethods(oakProjectController, @selector(windowWillClose:),   @selector(MD_repl_windowWillClose:));
-    swapInstanceMethods(oakProjectController, @selector(openProjectDrawer:), @selector(MD_repl_openProjectDrawer:));
-    swapInstanceMethods(oakProjectController, @selector(revealInProject:),   @selector(MD_repl_revealInProject:));
+  Class oakProjectController = NSClassFromString(@"OakProjectController");
+  swapInstanceMethods(oakProjectController, @selector(windowDidLoad),      @selector(MD_repl_windowDidLoad));
+  swapInstanceMethods(oakProjectController, @selector(windowWillClose:),   @selector(MD_repl_windowWillClose:));
+  swapInstanceMethods(oakProjectController, @selector(openProjectDrawer:), @selector(MD_repl_openProjectDrawer:));
+  swapInstanceMethods(oakProjectController, @selector(revealInProject:),   @selector(MD_repl_revealInProject:));
 }
 
 - (void)_injectPreferenceMethods {
@@ -159,7 +163,15 @@ void swapInstanceMethods(Class cls, SEL originalSel, SEL newSel) {
 	swapInstanceMethods(oakPreferenceController, @selector(selectToolbarItem:),					@selector(MD_selectToolbarItem:));
 	
 	swapInstanceMethods(oakPreferenceController, @selector(toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:),   
-												 @selector(MD_toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:));
+                      @selector(MD_toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar:));
+}
+
+- (void)_injectOutlineMethods {
+  MDLog("swapping OakOutlineView methods");
+  
+  Class oakOutlineView = NSClassFromString(@"OakOutlineView");
+  swapInstanceMethods(oakOutlineView, @selector(reloadItem:), @selector(MD_repl_reloadItem:));
+  swapInstanceMethods(oakOutlineView, @selector(reloadItem:reloadChildren:), @selector(MD_repl_reloadItem:reloadChildren:));
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  MDSplitView.h
+//  MDSearchFieldCell.m
 //  MissingDrawer
 //
 //	Copyright (c) The MissingDrawer authors.
@@ -26,43 +26,12 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@class MDOutlineViewDataSource;
-@class MDSidebarBorderView;
+#import "MDSearchFieldCell.h"
 
-@interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
-  
-	IBOutlet id resizeSlider;
-	
-@private
-	
-  NSView *_sideView;
-  NSView *_mainView;
-  
-  MDSidebarBorderView *_borderView;
-  NSOutlineView *_outlineView;
-  MDOutlineViewDataSource *_outlineViewDataSource;
-  dispatch_queue_t _filterQueue;
-  NSMutableArray *_fullOutlineViewExpandedItems;
-	
-  BOOL _inResizeMode;
+@implementation MDSearchFieldCell
+- (NSRect)searchButtonRectForBounds:(NSRect)rect {
+  NSRect newRect = [super searchButtonRectForBounds:rect];
+  newRect.origin.x -= 2;
+  return newRect;
 }
-
-@property (readonly) NSView *sideView;
-@property (readonly) NSView *mainView;
-@property (nonatomic, retain) MDSidebarBorderView *borderView;
-@property (readonly) dispatch_queue_t filterQueue;
-
-// Initializer
-- (id)initWithFrame:(NSRect)frame mainView:(NSView *)aMainView sideView:(NSView *)aSideView;
-
-// Drawing
-- (void)toggleLayout;
-
-// Layout
-- (void)windowWillCloseWillCall;
-- (void)saveLayout;
-- (void)restoreLayout;
-
-// Filtering
-- (void)filterOutlineView:(NSNotification*)notification;
 @end

@@ -35,6 +35,7 @@
 	NSRect _mainViewLayout;
 	NSMenuItem *_toggleSplitViewLayoutMenuItem;
 	NSMenuItem *_focusSideViewMenuItem;
+  NSMenuItem *_filterInDrawerMenuItem;
 	NSColor *_bgColor;
 	NSColor *_bgColorInactive;
 	NSDictionary *_namedColors;
@@ -42,6 +43,7 @@
 
 @property (nonatomic, readonly) NSMenuItem *toggleSplitViewLayoutMenuItem;
 @property (nonatomic, readonly) NSMenuItem *focusSideViewMenuItem;
+@property (nonatomic, readonly) NSMenuItem *filterInDrawerMenuItem;
 @property BOOL showSideViewOnLeft;
 @property NSRect sideViewLayout;
 @property NSRect mainViewLayout;
@@ -54,5 +56,6 @@
 - (void)save;
 - (IBAction)toggleSideViewLayout:(id)sender;
 - (IBAction)focusSideView:(id)sender;
+- (IBAction)filterInDrawer:(id)sender;
 
 @end

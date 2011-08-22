@@ -1,5 +1,5 @@
 //
-//  MDSplitView.h
+//  MDOutlineViewDataSource.h
 //  MissingDrawer
 //
 //	Copyright (c) The MissingDrawer authors.
@@ -26,43 +26,18 @@
 //	OTHER DEALINGS IN THE SOFTWARE.
 //
 
-@class MDOutlineViewDataSource;
-@class MDSidebarBorderView;
-
-@interface MDSplitView : NSSplitView <NSSplitViewDelegate> {
-  
-	IBOutlet id resizeSlider;
-	
+@interface MDOutlineViewDataSource : NSObject <NSOutlineViewDataSource> {
 @private
-	
-  NSView *_sideView;
-  NSView *_mainView;
-  
-  MDSidebarBorderView *_borderView;
-  NSOutlineView *_outlineView;
-  MDOutlineViewDataSource *_outlineViewDataSource;
-  dispatch_queue_t _filterQueue;
-  NSMutableArray *_fullOutlineViewExpandedItems;
-	
-  BOOL _inResizeMode;
+  id<NSOutlineViewDataSource> _originalDataSource;
+  NSString* _currentFilter;
+  NSMutableDictionary* _rootDirectoryInfo;
 }
 
-@property (readonly) NSView *sideView;
-@property (readonly) NSView *mainView;
-@property (nonatomic, retain) MDSidebarBorderView *borderView;
-@property (readonly) dispatch_queue_t filterQueue;
+- (id)initWithOriginalDataSource:(id<NSOutlineViewDataSource>)originalDataSource;
 
-// Initializer
-- (id)initWithFrame:(NSRect)frame mainView:(NSView *)aMainView sideView:(NSView *)aSideView;
+@property (nonatomic, readonly) id<NSOutlineViewDataSource> originalDataSource;
+@property (nonatomic, retain) NSString* currentFilter;
+@property (nonatomic, readonly) NSMutableDictionary* rootDirectoryInfo;
 
-// Drawing
-- (void)toggleLayout;
-
-// Layout
-- (void)windowWillCloseWillCall;
-- (void)saveLayout;
-- (void)restoreLayout;
-
-// Filtering
-- (void)filterOutlineView:(NSNotification*)notification;
+- (void)recalculateTreeFilter;
 @end

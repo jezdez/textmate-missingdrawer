@@ -44,18 +44,21 @@
 			NSDrawer *drawer = [[window drawers] objectAtIndex:0];
 			if (drawer)	{
 				[drawer close]; // does no harm if the drawer is already closed
-
+        
 				NSView *leftView = [[drawer contentView] retain];
 				[drawer setContentView:nil];
 				[window setContentView:nil];
-			
+        
 				MDSidebarBorderView *borderView = [[MDSidebarBorderView alloc] initWithFrame:[leftView frame]];
 				[borderView addToSuperview:leftView];
-			
+        
 				MDSplitView *splitView = [MDMissingDrawer makeSplitViewWithMainView:contentView sideView:leftView];
+        splitView.borderView = borderView;
 				MDLog(@"replacing current window with split view");
 				[window setContentView:splitView];
-			
+        
+        [[NSNotificationCenter defaultCenter] addObserver:splitView selector:@selector(filterOutlineView:) name:NSControlTextDidChangeNotification object:borderView.searchField];
+        
 				[borderView release];
 				[leftView release];
 				[splitView restoreLayout];
@@ -75,13 +78,13 @@
 
 - (void)MD_windowDidBecomeMain:(NSNotification *)notification {
 	NSDictionary *bindingOptions = [[NSDictionary alloc] initWithObjectsAndKeys:
-									NSUnarchiveFromDataTransformerName, @"NSValueTransformerName", nil];
+                                  NSUnarchiveFromDataTransformerName, @"NSValueTransformerName", nil];
 	NSString *keyPath = [[NSString alloc] initWithFormat:@"values.%@", kMDSidebarBackgroundColorActiveKey];
 	
 	[[self MD_outlineView] bind:@"backgroundColor"
-					   toObject:[NSUserDefaultsController sharedUserDefaultsController]
-					withKeyPath:keyPath
-						options:bindingOptions];
+                     toObject:[NSUserDefaultsController sharedUserDefaultsController]
+                  withKeyPath:keyPath
+                      options:bindingOptions];
 	
 	[bindingOptions release];
 	[keyPath release];
@@ -90,13 +93,13 @@
 
 - (void)MD_windowDidResignMain:(NSNotification *)notification {
 	NSDictionary *bindingOptions = [[NSDictionary alloc] initWithObjectsAndKeys:
-									NSUnarchiveFromDataTransformerName, @"NSValueTransformerName", nil];
+                                  NSUnarchiveFromDataTransformerName, @"NSValueTransformerName", nil];
 	NSString *keyPath = [[NSString alloc] initWithFormat:@"values.%@", kMDSidebarBackgroundColorIdleKey];
 	
 	[[self MD_outlineView] bind:@"backgroundColor"
-					   toObject:[NSUserDefaultsController sharedUserDefaultsController]
-					withKeyPath:keyPath
-						options:bindingOptions];
+                     toObject:[NSUserDefaultsController sharedUserDefaultsController]
+                  withKeyPath:keyPath
+                      options:bindingOptions];
 	
 	[bindingOptions release];
 	[keyPath release];

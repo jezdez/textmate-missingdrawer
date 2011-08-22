@@ -11,6 +11,11 @@
 		093EFCAF12AFF0EA00D8A18C /* NSWindowController+Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 093EFCAE12AFF0EA00D8A18C /* NSWindowController+Preferences.m */; };
 		097A211712B115F300614549 /* MDPreferenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097A211612B115F300614549 /* MDPreferenceController.m */; };
 		17A67ED81220168000BECE6F /* defaultSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17A67ED71220168000BECE6F /* defaultSettings.plist */; };
+		3173DA5413EDC5F700C009E7 /* MDOutlineViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 3173DA5313EDC5F700C009E7 /* MDOutlineViewDataSource.m */; };
+		3173DA5913EDFDE800C009E7 /* NSOutlineView+MDMethodReplacements.m in Sources */ = {isa = PBXBuildFile; fileRef = 3173DA5813EDFDE800C009E7 /* NSOutlineView+MDMethodReplacements.m */; };
+		31B0269513EE9AA300B235B4 /* FilterIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 31B0269313EE9AA300B235B4 /* FilterIcon.png */; };
+		31B0269B13EE9FA700B235B4 /* MDSearchFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B0269A13EE9FA700B235B4 /* MDSearchFieldCell.m */; };
+		31B0269E13EEA05200B235B4 /* MDSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = 31B0269D13EEA05200B235B4 /* MDSearchField.m */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		B21734D813916D0200299F09 /* MDDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = B21734D713916D0200299F09 /* MDDefines.m */; };
 		B21734EF13916FBD00299F09 /* ButtonTerminal.png in Resources */ = {isa = PBXBuildFile; fileRef = B21734E913916FBD00299F09 /* ButtonTerminal.png */; };
@@ -36,6 +41,15 @@
 		097A211612B115F300614549 /* MDPreferenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDPreferenceController.m; sourceTree = "<group>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		17A67ED71220168000BECE6F /* defaultSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultSettings.plist; sourceTree = "<group>"; };
+		3173DA5213EDC5F700C009E7 /* MDOutlineViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDOutlineViewDataSource.h; sourceTree = "<group>"; };
+		3173DA5313EDC5F700C009E7 /* MDOutlineViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDOutlineViewDataSource.m; sourceTree = "<group>"; };
+		3173DA5713EDFDE800C009E7 /* NSOutlineView+MDMethodReplacements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSOutlineView+MDMethodReplacements.h"; sourceTree = "<group>"; };
+		3173DA5813EDFDE800C009E7 /* NSOutlineView+MDMethodReplacements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSOutlineView+MDMethodReplacements.m"; sourceTree = "<group>"; };
+		31B0269413EE9AA300B235B4 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = English.lproj/FilterIcon.png; sourceTree = "<group>"; };
+		31B0269913EE9FA700B235B4 /* MDSearchFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSearchFieldCell.h; sourceTree = "<group>"; };
+		31B0269A13EE9FA700B235B4 /* MDSearchFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSearchFieldCell.m; sourceTree = "<group>"; };
+		31B0269C13EEA05200B235B4 /* MDSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDSearchField.h; sourceTree = "<group>"; };
+		31B0269D13EEA05200B235B4 /* MDSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDSearchField.m; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* MissingDrawer.tmplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MissingDrawer.tmplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21734D613916D0200299F09 /* MDDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDefines.h; sourceTree = "<group>"; };
 		B21734D713916D0200299F09 /* MDDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDefines.m; sourceTree = "<group>"; };
@@ -136,6 +150,7 @@
 		B2B89106121CD28D00AC78F1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				31B0269313EE9AA300B235B4 /* FilterIcon.png */,
 				B21734E913916FBD00299F09 /* ButtonTerminal.png */,
 				B21734EB13916FBD00299F09 /* ButtonTerminalPressed.png */,
 				093EFCA512AFEF0E00D8A18C /* Preferences.xib */,
@@ -167,6 +182,8 @@
 				B2B89193121CDA1A00AC78F1 /* NSWindowController+MDMethodReplacements.m */,
 				B2B89195121CDA5800AC78F1 /* NSWindowController+MDAdditions.h */,
 				B2B89196121CDA5800AC78F1 /* NSWindowController+MDAdditions.m */,
+				3173DA5713EDFDE800C009E7 /* NSOutlineView+MDMethodReplacements.h */,
+				3173DA5813EDFDE800C009E7 /* NSOutlineView+MDMethodReplacements.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -180,6 +197,10 @@
 				B2B89102121CD28D00AC78F1 /* MDSidebarBorderView.m */,
 				B2B89103121CD28D00AC78F1 /* MDSplitView.h */,
 				B2B89104121CD28D00AC78F1 /* MDSplitView.m */,
+				31B0269913EE9FA700B235B4 /* MDSearchFieldCell.h */,
+				31B0269A13EE9FA700B235B4 /* MDSearchFieldCell.m */,
+				31B0269C13EEA05200B235B4 /* MDSearchField.h */,
+				31B0269D13EEA05200B235B4 /* MDSearchField.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -194,6 +215,8 @@
 				B2B89100121CD28D00AC78F1 /* MDSettings.m */,
 				097A211512B115F300614549 /* MDPreferenceController.h */,
 				097A211612B115F300614549 /* MDPreferenceController.m */,
+				3173DA5213EDC5F700C009E7 /* MDOutlineViewDataSource.h */,
+				3173DA5313EDC5F700C009E7 /* MDOutlineViewDataSource.m */,
 			);
 			name = Plugin;
 			sourceTree = "<group>";
@@ -254,6 +277,7 @@
 				093EFCA712AFEF0E00D8A18C /* Preferences.xib in Resources */,
 				B21734EF13916FBD00299F09 /* ButtonTerminal.png in Resources */,
 				B21734F013916FBD00299F09 /* ButtonTerminalPressed.png in Resources */,
+				31B0269513EE9AA300B235B4 /* FilterIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +298,10 @@
 				093EFCAF12AFF0EA00D8A18C /* NSWindowController+Preferences.m in Sources */,
 				097A211712B115F300614549 /* MDPreferenceController.m in Sources */,
 				B21734D813916D0200299F09 /* MDDefines.m in Sources */,
+				3173DA5413EDC5F700C009E7 /* MDOutlineViewDataSource.m in Sources */,
+				3173DA5913EDFDE800C009E7 /* NSOutlineView+MDMethodReplacements.m in Sources */,
+				31B0269B13EE9FA700B235B4 /* MDSearchFieldCell.m in Sources */,
+				31B0269E13EEA05200B235B4 /* MDSearchField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +314,14 @@
 				093EFCA612AFEF0E00D8A18C /* English */,
 			);
 			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
+		31B0269313EE9AA300B235B4 /* FilterIcon.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				31B0269413EE9AA300B235B4 /* English */,
+			);
+			name = FilterIcon.png;
 			sourceTree = "<group>";
 		};
 		B21734E913916FBD00299F09 /* ButtonTerminal.png */ = {
