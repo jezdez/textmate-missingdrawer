@@ -25,7 +25,6 @@ To configure Missing Drawer, simply open TextMate's preferences, click the doubl
 * Changing the sidebar's color
 * Enabling/Disabling the open terminal button
 * Choosing the terminal application. Terminal and iTerm are supported
-* Enabling the git button
 
 ## Authors
 
