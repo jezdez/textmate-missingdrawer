@@ -197,7 +197,7 @@ NSComparisonResult compareFrameOriginX(id viewA, id viewB, void *context) {
 	if ([appName isEqualToString:@"iTerm"]) {
 		appleScriptCommand = [NSString stringWithFormat:@"tell application \"iTerm\"\n\tactivate\n\ttell the first terminal\n\t\tlaunch session \"Default session\"\n\t\ttell the last session\n\t\t\twrite text \"cd \\\"%@\\\"\"\n\t\tend tell\n\tend tell\nend tell", path];
 	} else {
-		appleScriptCommand = [NSString stringWithFormat:@"activate application \"Terminal\"\n\ttell application \"System Events\"\n\tkeystroke \"t\" using {command down}\n\tend tell\n\ttell application \"Terminal\"\n\trepeat with win in windows\n\ttry\n\tif get frontmost of win is true then\n\tdo script \"cd \\\"%@\\\"; clear\" in (selected tab of win)\n\tend if\n\tend try\n\tend repeat\n\tend tell", path];
+		appleScriptCommand = [NSString stringWithFormat:@"tell application \"System Events\"\n\tif (count (every process whose name is \"Terminal\")) is 0 then\n\tactivate application \"Terminal\"\n\telse\n\tactivate application \"Terminal\"\n\tkeystroke \"t\" using {command down}\n\tend if\n\tend tell\n\ttell application \"Terminal\"\n\trepeat with win in windows\n\ttry\n\tif get frontmost of win is true then\n\tdo script \"cd \\\"%@\\\"; clear\" in (selected tab of win)\n\tend if\n\tend try\n\tend repeat\n\tend tell", path];
 	}
 	
 	MDLog(@"script:\n%@", appleScriptCommand);
